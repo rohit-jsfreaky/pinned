@@ -238,7 +238,7 @@ def scan_module_strings(source: str, name: str) -> list[str]:
 
 
 # ---------------------------------------------------------------------------------------------------- replacements
-_NAME = r"[`'\"]{0,2}(?P<name>[A-Za-z_][\w]*(?:\.[A-Za-z_][\w]*)*)(?:\([^)]*\))?[`'\"]{0,2}"
+_NAME = r"[`'\".]{0,2}(?P<name>[A-Za-z_][\w]*(?:\.[A-Za-z_][\w]*)*)(?:\([^)]*\))?[`'\"]{0,2}"
 _PATTERNS = [
     re.compile(p.format(name=_NAME), re.I)
     for p in (

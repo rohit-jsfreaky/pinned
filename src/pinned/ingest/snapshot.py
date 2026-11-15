@@ -21,7 +21,7 @@ from .static import SKIP_MODULES, StaticResult, load_static
 
 log = logging.getLogger(__name__)
 
-SNAPSHOT_FORMAT = 6
+SNAPSHOT_FORMAT = 7
 
 
 @dataclass

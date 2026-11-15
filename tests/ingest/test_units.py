@@ -116,6 +116,7 @@ def test_replacement_names_and_resolution():
     assert replacement_names("``comb`` is deprecated in favour of ``scipy.special.comb``") == ["scipy.special.comb"]
     assert replacement_names("'from_json' is deprecated. Use 'from_file(path, json.load)' instead.") == ["from_file"]
     assert replacement_names("renamed to `new_thing`; moved to np.linalg.solve") == ["new_thing", "np.linalg.solve"]
+    assert replacement_names("iteritems is deprecated. Use .items instead.") == ["items"]
     known = {"pandas.concat", "numpy.linalg.solve", "pkg.mod.Cls.new", "pkg.helper"}
     assert resolve_name("np.linalg.solve", "numpy.foo", known, ["numpy"]) == "numpy.linalg.solve"
     assert resolve_name("new", "pkg.mod.Cls.old", known, ["pkg"]) == "pkg.mod.Cls.new"
@@ -154,8 +155,8 @@ def test_type_checking_imports_are_not_reexports():
 def test_static_load_of_a_small_package(tmp_path):
     pkg = tmp_path / "toy"
     pkg.mkdir()
-    (pkg / "__init__.py").write_text("from .impl import Widget, make\nfrom ._hidden import secret\n"
-                                     "import os\n__all__ = ['Widget', 'make', 'sub']\n")
+    (pkg / "__init__.py").write_text("SETUP = False\nif SETUP:\n    pass\nelse:\n    from .impl import Widget, make\n"
+                                     "from ._hidden import secret\nimport os\n")
     (pkg / "impl.py").write_text("from os.path import join\nclass Base:\n    def ping(self, n=1):\n        '''Ping.'''\n"
                                  "class Widget(Base):\n    '''A widget.'''\n    def __init__(self, size, *, color='red'):\n"
                                  "        pass\n    @property\n    def area(self):\n        return 1\n"
@@ -168,8 +169,9 @@ def test_static_load_of_a_small_package(tmp_path):
     assert a["toy.Widget"].target == "toy.impl.Widget"
     assert a["toy.Widget.ping"].kind == "method" and a["toy.Widget.ping"].target == "toy.impl.Base.ping"
     assert a["toy.Widget.area"].kind == "attr"
-    assert "toy.secret" not in a and "toy.os" not in a and "toy.impl.join" not in a
-    assert a["toy.sub.g"].kind == "function" and a["toy.make"].doc == "Make one."
+    assert "toy.os" not in a and "toy.impl.join" not in a           # other projects' names are never API
+    assert a["toy.secret"].target == "toy._hidden.secret"            # hub re-export from a private module is API
+    assert a["toy.sub.g"].kind == "function" and a["toy.make"].doc == "Make one."  # re-export inside if/else kept
 
 
 # ------------------------------------------------------------------ dynamic planning + merge

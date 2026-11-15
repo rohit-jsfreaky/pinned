@@ -173,7 +173,9 @@ class StaticLoader:
         for name, member in list(mod.members.items()):
             if name.endswith("*"):  # a wildcard griffe could not expand (target not found statically)
                 continue
-            if name.startswith("_") or not getattr(member, "runtime", True) or name in typing_only:
+            # griffe's own `runtime` flag is not used: it is also False for code in a plain if/else (numpy's whole
+            # top level sits under `if __NUMPY_SETUP__: ... else:`); type-checking-only imports are found above
+            if name.startswith("_") or name in typing_only:
                 continue  # private, or imported only for type checkers
             if member.is_alias:
                 if (exports is not None and name not in exports) or (exports is None and not hub):

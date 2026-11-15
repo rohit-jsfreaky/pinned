@@ -114,7 +114,10 @@ def install_attempts(library: str, pypi_version: str, released: str, dep_sets: l
     as_of = ["--exclude-newer", cutoff, "--exclude-newer-package", "griffe=false",
              "--exclude-newer-package", "setuptools=false"]
     attempts = []
-    if index:  # the extra index has no upload dates, so no cutoff there
+    if index:
+        # the extra index has no upload dates (no cutoff), and uv takes a package from the FIRST index that has it:
+        # that index carries its own setuptools, so the setuptools pin (only needed for pkg_resources) is left out
+        base = base[:2]
         attempts += [index + base + deps] if deps else []
         attempts.append(index + base)
         return attempts

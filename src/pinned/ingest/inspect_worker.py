@@ -247,6 +247,23 @@ def module_records(name, owners, records, errors, notes, seen):
             class_members(path, type(obj), owners, records, seen)
 
 
+def _prepare_django():
+    from django.conf import settings
+    if not settings.configured:
+        settings.configure(
+            INSTALLED_APPS=["django.contrib.auth", "django.contrib.contenttypes", "django.contrib.sessions",
+                            "django.contrib.messages", "django.contrib.admin", "django.contrib.staticfiles"],
+            DATABASES={"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}},
+            USE_TZ=True,
+        )
+    import django
+    django.setup()
+
+
+# Libraries whose modules cannot be imported before some runtime set-up (Django needs configured settings).
+PREPARE = {"django": _prepare_django}
+
+
 def main():
     warnings.simplefilter("ignore")
     with open(sys.argv[1]) as f:
@@ -255,6 +272,12 @@ def main():
         sys.path.insert(0, entry)
     owners = set(req["own"])
     records, errors, notes, seen = [], {}, {}, set()
+    for owner in sorted(owners):
+        if owner in PREPARE:
+            try:
+                PREPARE[owner]()
+            except BaseException as e:  # noqa: BLE001 - report and inspect what still imports
+                notes[owner + " (prepare)"] = ("%s: %s" % (type(e).__name__, e))[:300]
     for name in req["modules"]:
         module_records(name, owners, records, errors, notes, seen)
     try:

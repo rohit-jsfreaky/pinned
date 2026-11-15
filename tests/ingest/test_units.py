@@ -198,6 +198,7 @@ def test_python_candidates_and_install_attempts():
     assert att[1] == base + ["numpy==1.21.6"] and att[2][-3:] == base and att[3] == base
     torch = install_attempts("torch", "1.9.0", "2021-06-15", [""])
     assert all(a[:2] == ["--index", "https://download.pytorch.org/whl/cpu"] for a in torch)
+    assert torch[-1] == ["--index", "https://download.pytorch.org/whl/cpu", "torch==1.9.0", "griffe"]
 
 
 # ------------------------------------------------------------------ diff

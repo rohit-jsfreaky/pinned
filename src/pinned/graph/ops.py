@@ -15,7 +15,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from typing import Any, Iterable
 
-from .client import HydraGraph
+from .client import HydraError, HydraGraph
 from .ids import node_id
 
 BATCH = 1000  # server cap is 1024 items per batch
@@ -94,7 +94,18 @@ def link_many(g: HydraGraph, rel: str, pairs: Iterable[tuple[int, int]]) -> int:
     rows = [{"src": s, "dst": d} for s, d in dict.fromkeys(pairs)]
     q = f"UNWIND $rows AS row CREATE (a {{id: row.src}})-[:{_name(rel)}]->(b {{id: row.dst}})"
     for chunk in _chunks(rows):
-        g.write(q, {"rows": chunk})
+        try:
+            g.write(q, {"rows": chunk})
+        except HydraError as e:
+            if e.code != "internal":
+                raise
+            # HydraDB 0.4.0: a batch CREATE's idempotency key is `http-query-<counter>.unwind-create.<n>`; the counter
+            # restarts at 0 when a node is started from a saved store, but the old keys are kept, so a new batch can
+            # clash with one from before the restart ("idempotency key conflict ... different edge", reported to the
+            # client as `internal`). UNWIND MERGE of edges is not supported, so fall back to one MERGE per edge
+            # (idempotent by match, no counter key).
+            for row in chunk:
+                g.write(f"MERGE (a {{id: $src}})-[:{_name(rel)}]->(b {{id: $dst}})", row)
     return len(rows)
 
 

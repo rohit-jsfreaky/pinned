@@ -23,6 +23,7 @@ from pinned.contract import (
     LearnReport,
 )
 from pinned.graph import link_props_many, set_edges_many
+from pinned.graph.client import HydraError
 
 from .facts import load_facts
 from .movelog import MoveLog
@@ -64,6 +65,10 @@ class MaintainState:
     dirty_libs: set[str] = field(default_factory=set)
     touched: dict[str, set[tuple[int, int]]] = field(default_factory=lambda: defaultdict(set))
     full_decay_done: bool = False
+
+
+# HydraDB error codes for a read it refuses at full size (admission limits, 30 s timeout)
+SCAN_REFUSED = ("resource_exhausted", "query_timeout")
 
 
 class Maintainer:
@@ -220,12 +225,29 @@ class Maintainer:
         both carry the same non-empty docstring line (`doc`). One read for all libraries asked."""
         if not libs:
             return 0
-        where, params = ("WHERE a.library = $lib", {"lib": libs[0]}) if len(libs) == 1 else ("", {})
-        wanted = set(libs)
-        adds = self.g.query(
-            f"MATCH (a:{API})-[r:{ADDED_IN}]->(v) {where} RETURN a.id AS id, a.library AS lib, a.path AS path, "
-            "a.kind AS kind, a.doc AS doc, r.sig AS sig, v.ord AS ord", params)
-        rems = self.g.query(f"MATCH (a:{API})-[r:{REMOVED_IN}]->(v) {where} RETURN a.id AS id, v.ord AS ord", params)
+        # One read per library: an unfiltered read walks every Api, and at full size (~1M Api) HydraDB 0.4.0 rejects
+        # it (label-index candidates > 250,000). A library too big to scan on its own is skipped and logged.
+        wanted: set[str] = set()
+        adds: list[dict] = []
+        rems: list[dict] = []
+        for lib in libs:
+            params = {"lib": lib}
+            try:
+                a = self.g.query(
+                    f"MATCH (a:{API})-[r:{ADDED_IN}]->(v) WHERE a.library = $lib RETURN a.id AS id, a.library AS lib, "
+                    "a.path AS path, a.kind AS kind, a.doc AS doc, r.sig AS sig, v.ord AS ord", params)
+                r = self.g.query(f"MATCH (a:{API})-[r:{REMOVED_IN}]->(v) WHERE a.library = $lib "
+                                 "RETURN a.id AS id, v.ord AS ord", params)
+            except HydraError as e:
+                if e.code not in SCAN_REFUSED:
+                    raise
+                self.log.write("merge_skipped", {"library": lib}, None, None,
+                               f"HydraDB refused the library scan: {e.code}: {e.message[:200]}", [])
+                self.state.merged_libs.add(lib)   # same size next time: do not retry every maintain()
+                continue
+            wanted.add(lib)
+            adds += a
+            rems += r
         info: dict[int, tuple[str, str, str, str]] = {}
         hist: dict[int, list[tuple]] = defaultdict(list)
         for r in adds:
@@ -277,10 +299,19 @@ class Maintainer:
         cols = ("a.id AS src, b.id AS dst, a.key AS src_key, b.key AS dst_key, r.w AS w, "
                 "r.n_pass AS n_pass, r.n_fail AS n_fail")
         for rel, label in ((CUES, TERM), (SHORTCUT, TERM), (REPLACED_BY, API)):
+            rows = None
             if not self.state.full_decay_done:
-                rows = self.g.query(f"MATCH (a:{label})-[r:{rel}]->(b) WHERE r.n_fail >= $n RETURN {cols}",
-                                    {"n": DECAY_MIN_FAILS})
-            else:
+                try:
+                    rows = self.g.query(f"MATCH (a:{label})-[r:{rel}]->(b) WHERE r.n_fail >= $n RETURN {cols}",
+                                        {"n": DECAY_MIN_FAILS})
+                except HydraError as e:
+                    # full size: the scan walks every CUES edge (millions) and is refused; edges reweighted in this
+                    # process are still checked below (n_fail only grows through record(), which marks them touched)
+                    if e.code not in SCAN_REFUSED:
+                        raise
+                    self.log.write("decay_scan_skipped", {"rel": rel}, None, None,
+                                   f"HydraDB refused the full scan: {e.code}; checking touched edges only", [])
+            if rows is None:
                 rows = edges_of_pairs(self.g, rel, sorted(self.state.touched.get(rel, set())), cols)
             batch = []
             for r in rows:

@@ -76,3 +76,30 @@ def test_config_guards_measurement_fields(tmp_path):
         assert "template_hash" in str(e)
     else:
         raise AssertionError("a changed template must need a new run id")
+
+
+def test_solve_stage_builds_contexts_in_parallel_and_keeps_order(tmp_path):
+    import threading
+    import time
+
+    from pinned.eval.arms import ArmContext
+
+    class SlowArm(NoneArm):
+        def __init__(self):
+            self.active = self.peak = 0
+            self.lock = threading.Lock()
+
+        def context(self, p):
+            with self.lock:
+                self.active += 1
+                self.peak = max(self.peak, self.active)
+            time.sleep(0.05)
+            with self.lock:
+                self.active -= 1
+            return ArmContext(f"ctx-{p.id}")
+
+    arm, solver = SlowArm(), Solver()
+    rows = solve_stage(RunStore("p1", tmp_path / "runs"), PROBLEMS, arm, "test", 0, solver,
+                       CompletionCache(tmp_path / "c"), concurrency=4, log=lambda m: None)
+    assert arm.peak > 1
+    assert all(r.context == f"ctx-{r.problem}" for r in rows.values()) and len(rows) == len(PROBLEMS)

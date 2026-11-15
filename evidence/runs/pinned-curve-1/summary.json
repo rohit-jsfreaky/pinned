@@ -1,0 +1,1255 @@
+{
+ "run_id": "pinned-curve-1",
+ "generated": "2026-11-15T19:49:44+00:00",
+ "metric": "pass@1 (one completion per problem; hidden tests)",
+ "groups": [
+  {
+   "arm": "pinned",
+   "iteration": 0,
+   "split": "test",
+   "n": 169,
+   "passed": 113,
+   "pass_at_1": 0.6686,
+   "expected": 169,
+   "missing": 0,
+   "solver_failed": [],
+   "pass_at_1_over_expected": 0.6686,
+   "error_types": {
+    "AssertionError": 35,
+    "ValueError": 7,
+    "AttributeError": 5,
+    "TypeError": 4,
+    "ZeroDivisionError": 1,
+    "NetworkXError": 1,
+    "IndexError": 1,
+    "NameError": 1,
+    "ParameterError": 1
+   },
+   "per_library": {
+    "django": {
+     "passed": 4,
+     "n": 5,
+     "pass_at_1": 0.8
+    },
+    "falcon": {
+     "passed": 7,
+     "n": 11,
+     "pass_at_1": 0.6364
+    },
+    "flask": {
+     "passed": 9,
+     "n": 11,
+     "pass_at_1": 0.8182
+    },
+    "geopandas": {
+     "passed": 2,
+     "n": 4,
+     "pass_at_1": 0.5
+    },
+    "gradio": {
+     "passed": 3,
+     "n": 4,
+     "pass_at_1": 0.75
+    },
+    "jinja2": {
+     "passed": 1,
+     "n": 2,
+     "pass_at_1": 0.5
+    },
+    "kymatio": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    },
+    "librosa": {
+     "passed": 11,
+     "n": 21,
+     "pass_at_1": 0.5238
+    },
+    "lightgbm": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "matplotlib": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "mitmproxy": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "networkx": {
+     "passed": 3,
+     "n": 5,
+     "pass_at_1": 0.6
+    },
+    "nltk": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "numpy": {
+     "passed": 8,
+     "n": 8,
+     "pass_at_1": 1.0
+    },
+    "pandas": {
+     "passed": 1,
+     "n": 5,
+     "pass_at_1": 0.2
+    },
+    "pillow": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    },
+    "plotly": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "pytest": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "scikit-learn": {
+     "passed": 5,
+     "n": 6,
+     "pass_at_1": 0.8333
+    },
+    "scipy": {
+     "passed": 13,
+     "n": 20,
+     "pass_at_1": 0.65
+    },
+    "seaborn": {
+     "passed": 4,
+     "n": 4,
+     "pass_at_1": 1.0
+    },
+    "spacy": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "sympy": {
+     "passed": 11,
+     "n": 17,
+     "pass_at_1": 0.6471
+    },
+    "torch": {
+     "passed": 2,
+     "n": 9,
+     "pass_at_1": 0.2222
+    },
+    "tornado": {
+     "passed": 3,
+     "n": 4,
+     "pass_at_1": 0.75
+    },
+    "tqdm": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    }
+   },
+   "per_type_of_change": {
+    "Argument or Attribute change": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "Function Name change": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "New feature or additional dependency based change": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "Semantics or Function Behaviour change": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "argument change": {
+     "passed": 26,
+     "n": 38,
+     "pass_at_1": 0.6842
+    },
+    "argument or attribute change": {
+     "passed": 15,
+     "n": 21,
+     "pass_at_1": 0.7143
+    },
+    "behaviour": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "breaking change": {
+     "passed": 9,
+     "n": 10,
+     "pass_at_1": 0.9
+    },
+    "deprecation": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "name change": {
+     "passed": 14,
+     "n": 23,
+     "pass_at_1": 0.6087
+    },
+    "name change (attribute)": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "new feature": {
+     "passed": 10,
+     "n": 20,
+     "pass_at_1": 0.5
+    },
+    "new func/method/class": {
+     "passed": 13,
+     "n": 22,
+     "pass_at_1": 0.5909
+    },
+    "other library": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    },
+    "other library or new feature": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    },
+    "output behavior": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "output behaviour": {
+     "passed": 3,
+     "n": 7,
+     "pass_at_1": 0.4286
+    },
+    "output change": {
+     "passed": 2,
+     "n": 3,
+     "pass_at_1": 0.6667
+    }
+   },
+   "solver_cost_usd": 0.1648,
+   "models": [
+    "claude-haiku-5-5"
+   ]
+  },
+  {
+   "arm": "pinned",
+   "iteration": 1,
+   "split": "test",
+   "n": 169,
+   "passed": 109,
+   "pass_at_1": 0.645,
+   "expected": 169,
+   "missing": 0,
+   "solver_failed": [],
+   "pass_at_1_over_expected": 0.645,
+   "error_types": {
+    "AssertionError": 37,
+    "ValueError": 10,
+    "AttributeError": 6,
+    "TypeError": 3,
+    "ZeroDivisionError": 1,
+    "IndexError": 1,
+    "KeyError": 1,
+    "NameError": 1
+   },
+   "per_library": {
+    "django": {
+     "passed": 3,
+     "n": 5,
+     "pass_at_1": 0.6
+    },
+    "falcon": {
+     "passed": 7,
+     "n": 11,
+     "pass_at_1": 0.6364
+    },
+    "flask": {
+     "passed": 8,
+     "n": 11,
+     "pass_at_1": 0.7273
+    },
+    "geopandas": {
+     "passed": 2,
+     "n": 4,
+     "pass_at_1": 0.5
+    },
+    "gradio": {
+     "passed": 3,
+     "n": 4,
+     "pass_at_1": 0.75
+    },
+    "jinja2": {
+     "passed": 0,
+     "n": 2,
+     "pass_at_1": 0.0
+    },
+    "kymatio": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    },
+    "librosa": {
+     "passed": 9,
+     "n": 21,
+     "pass_at_1": 0.4286
+    },
+    "lightgbm": {
+     "passed": 4,
+     "n": 5,
+     "pass_at_1": 0.8
+    },
+    "matplotlib": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "mitmproxy": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "networkx": {
+     "passed": 3,
+     "n": 5,
+     "pass_at_1": 0.6
+    },
+    "nltk": {
+     "passed": 2,
+     "n": 3,
+     "pass_at_1": 0.6667
+    },
+    "numpy": {
+     "passed": 8,
+     "n": 8,
+     "pass_at_1": 1.0
+    },
+    "pandas": {
+     "passed": 1,
+     "n": 5,
+     "pass_at_1": 0.2
+    },
+    "pillow": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    },
+    "plotly": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "pytest": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "scikit-learn": {
+     "passed": 5,
+     "n": 6,
+     "pass_at_1": 0.8333
+    },
+    "scipy": {
+     "passed": 15,
+     "n": 20,
+     "pass_at_1": 0.75
+    },
+    "seaborn": {
+     "passed": 4,
+     "n": 4,
+     "pass_at_1": 1.0
+    },
+    "spacy": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "sympy": {
+     "passed": 10,
+     "n": 17,
+     "pass_at_1": 0.5882
+    },
+    "torch": {
+     "passed": 4,
+     "n": 9,
+     "pass_at_1": 0.4444
+    },
+    "tornado": {
+     "passed": 3,
+     "n": 4,
+     "pass_at_1": 0.75
+    },
+    "tqdm": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    }
+   },
+   "per_type_of_change": {
+    "Argument or Attribute change": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    },
+    "Function Name change": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "New feature or additional dependency based change": {
+     "passed": 4,
+     "n": 5,
+     "pass_at_1": 0.8
+    },
+    "Semantics or Function Behaviour change": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "argument change": {
+     "passed": 27,
+     "n": 38,
+     "pass_at_1": 0.7105
+    },
+    "argument or attribute change": {
+     "passed": 17,
+     "n": 21,
+     "pass_at_1": 0.8095
+    },
+    "behaviour": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "breaking change": {
+     "passed": 9,
+     "n": 10,
+     "pass_at_1": 0.9
+    },
+    "deprecation": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "name change": {
+     "passed": 13,
+     "n": 23,
+     "pass_at_1": 0.5652
+    },
+    "name change (attribute)": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "new feature": {
+     "passed": 8,
+     "n": 20,
+     "pass_at_1": 0.4
+    },
+    "new func/method/class": {
+     "passed": 11,
+     "n": 22,
+     "pass_at_1": 0.5
+    },
+    "other library": {
+     "passed": 2,
+     "n": 3,
+     "pass_at_1": 0.6667
+    },
+    "other library or new feature": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    },
+    "output behavior": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "output behaviour": {
+     "passed": 3,
+     "n": 7,
+     "pass_at_1": 0.4286
+    },
+    "output change": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    }
+   },
+   "solver_cost_usd": 0.158,
+   "models": [
+    "claude-haiku-5-5"
+   ]
+  },
+  {
+   "arm": "pinned",
+   "iteration": 1,
+   "split": "train",
+   "n": 159,
+   "passed": 102,
+   "pass_at_1": 0.6415,
+   "expected": 159,
+   "missing": 0,
+   "solver_failed": [],
+   "pass_at_1_over_expected": 0.6415,
+   "error_types": {
+    "AssertionError": 39,
+    "TypeError": 7,
+    "AttributeError": 6,
+    "ValueError": 3,
+    "KeyError": 1,
+    "RuntimeError": 1
+   },
+   "per_library": {
+    "django": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "falcon": {
+     "passed": 7,
+     "n": 10,
+     "pass_at_1": 0.7
+    },
+    "flask": {
+     "passed": 8,
+     "n": 11,
+     "pass_at_1": 0.7273
+    },
+    "geopandas": {
+     "passed": 0,
+     "n": 4,
+     "pass_at_1": 0.0
+    },
+    "gradio": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "jinja2": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "librosa": {
+     "passed": 14,
+     "n": 21,
+     "pass_at_1": 0.6667
+    },
+    "lightgbm": {
+     "passed": 4,
+     "n": 4,
+     "pass_at_1": 1.0
+    },
+    "matplotlib": {
+     "passed": 2,
+     "n": 3,
+     "pass_at_1": 0.6667
+    },
+    "mitmproxy": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "networkx": {
+     "passed": 3,
+     "n": 4,
+     "pass_at_1": 0.75
+    },
+    "nltk": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "numpy": {
+     "passed": 7,
+     "n": 7,
+     "pass_at_1": 1.0
+    },
+    "pandas": {
+     "passed": 1,
+     "n": 5,
+     "pass_at_1": 0.2
+    },
+    "pillow": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    },
+    "plotly": {
+     "passed": 4,
+     "n": 4,
+     "pass_at_1": 1.0
+    },
+    "pytest": {
+     "passed": 1,
+     "n": 4,
+     "pass_at_1": 0.25
+    },
+    "scikit-learn": {
+     "passed": 5,
+     "n": 6,
+     "pass_at_1": 0.8333
+    },
+    "scipy": {
+     "passed": 15,
+     "n": 20,
+     "pass_at_1": 0.75
+    },
+    "seaborn": {
+     "passed": 4,
+     "n": 4,
+     "pass_at_1": 1.0
+    },
+    "spacy": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "sympy": {
+     "passed": 7,
+     "n": 16,
+     "pass_at_1": 0.4375
+    },
+    "torch": {
+     "passed": 4,
+     "n": 9,
+     "pass_at_1": 0.4444
+    },
+    "tornado": {
+     "passed": 2,
+     "n": 4,
+     "pass_at_1": 0.5
+    },
+    "tqdm": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    }
+   },
+   "per_type_of_change": {
+    "Argument or Attribute change": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "Function Name change": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "New feature or additional dependency based change": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "Semantics or Function Behaviour change": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "argument change": {
+     "passed": 11,
+     "n": 21,
+     "pass_at_1": 0.5238
+    },
+    "argument or attribute change": {
+     "passed": 18,
+     "n": 23,
+     "pass_at_1": 0.7826
+    },
+    "attribute change": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "behaviour": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "breaking change": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "deprecation": {
+     "passed": 8,
+     "n": 8,
+     "pass_at_1": 1.0
+    },
+    "gh\noutput behaviour": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    },
+    "name change": {
+     "passed": 15,
+     "n": 29,
+     "pass_at_1": 0.5172
+    },
+    "new feature": {
+     "passed": 13,
+     "n": 20,
+     "pass_at_1": 0.65
+    },
+    "new func/method/class": {
+     "passed": 16,
+     "n": 24,
+     "pass_at_1": 0.6667
+    },
+    "other library": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "other library or new feature": {
+     "passed": 2,
+     "n": 3,
+     "pass_at_1": 0.6667
+    },
+    "ouput behavior": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    },
+    "output behaviour": {
+     "passed": 4,
+     "n": 6,
+     "pass_at_1": 0.6667
+    },
+    "output change": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    }
+   },
+   "solver_cost_usd": 0.1583,
+   "models": [
+    "claude-haiku-5-5"
+   ]
+  },
+  {
+   "arm": "pinned",
+   "iteration": 2,
+   "split": "test",
+   "n": 169,
+   "passed": 114,
+   "pass_at_1": 0.6746,
+   "expected": 169,
+   "missing": 0,
+   "solver_failed": [],
+   "pass_at_1_over_expected": 0.6746,
+   "error_types": {
+    "AssertionError": 35,
+    "ValueError": 8,
+    "AttributeError": 5,
+    "TypeError": 2,
+    "NetworkXError": 1,
+    "ZeroDivisionError": 1,
+    "PolynomialError": 1,
+    "HTTPError": 1,
+    "NameError": 1
+   },
+   "per_library": {
+    "django": {
+     "passed": 4,
+     "n": 5,
+     "pass_at_1": 0.8
+    },
+    "falcon": {
+     "passed": 7,
+     "n": 11,
+     "pass_at_1": 0.6364
+    },
+    "flask": {
+     "passed": 9,
+     "n": 11,
+     "pass_at_1": 0.8182
+    },
+    "geopandas": {
+     "passed": 2,
+     "n": 4,
+     "pass_at_1": 0.5
+    },
+    "gradio": {
+     "passed": 3,
+     "n": 4,
+     "pass_at_1": 0.75
+    },
+    "jinja2": {
+     "passed": 1,
+     "n": 2,
+     "pass_at_1": 0.5
+    },
+    "kymatio": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    },
+    "librosa": {
+     "passed": 8,
+     "n": 21,
+     "pass_at_1": 0.381
+    },
+    "lightgbm": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "matplotlib": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "mitmproxy": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "networkx": {
+     "passed": 3,
+     "n": 5,
+     "pass_at_1": 0.6
+    },
+    "nltk": {
+     "passed": 2,
+     "n": 3,
+     "pass_at_1": 0.6667
+    },
+    "numpy": {
+     "passed": 7,
+     "n": 8,
+     "pass_at_1": 0.875
+    },
+    "pandas": {
+     "passed": 1,
+     "n": 5,
+     "pass_at_1": 0.2
+    },
+    "pillow": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    },
+    "plotly": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "pytest": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "scikit-learn": {
+     "passed": 5,
+     "n": 6,
+     "pass_at_1": 0.8333
+    },
+    "scipy": {
+     "passed": 15,
+     "n": 20,
+     "pass_at_1": 0.75
+    },
+    "seaborn": {
+     "passed": 4,
+     "n": 4,
+     "pass_at_1": 1.0
+    },
+    "spacy": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "sympy": {
+     "passed": 11,
+     "n": 17,
+     "pass_at_1": 0.6471
+    },
+    "torch": {
+     "passed": 5,
+     "n": 9,
+     "pass_at_1": 0.5556
+    },
+    "tornado": {
+     "passed": 4,
+     "n": 4,
+     "pass_at_1": 1.0
+    },
+    "tqdm": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    }
+   },
+   "per_type_of_change": {
+    "Argument or Attribute change": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "Function Name change": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "New feature or additional dependency based change": {
+     "passed": 4,
+     "n": 5,
+     "pass_at_1": 0.8
+    },
+    "Semantics or Function Behaviour change": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "argument change": {
+     "passed": 27,
+     "n": 38,
+     "pass_at_1": 0.7105
+    },
+    "argument or attribute change": {
+     "passed": 17,
+     "n": 21,
+     "pass_at_1": 0.8095
+    },
+    "behaviour": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "breaking change": {
+     "passed": 9,
+     "n": 10,
+     "pass_at_1": 0.9
+    },
+    "deprecation": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "name change": {
+     "passed": 16,
+     "n": 23,
+     "pass_at_1": 0.6957
+    },
+    "name change (attribute)": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "new feature": {
+     "passed": 7,
+     "n": 20,
+     "pass_at_1": 0.35
+    },
+    "new func/method/class": {
+     "passed": 13,
+     "n": 22,
+     "pass_at_1": 0.5909
+    },
+    "other library": {
+     "passed": 2,
+     "n": 3,
+     "pass_at_1": 0.6667
+    },
+    "other library or new feature": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    },
+    "output behavior": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "output behaviour": {
+     "passed": 3,
+     "n": 7,
+     "pass_at_1": 0.4286
+    },
+    "output change": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    }
+   },
+   "solver_cost_usd": 0.1573,
+   "models": [
+    "claude-haiku-5-5"
+   ]
+  },
+  {
+   "arm": "pinned",
+   "iteration": 2,
+   "split": "train",
+   "n": 159,
+   "passed": 105,
+   "pass_at_1": 0.6604,
+   "expected": 159,
+   "missing": 0,
+   "solver_failed": [],
+   "pass_at_1_over_expected": 0.6604,
+   "error_types": {
+    "AssertionError": 43,
+    "TypeError": 4,
+    "AttributeError": 3,
+    "ValueError": 2,
+    "RuntimeError": 1,
+    "IndexError": 1
+   },
+   "per_library": {
+    "django": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "falcon": {
+     "passed": 7,
+     "n": 10,
+     "pass_at_1": 0.7
+    },
+    "flask": {
+     "passed": 8,
+     "n": 11,
+     "pass_at_1": 0.7273
+    },
+    "geopandas": {
+     "passed": 0,
+     "n": 4,
+     "pass_at_1": 0.0
+    },
+    "gradio": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "jinja2": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "librosa": {
+     "passed": 12,
+     "n": 21,
+     "pass_at_1": 0.5714
+    },
+    "lightgbm": {
+     "passed": 4,
+     "n": 4,
+     "pass_at_1": 1.0
+    },
+    "matplotlib": {
+     "passed": 2,
+     "n": 3,
+     "pass_at_1": 0.6667
+    },
+    "mitmproxy": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "networkx": {
+     "passed": 4,
+     "n": 4,
+     "pass_at_1": 1.0
+    },
+    "nltk": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "numpy": {
+     "passed": 7,
+     "n": 7,
+     "pass_at_1": 1.0
+    },
+    "pandas": {
+     "passed": 1,
+     "n": 5,
+     "pass_at_1": 0.2
+    },
+    "pillow": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    },
+    "plotly": {
+     "passed": 4,
+     "n": 4,
+     "pass_at_1": 1.0
+    },
+    "pytest": {
+     "passed": 1,
+     "n": 4,
+     "pass_at_1": 0.25
+    },
+    "scikit-learn": {
+     "passed": 5,
+     "n": 6,
+     "pass_at_1": 0.8333
+    },
+    "scipy": {
+     "passed": 17,
+     "n": 20,
+     "pass_at_1": 0.85
+    },
+    "seaborn": {
+     "passed": 4,
+     "n": 4,
+     "pass_at_1": 1.0
+    },
+    "spacy": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "sympy": {
+     "passed": 8,
+     "n": 16,
+     "pass_at_1": 0.5
+    },
+    "torch": {
+     "passed": 5,
+     "n": 9,
+     "pass_at_1": 0.5556
+    },
+    "tornado": {
+     "passed": 2,
+     "n": 4,
+     "pass_at_1": 0.5
+    },
+    "tqdm": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    }
+   },
+   "per_type_of_change": {
+    "Argument or Attribute change": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "Function Name change": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "New feature or additional dependency based change": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "Semantics or Function Behaviour change": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "argument change": {
+     "passed": 10,
+     "n": 21,
+     "pass_at_1": 0.4762
+    },
+    "argument or attribute change": {
+     "passed": 19,
+     "n": 23,
+     "pass_at_1": 0.8261
+    },
+    "attribute change": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "behaviour": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "breaking change": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "deprecation": {
+     "passed": 8,
+     "n": 8,
+     "pass_at_1": 1.0
+    },
+    "gh\noutput behaviour": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    },
+    "name change": {
+     "passed": 16,
+     "n": 29,
+     "pass_at_1": 0.5517
+    },
+    "new feature": {
+     "passed": 11,
+     "n": 20,
+     "pass_at_1": 0.55
+    },
+    "new func/method/class": {
+     "passed": 19,
+     "n": 24,
+     "pass_at_1": 0.7917
+    },
+    "other library": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "other library or new feature": {
+     "passed": 2,
+     "n": 3,
+     "pass_at_1": 0.6667
+    },
+    "ouput behavior": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    },
+    "output behaviour": {
+     "passed": 4,
+     "n": 6,
+     "pass_at_1": 0.6667
+    },
+    "output change": {
+     "passed": 2,
+     "n": 3,
+     "pass_at_1": 0.6667
+    }
+   },
+   "solver_cost_usd": 0.1533,
+   "models": [
+    "claude-haiku-5-5"
+   ]
+  }
+ ]
+}

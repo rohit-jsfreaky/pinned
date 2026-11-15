@@ -1,0 +1,320 @@
+{"op": "record", "iteration": 1, "problem": "0", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 23"]}}
+{"op": "record", "iteration": 1, "problem": "1", "passed": false, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "3", "passed": false, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "4", "passed": false, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "6", "passed": true, "report": {"edges_reweighted": 9, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 19"]}}
+{"op": "record", "iteration": 1, "problem": "7", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "9", "passed": true, "report": {"edges_reweighted": 14, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 14"]}}
+{"op": "record", "iteration": 1, "problem": "11", "passed": true, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 53"]}}
+{"op": "record", "iteration": 1, "problem": "16", "passed": false, "report": {"edges_reweighted": 11, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "18", "passed": false, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "19", "passed": false, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "20", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "25", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "26", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 3"]}}
+{"op": "record", "iteration": 1, "problem": "29", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 8"]}}
+{"op": "record", "iteration": 1, "problem": "31", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 4"]}}
+{"op": "record", "iteration": 1, "problem": "32", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "35", "passed": true, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 14"]}}
+{"op": "record", "iteration": 1, "problem": "37", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 7"]}}
+{"op": "record", "iteration": 1, "problem": "39", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 8"]}}
+{"op": "record", "iteration": 1, "problem": "40", "passed": true, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 3"]}}
+{"op": "record", "iteration": 1, "problem": "43", "passed": true, "report": {"edges_reweighted": 8, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 28"]}}
+{"op": "record", "iteration": 1, "problem": "45", "passed": true, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 14"]}}
+{"op": "record", "iteration": 1, "problem": "46", "passed": true, "report": {"edges_reweighted": 18, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "49", "passed": false, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "50", "passed": true, "report": {"edges_reweighted": 9, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 13"]}}
+{"op": "record", "iteration": 1, "problem": "52", "passed": true, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 13"]}}
+{"op": "record", "iteration": 1, "problem": "55", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "58", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "61", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 4"]}}
+{"op": "record", "iteration": 1, "problem": "62", "passed": false, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "63", "passed": false, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "65", "passed": false, "report": {"edges_reweighted": 5, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "69", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 12"]}}
+{"op": "record", "iteration": 1, "problem": "70", "passed": true, "report": {"edges_reweighted": 10, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 2"]}}
+{"op": "record", "iteration": 1, "problem": "74", "passed": true, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 9"]}}
+{"op": "record", "iteration": 1, "problem": "75", "passed": true, "report": {"edges_reweighted": 11, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 1"]}}
+{"op": "record", "iteration": 1, "problem": "76", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 7"]}}
+{"op": "record", "iteration": 1, "problem": "78", "passed": true, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 5"]}}
+{"op": "record", "iteration": 1, "problem": "80", "passed": true, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "82", "passed": true, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 17"]}}
+{"op": "record", "iteration": 1, "problem": "83", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 4"]}}
+{"op": "record", "iteration": 1, "problem": "85", "passed": true, "report": {"edges_reweighted": 5, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 3"]}}
+{"op": "record", "iteration": 1, "problem": "89", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "93", "passed": true, "report": {"edges_reweighted": 10, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 2"]}}
+{"op": "record", "iteration": 1, "problem": "95", "passed": true, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 11"]}}
+{"op": "record", "iteration": 1, "problem": "97", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "101", "passed": false, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "102", "passed": false, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "104", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "105", "passed": true, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 51"]}}
+{"op": "record", "iteration": 1, "problem": "108", "passed": true, "report": {"edges_reweighted": 13, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 23"]}}
+{"op": "record", "iteration": 1, "problem": "111", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 18"]}}
+{"op": "record", "iteration": 1, "problem": "112", "passed": true, "report": {"edges_reweighted": 19, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 1"]}}
+{"op": "record", "iteration": 1, "problem": "113", "passed": false, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "114", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "115", "passed": true, "report": {"edges_reweighted": 15, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 30"]}}
+{"op": "record", "iteration": 1, "problem": "119", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 6"]}}
+{"op": "record", "iteration": 1, "problem": "121", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 8"]}}
+{"op": "record", "iteration": 1, "problem": "123", "passed": false, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "124", "passed": false, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "125", "passed": true, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 11"]}}
+{"op": "record", "iteration": 1, "problem": "128", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 6"]}}
+{"op": "record", "iteration": 1, "problem": "130", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 9"]}}
+{"op": "record", "iteration": 1, "problem": "131", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 9"]}}
+{"op": "record", "iteration": 1, "problem": "133", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 9"]}}
+{"op": "record", "iteration": 1, "problem": "135", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 9"]}}
+{"op": "record", "iteration": 1, "problem": "139", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 9"]}}
+{"op": "record", "iteration": 1, "problem": "142", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 9"]}}
+{"op": "record", "iteration": 1, "problem": "144", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 66"]}}
+{"op": "record", "iteration": 1, "problem": "145", "passed": true, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 14"]}}
+{"op": "record", "iteration": 1, "problem": "147", "passed": true, "report": {"edges_reweighted": 7, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 10"]}}
+{"op": "record", "iteration": 1, "problem": "148", "passed": true, "report": {"edges_reweighted": 15, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "149", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "155", "passed": true, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 57"]}}
+{"op": "record", "iteration": 1, "problem": "156", "passed": true, "report": {"edges_reweighted": 20, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 18"]}}
+{"op": "record", "iteration": 1, "problem": "157", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 6"]}}
+{"op": "record", "iteration": 1, "problem": "159", "passed": true, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 10"]}}
+{"op": "record", "iteration": 1, "problem": "161", "passed": false, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "163", "passed": true, "report": {"edges_reweighted": 14, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 12"]}}
+{"op": "record", "iteration": 1, "problem": "166", "passed": true, "report": {"edges_reweighted": 26, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 34"]}}
+{"op": "record", "iteration": 1, "problem": "167", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "168", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "170", "passed": true, "report": {"edges_reweighted": 18, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 10"]}}
+{"op": "record", "iteration": 1, "problem": "173", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "175", "passed": false, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "176", "passed": true, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 39"]}}
+{"op": "record", "iteration": 1, "problem": "177", "passed": false, "report": {"edges_reweighted": 9, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "178", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 25"]}}
+{"op": "record", "iteration": 1, "problem": "180", "passed": true, "report": {"edges_reweighted": 8, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 97"]}}
+{"op": "record", "iteration": 1, "problem": "181", "passed": false, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "182", "passed": false, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "184", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "189", "passed": true, "report": {"edges_reweighted": 14, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 250"]}}
+{"op": "record", "iteration": 1, "problem": "191", "passed": false, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "193", "passed": false, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "194", "passed": true, "report": {"edges_reweighted": 11, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 25"]}}
+{"op": "record", "iteration": 1, "problem": "196", "passed": false, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "198", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 2"]}}
+{"op": "record", "iteration": 1, "problem": "202", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 5"]}}
+{"op": "record", "iteration": 1, "problem": "203", "passed": false, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "209", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 10"]}}
+{"op": "record", "iteration": 1, "problem": "210", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 8"]}}
+{"op": "record", "iteration": 1, "problem": "211", "passed": true, "report": {"edges_reweighted": 8, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 2"]}}
+{"op": "record", "iteration": 1, "problem": "215", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "217", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 10"]}}
+{"op": "record", "iteration": 1, "problem": "220", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "222", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "223", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "224", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "226", "passed": false, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "227", "passed": false, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "228", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 19"]}}
+{"op": "record", "iteration": 1, "problem": "231", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "239", "passed": false, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "242", "passed": true, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 23"]}}
+{"op": "record", "iteration": 1, "problem": "243", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 18"]}}
+{"op": "record", "iteration": 1, "problem": "244", "passed": true, "report": {"edges_reweighted": 19, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 51"]}}
+{"op": "record", "iteration": 1, "problem": "245", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 11"]}}
+{"op": "record", "iteration": 1, "problem": "246", "passed": false, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "247", "passed": true, "report": {"edges_reweighted": 7, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 56"]}}
+{"op": "record", "iteration": 1, "problem": "248", "passed": true, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 7"]}}
+{"op": "record", "iteration": 1, "problem": "252", "passed": true, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 17"]}}
+{"op": "record", "iteration": 1, "problem": "254", "passed": false, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "258", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "262", "passed": false, "report": {"edges_reweighted": 5, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "263", "passed": false, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "264", "passed": true, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 16"]}}
+{"op": "record", "iteration": 1, "problem": "266", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 21"]}}
+{"op": "record", "iteration": 1, "problem": "268", "passed": true, "report": {"edges_reweighted": 7, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 31"]}}
+{"op": "record", "iteration": 1, "problem": "271", "passed": true, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 18"]}}
+{"op": "record", "iteration": 1, "problem": "273", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "275", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 4"]}}
+{"op": "record", "iteration": 1, "problem": "278", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "279", "passed": false, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "281", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 9"]}}
+{"op": "record", "iteration": 1, "problem": "285", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 16"]}}
+{"op": "record", "iteration": 1, "problem": "286", "passed": false, "report": {"edges_reweighted": 16, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "289", "passed": false, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "292", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "297", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "298", "passed": true, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 3"]}}
+{"op": "record", "iteration": 1, "problem": "299", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "301", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "302", "passed": true, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 1"]}}
+{"op": "record", "iteration": 1, "problem": "304", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "305", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "308", "passed": false, "report": {"edges_reweighted": 5, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "310", "passed": true, "report": {"edges_reweighted": 5, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 7"]}}
+{"op": "record", "iteration": 1, "problem": "311", "passed": true, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 18"]}}
+{"op": "record", "iteration": 1, "problem": "312", "passed": true, "report": {"edges_reweighted": 8, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 3"]}}
+{"op": "record", "iteration": 1, "problem": "314", "passed": true, "report": {"edges_reweighted": 7, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 1"]}}
+{"op": "record", "iteration": 1, "problem": "315", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "318", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "320", "passed": false, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "322", "passed": true, "report": {"edges_reweighted": 5, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 16"]}}
+{"op": "record", "iteration": 1, "problem": "324", "passed": false, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 1, "problem": "326", "passed": true, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 11"]}}
+{"op": "record", "iteration": 1, "problem": "329", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "maintain", "iteration": 1, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 12196, "split": 0, "notes": ["libraries=25 shortcuts=0 merged=12196 split=0 decayed=0"]}}
+{"op": "record", "iteration": 2, "problem": "0", "passed": true, "report": {"edges_reweighted": 13, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 47"]}}
+{"op": "record", "iteration": 2, "problem": "1", "passed": false, "report": {"edges_reweighted": 37, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "3", "passed": false, "report": {"edges_reweighted": 20, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "4", "passed": false, "report": {"edges_reweighted": 29, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "6", "passed": true, "report": {"edges_reweighted": 28, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 28"]}}
+{"op": "record", "iteration": 2, "problem": "7", "passed": true, "report": {"edges_reweighted": 11, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 11"]}}
+{"op": "record", "iteration": 2, "problem": "9", "passed": true, "report": {"edges_reweighted": 28, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "11", "passed": true, "report": {"edges_reweighted": 57, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "16", "passed": false, "report": {"edges_reweighted": 7, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "18", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "19", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "20", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "25", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "26", "passed": true, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "29", "passed": true, "report": {"edges_reweighted": 10, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "31", "passed": true, "report": {"edges_reweighted": 5, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "32", "passed": true, "report": {"edges_reweighted": 5, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "35", "passed": true, "report": {"edges_reweighted": 20, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "37", "passed": true, "report": {"edges_reweighted": 8, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "39", "passed": true, "report": {"edges_reweighted": 10, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "40", "passed": true, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "43", "passed": true, "report": {"edges_reweighted": 36, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "45", "passed": true, "report": {"edges_reweighted": 18, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "46", "passed": true, "report": {"edges_reweighted": 18, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "49", "passed": false, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "50", "passed": true, "report": {"edges_reweighted": 22, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "52", "passed": true, "report": {"edges_reweighted": 16, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "55", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "58", "passed": false, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "61", "passed": true, "report": {"edges_reweighted": 5, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "62", "passed": false, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "63", "passed": false, "report": {"edges_reweighted": 5, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "65", "passed": false, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "69", "passed": true, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "70", "passed": true, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "74", "passed": true, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "75", "passed": true, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "76", "passed": true, "report": {"edges_reweighted": 9, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "78", "passed": true, "report": {"edges_reweighted": 8, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "80", "passed": true, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "82", "passed": true, "report": {"edges_reweighted": 14, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "83", "passed": true, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "85", "passed": true, "report": {"edges_reweighted": 8, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "89", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "93", "passed": true, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "95", "passed": true, "report": {"edges_reweighted": 15, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "97", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "101", "passed": false, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "102", "passed": false, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "104", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "105", "passed": true, "report": {"edges_reweighted": 54, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "108", "passed": true, "report": {"edges_reweighted": 36, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "111", "passed": true, "report": {"edges_reweighted": 20, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "112", "passed": true, "report": {"edges_reweighted": 20, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "113", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 36"]}}
+{"op": "record", "iteration": 2, "problem": "114", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "115", "passed": true, "report": {"edges_reweighted": 45, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "119", "passed": true, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "121", "passed": true, "report": {"edges_reweighted": 9, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "123", "passed": true, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 10"]}}
+{"op": "record", "iteration": 2, "problem": "124", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "125", "passed": true, "report": {"edges_reweighted": 14, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "128", "passed": true, "report": {"edges_reweighted": 8, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "130", "passed": true, "report": {"edges_reweighted": 11, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "131", "passed": true, "report": {"edges_reweighted": 11, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "133", "passed": true, "report": {"edges_reweighted": 11, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "135", "passed": true, "report": {"edges_reweighted": 11, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "139", "passed": true, "report": {"edges_reweighted": 11, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "142", "passed": true, "report": {"edges_reweighted": 11, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "144", "passed": true, "report": {"edges_reweighted": 68, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "145", "passed": true, "report": {"edges_reweighted": 18, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "147", "passed": true, "report": {"edges_reweighted": 19, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "148", "passed": true, "report": {"edges_reweighted": 17, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "149", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "155", "passed": true, "report": {"edges_reweighted": 60, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "156", "passed": true, "report": {"edges_reweighted": 38, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "157", "passed": true, "report": {"edges_reweighted": 7, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "159", "passed": true, "report": {"edges_reweighted": 13, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "161", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "163", "passed": true, "report": {"edges_reweighted": 26, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "166", "passed": true, "report": {"edges_reweighted": 45, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "167", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "168", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "170", "passed": true, "report": {"edges_reweighted": 35, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 7"]}}
+{"op": "record", "iteration": 2, "problem": "173", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "175", "passed": false, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "176", "passed": true, "report": {"edges_reweighted": 45, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "177", "passed": false, "report": {"edges_reweighted": 14, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "178", "passed": true, "report": {"edges_reweighted": 26, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "180", "passed": true, "report": {"edges_reweighted": 105, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "181", "passed": false, "report": {"edges_reweighted": 5, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "182", "passed": false, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "184", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "189", "passed": true, "report": {"edges_reweighted": 197, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "191", "passed": false, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "193", "passed": true, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 4"]}}
+{"op": "record", "iteration": 2, "problem": "194", "passed": true, "report": {"edges_reweighted": 36, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 9"]}}
+{"op": "record", "iteration": 2, "problem": "196", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "198", "passed": true, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "202", "passed": true, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "203", "passed": false, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "209", "passed": true, "report": {"edges_reweighted": 11, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "210", "passed": true, "report": {"edges_reweighted": 9, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "211", "passed": true, "report": {"edges_reweighted": 10, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "215", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "217", "passed": true, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "220", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "222", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "223", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "224", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "226", "passed": true, "report": {"edges_reweighted": 9, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 15"]}}
+{"op": "record", "iteration": 2, "problem": "227", "passed": false, "report": {"edges_reweighted": 19, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "228", "passed": false, "report": {"edges_reweighted": 19, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "231", "passed": false, "report": {"edges_reweighted": 17, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "239", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "242", "passed": true, "report": {"edges_reweighted": 26, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "243", "passed": true, "report": {"edges_reweighted": 20, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "244", "passed": true, "report": {"edges_reweighted": 70, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "245", "passed": true, "report": {"edges_reweighted": 13, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "246", "passed": false, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "247", "passed": true, "report": {"edges_reweighted": 63, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "248", "passed": true, "report": {"edges_reweighted": 10, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "252", "passed": true, "report": {"edges_reweighted": 21, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "254", "passed": false, "report": {"edges_reweighted": 2, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "258", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "262", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "263", "passed": false, "report": {"edges_reweighted": 3, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "264", "passed": true, "report": {"edges_reweighted": 20, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "266", "passed": true, "report": {"edges_reweighted": 22, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "268", "passed": true, "report": {"edges_reweighted": 38, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "271", "passed": true, "report": {"edges_reweighted": 30, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "273", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "275", "passed": true, "report": {"edges_reweighted": 6, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "278", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "279", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "281", "passed": true, "report": {"edges_reweighted": 10, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "285", "passed": true, "report": {"edges_reweighted": 16, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "286", "passed": false, "report": {"edges_reweighted": 16, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "289", "passed": false, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "292", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "297", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "298", "passed": true, "report": {"edges_reweighted": 7, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "299", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "301", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "302", "passed": true, "report": {"edges_reweighted": 4, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "304", "passed": false, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "305", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "308", "passed": false, "report": {"edges_reweighted": 5, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "310", "passed": true, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "311", "passed": true, "report": {"edges_reweighted": 22, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "312", "passed": true, "report": {"edges_reweighted": 22, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "314", "passed": true, "report": {"edges_reweighted": 8, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "315", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "318", "passed": false, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "320", "passed": false, "report": {"edges_reweighted": 14, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "322", "passed": true, "report": {"edges_reweighted": 14, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["learned cues added: 7"]}}
+{"op": "record", "iteration": 2, "problem": "324", "passed": false, "report": {"edges_reweighted": 1, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "326", "passed": true, "report": {"edges_reweighted": 12, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "record", "iteration": 2, "problem": "329", "passed": true, "report": {"edges_reweighted": 0, "shortcuts_added": 0, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": []}}
+{"op": "maintain", "iteration": 2, "report": {"edges_reweighted": 1, "shortcuts_added": 3, "gaps_ingested": 0, "merged": 0, "split": 0, "notes": ["libraries=25 shortcuts=3 merged=0 split=0 decayed=1"]}}

@@ -21,7 +21,7 @@ from .static import SKIP_MODULES, StaticResult, load_static
 
 log = logging.getLogger(__name__)
 
-SNAPSHOT_FORMAT = 7
+SNAPSHOT_FORMAT = 8
 
 
 @dataclass
@@ -34,8 +34,9 @@ class Plan:
 def compiled_plan(static: StaticResult, compiled: list[str]) -> Plan:
     """Public modules static loading cannot fully see.
 
-    A public module is planned when it imports from a compiled extension module (directly, by wildcard, or through
-    an alias griffe could not resolve), or when it is itself a compiled module with a public name.
+    A public module is planned when it imports from a compiled extension module (directly or by wildcard), when one
+    of its re-exports could not be resolved statically, when its `__all__` is computed at runtime, or when it is
+    itself a compiled module with a public name.
     """
     comp = set(compiled)
 
@@ -48,9 +49,11 @@ def compiled_plan(static: StaticResult, compiled: list[str]) -> Plan:
         if any(is_compiled(t) for t in targets):
             planned.add(mod)
     for path, target in static.unresolved.items():
+        # a re-export griffe could not follow (compiled target, runtime-built name, stub-only chain): import it
         parent = path.rsplit(".", 1)[0]
-        if parent in static.apis and static.apis[parent].kind == "module" and (is_compiled(target) or target == parent):
+        if parent in static.apis and static.apis[parent].kind == "module":
             planned.add(parent)
+    planned |= static.computed_all  # `__all__` only exists at runtime
     for name in comp:
         if not any(p.startswith("_") for p in name.split(".")) and name.split(".", 1)[0] in {
                 m.split(".", 1)[0] for m in static.apis}:

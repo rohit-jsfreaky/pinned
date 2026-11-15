@@ -41,28 +41,38 @@ def first_line(doc):
     return ""
 
 
-def summary_line(name, doc):
-    """First docstring line, skipping a leading "name(params)" signature line (ufuncs, C builtins)."""
-    lines = [l.strip() for l in (doc or "").splitlines() if l.strip()]
-    if lines and name and lines[0].startswith(name + "(") and len(lines) > 1:
-        return lines[1][:200]
-    return lines[0][:200] if lines else ""
-
-
-def doc_signature(name, doc):
-    """'i1(x, /, out=None, *, where=True)' -> '(x, /, out=None, *, where=True)' when the docstring starts with it."""
-    line = first_line(doc)
-    if not line.startswith(name + "("):
-        return ""
+def _leading_signature(name, doc):
+    """(signature "(...)", number of docstring lines it spans) when the docstring starts with `name(` or
+    `<obj>.name(` (numpy: "a.reshape(shape, order='C')"), possibly wrapped over several lines."""
+    text = (doc or "").lstrip()
+    head = text.split("(", 1)[0]
+    if not name or "(" not in text or "\n" in head or not (head == name or head.endswith("." + name)):
+        return "", 0
     depth = 0
-    for i, ch in enumerate(line[len(name):], start=len(name)):
+    for i, ch in enumerate(text[len(head):], start=len(head)):
         if ch == "(":
             depth += 1
         elif ch == ")":
             depth -= 1
             if depth == 0:
-                return line[len(name):i + 1]
-    return ""
+                sig = " ".join(text[len(head):i + 1].split())
+                return sig[:400], text[:i + 1].count("\n") + 1
+    return "", 0
+
+
+def summary_line(name, doc):
+    """First docstring line, skipping a leading "name(params)" signature (ufuncs, C builtins), even a wrapped one."""
+    _, skip = _leading_signature(name, doc)
+    lines = [l.strip() for l in (doc or "").lstrip().splitlines()]
+    rest = [l for l in lines[skip:] if l and not l.startswith("-->") and not l.startswith("->")]
+    if rest:
+        return rest[0][:200]
+    return next((l for l in lines if l), "")[:200]
+
+
+def doc_signature(name, doc):
+    """'i1(x, /, out=None, *, where=True)' -> '(x, /, out=None, *, where=True)' when the docstring starts with it."""
+    return _leading_signature(name, doc)[0]
 
 
 def runtime_params(obj):
@@ -231,6 +241,10 @@ def module_records(name, owners, records, errors, notes, seen):
         records.append(rec)
         if inspect.isclass(obj):
             class_members(path, obj, owners, records, seen)
+        elif own(getattr(type(obj), "__module__", "") or "", owners) and not inspect.isroutine(obj):
+            # a module-level instance of the library's own class (scipy.stats.norm = norm_gen(...)): its methods are
+            # what users call (scipy.stats.norm.logcdf)
+            class_members(path, type(obj), owners, records, seen)
 
 
 def main():

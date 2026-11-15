@@ -21,6 +21,7 @@ from pathlib import Path
 
 import griffe
 
+from .inspect_worker import summary_line
 from .deprecation import scan_class, scan_docstring, scan_function, scan_module_getattr
 from .model import ApiRecord
 
@@ -36,6 +37,7 @@ class StaticResult:
     apis: dict[str, ApiRecord] = field(default_factory=dict)
     modules: dict[str, Path] = field(default_factory=dict)          # public module path -> file
     unresolved: dict[str, str] = field(default_factory=dict)        # public path -> alias target griffe could not find
+    computed_all: set[str] = field(default_factory=set)             # modules whose __all__ is built at runtime
     imports: dict[str, set[str]] = field(default_factory=dict)      # module path -> absolute import targets
     errors: list[str] = field(default_factory=list)
 
@@ -50,11 +52,8 @@ def first_line(doc: str | None) -> str:
 
 
 def summary(name: str, doc: str | None) -> str:
-    """First docstring line, skipping a leading "name(params) -> T" signature line."""
-    lines = [l.strip() for l in (doc or "").splitlines() if l.strip()]
-    if len(lines) > 1 and name and lines[0].startswith(name + "("):
-        return lines[1][:200]
-    return lines[0][:200] if lines else ""
+    """First docstring line, skipping a leading "name(params) -> T" signature (even one wrapped over lines)."""
+    return summary_line(name, doc or "")
 
 
 def _default(value: object) -> str:
@@ -164,6 +163,8 @@ class StaticLoader:
                 rec.deprecations += scan_module_getattr(src)
             if "TYPE_CHECKING" in src:
                 typing_only = type_checking_names(src)
+            if "__all__" in src and not self._literal_exports(mod):
+                self.result.computed_all.add(path)  # e.g. `__all__ = [s for s in dir() ...]`: only runtime knows
         self.result.apis[path] = rec
         # import targets incl. wildcard sources and names griffe already expanded from a wildcard (via .pyi stubs)
         self.result.imports[path] = set(mod.imports.values()) | {
@@ -190,6 +191,11 @@ class StaticLoader:
             for name in exports:
                 if not name.startswith("_") and name not in mod.members and f"{path}.{name}" not in self.result.apis:
                     self.result.unresolved[f"{path}.{name}"] = path
+
+    @staticmethod
+    def _literal_exports(mod: griffe.Module) -> bool:
+        """True when griffe could read `__all__` as plain names (not absent, empty or partly computed)."""
+        return bool(mod.exports) and all(isinstance(e, str) for e in mod.exports)
 
     @staticmethod
     def _exports(mod: griffe.Module) -> set[str] | None:
@@ -290,8 +296,29 @@ class StaticLoader:
         return [d for d in found if d.scope == "object"] if only_object else found
 
 
+def add_namespace_inits(root: Path, top_level: list[str]) -> list[str]:
+    """griffe does not load implicit namespace SUBpackages (a folder of .py files without __init__.py inside a
+    regular package, e.g. flask/sansio in Flask 3.0), so their classes never resolve as bases. Python imports them
+    all the same; for API purposes an empty __init__.py is equivalent, so one is added to the extracted copy.
+    Returns the dotted names of the folders that got one."""
+    added = []
+    for top in top_level:
+        pkg = Path(root) / top
+        if not (pkg / "__init__.py").exists():
+            continue
+        for d in sorted(p for p in pkg.rglob("*") if p.is_dir()):
+            rel = d.relative_to(root)
+            if not all(part.isidentifier() for part in rel.parts) or (d / "__init__.py").exists():
+                continue
+            if (d.parent / "__init__.py").exists() and any(d.glob("*.py")):
+                (d / "__init__.py").write_text("")
+                added.append(".".join(rel.parts))
+    return added
+
+
 def load_static(root: Path, top_level: list[str], import_names: list[str], relaxed: set[str] = frozenset()) -> StaticResult:
     logging.getLogger("griffe").setLevel(logging.ERROR)
+    add_namespace_inits(root, top_level)
     with warnings.catch_warnings():  # griffe parses foreign code: silence its SyntaxWarnings
         warnings.simplefilter("ignore", SyntaxWarning)
         return StaticLoader(root, top_level, import_names, relaxed).load()

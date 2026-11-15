@@ -22,6 +22,9 @@ from .store import CompletionRow, ResultRow, RunStore, row_key
 from .venvs import DEFAULT_VENV_DIR
 
 
+CONTEXT_WORKERS = 4
+
+
 class Tester(Protocol):
     def run(self, jobs: list[TestJob], on_result: Callable[[TestJob, RunResult], None]) -> None: ...
 
@@ -51,8 +54,9 @@ def solve_stage(store: RunStore, problems: list[Problem], arm: Arm, split: str, 
             continue
         need.append(p)
     # Contexts are built in parallel: a graph arm spends ~1 s per problem in search, which done one by one
-    # dominated a whole stage. Order (and so the prompts) is unchanged.
-    with ThreadPoolExecutor(max_workers=max(1, concurrency)) as pool:
+    # dominated a whole stage. Order (and so the prompts) is unchanged. Capped at CONTEXT_WORKERS: 20 parallel
+    # searches on the full graph (1M Api nodes) pushed a CUES read past HydraDB's 30 s query timeout.
+    with ThreadPoolExecutor(max_workers=max(1, min(concurrency, CONTEXT_WORKERS))) as pool:
         ctxs = list(pool.map(arm.context, need))
     for p, actx in zip(need, ctxs):
         req = SolveRequest(arm.name, p.id, iteration, render_prompt(p, actx.text))

@@ -96,6 +96,29 @@ def _is_static(fn: griffe.Function) -> bool:
     return "staticmethod" in fn.labels
 
 
+def wildcard_sources(source: str, module: str, is_package: bool) -> list[str]:
+    """Absolute names of the modules a module star-imports (`from .core import *`), anywhere in its top level."""
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        try:
+            tree = ast.parse(source)
+        except (SyntaxError, ValueError):
+            return []
+    out = []
+    package = module if is_package else module.rpartition(".")[0]
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ImportFrom) and any(a.name == "*" for a in node.names):
+            if node.level:
+                base = package.split(".")
+                base = base[: len(base) - (node.level - 1)] if node.level > 1 else base
+                name = ".".join(base + ([node.module] if node.module else []))
+            else:
+                name = node.module or ""
+            if name and name not in out:
+                out.append(name)
+    return out
+
+
 def type_checking_names(source: str) -> set[str]:
     """Names imported only under `if TYPE_CHECKING:` / `if t.TYPE_CHECKING:` (not there at runtime, so not API).
     griffe flags plain `TYPE_CHECKING` / `typing.TYPE_CHECKING` but not an aliased module (`import typing as t`)."""
@@ -187,10 +210,41 @@ class StaticLoader:
                     self._walk_module(member, f"{path}.{name}")
             elif exports is None or name in exports:
                 self._object(member, f"{path}.{name}", in_class=False)
+        if mod.filepath and not isinstance(mod.filepath, list):
+            self._runtime_all_wildcards(mod, path, exports)
         if exports is not None:  # names in __all__ that static loading cannot find (built at runtime / compiled)
             for name in exports:
                 if not name.startswith("_") and name not in mod.members and f"{path}.{name}" not in self.result.apis:
                     self.result.unresolved[f"{path}.{name}"] = path
+
+    def _runtime_all_wildcards(self, mod: griffe.Module, path: str, exports: set[str] | None) -> None:
+        """`from X import *` where X builds `__all__` at runtime (`[_ for _ in dir() if not _.startswith('_')]`):
+        griffe reads that `__all__` as empty and expands the star to nothing. Python gives every public name of X,
+        so those become re-exports here (librosa: `from .core import *` -> librosa.load)."""
+        src = self._file_text(Path(mod.filepath))
+        if "import *" not in src:
+            return
+        for source in wildcard_sources(src, mod.path, mod.is_init_module):
+            if not self._own(source):
+                continue
+            try:
+                smod = self.loader.modules_collection.get_member(source)
+            except Exception:
+                continue
+            if smod is None or not getattr(smod, "is_module", False) or self._literal_exports(smod):
+                continue
+            for name, member in list(smod.members.items()):
+                if name.startswith("_") or name.endswith("*") or name in mod.members:
+                    continue
+                if exports is not None and name not in exports:
+                    continue
+                child = f"{path}.{name}"
+                if child in self.result.apis or (not member.is_alias and member.is_module):
+                    continue
+                if member.is_alias:  # _alias handles targets griffe cannot resolve (recorded as unresolved)
+                    self._alias(member, child, exported=True)
+                else:
+                    self._object(member, child, in_class=False)
 
     @staticmethod
     def _literal_exports(mod: griffe.Module) -> bool:

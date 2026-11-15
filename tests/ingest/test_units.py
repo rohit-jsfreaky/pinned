@@ -190,9 +190,12 @@ def test_python_candidates_and_install_attempts():
     files = [{"filename": "a-1-cp38-cp38-manylinux1_x86_64.whl"}, {"filename": "a-1-cp39-cp39-manylinux1_x86_64.whl"}]
     assert python_candidates("3.10", files) == ["3.10", "3.9", "3.8"]
     assert python_candidates("3.9", files) == ["3.9"]
+    assert python_candidates("3.10", [{"filename": "a-1-py3-none-any.whl"}]) == ["3.10", "3.9", "3.8", "3.7"]
     att = install_attempts("scipy", "1.7.3", "2021-11-24", ["", "numpy==1.21.6"])
-    assert att[0] == ["scipy==1.7.3", "griffe", "setuptools<70", "numpy==1.21.6"]
-    assert att[1][:2] == ["--exclude-newer", "2022-03-24"] and att[-1] == ["scipy==1.7.3", "griffe", "setuptools<70"]
+    base = ["scipy==1.7.3", "griffe", "setuptools<70"]
+    assert att[0][:2] == ["--exclude-newer", "2022-03-24"] and att[0][-4:] == base + ["numpy==1.21.6"]
+    assert "numpy=false" in att[0]  # the dataset's pin is exempt from the release-date cutoff
+    assert att[1] == base + ["numpy==1.21.6"] and att[2][-3:] == base and att[3] == base
     torch = install_attempts("torch", "1.9.0", "2021-06-15", [""])
     assert all(a[:2] == ["--index", "https://download.pytorch.org/whl/cpu"] for a in torch)
 
@@ -236,3 +239,14 @@ def test_cues_go_to_definitions_and_shortest_reexport_only():
               ApiRecord("lib.core.A.run", "method", target="lib.core.Base.run"),
               ApiRecord("lib.core.B.run", "method", target="lib.core.Base.run"))
     assert cue_paths(s) == {"lib.core.Base.run", "lib.Base.run"}
+
+
+def test_star_import_from_module_with_runtime_all(tmp_path):
+    pkg = tmp_path / "rt"
+    (pkg / "core").mkdir(parents=True)
+    (pkg / "__init__.py").write_text("from .core import *\n")
+    (pkg / "core" / "__init__.py").write_text("from .audio import *\n__all__ = [_ for _ in dir() if not _.startswith('_')]\n")
+    (pkg / "core" / "audio.py").write_text("__all__ = ['load']\ndef load(path, sr=22050):\n    '''Load audio.'''\n")
+    a = load_static(tmp_path, ["rt"], ["rt"]).apis
+    assert a["rt.load"].target == "rt.core.audio.load" and a["rt.load"].sig == "(path, sr=22050)"
+    assert a["rt.core.load"].kind == "function"

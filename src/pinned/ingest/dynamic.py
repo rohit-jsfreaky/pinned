@@ -88,6 +88,10 @@ def python_candidates(preferred: str, files: list[dict]) -> list[str]:
             b = [int(x) for x in preferred.split(".")]
             return abs((a[0] * 100 + a[1]) - (b[0] * 100 + b[1]))
         cands += sorted((t for t in tags if t != preferred), key=dist)
+    if preferred and not tags:
+        # a pure-Python (or sdist-only) release may predate the dataset's Python: older ones are the last resort
+        major, minor = (int(x) for x in preferred.split("."))
+        cands += [f"{major}.{m}" for m in range(minor - 1, 6, -1)]
     cands = [c for c in cands if tuple(int(x) for x in c.split(".")) >= (3, 7)]
     return list(dict.fromkeys(cands)) or ["3.10"]
 
@@ -99,20 +103,26 @@ def _requirements(dep_sets: list[str]) -> list[str]:
 
 
 def install_attempts(library: str, pypi_version: str, released: str, dep_sets: list[str]) -> list[list[str]]:
-    """uv pip install argument lists, most faithful first."""
+    """uv pip install argument lists, most faithful first: the dataset's pins resolved as of the release date, the
+    pins alone, everything as of the release date, then plain (newest compatible dependencies)."""
     # setuptools<70 keeps `pkg_resources`, which many older releases import at module level (spacy 3.4, ...)
     base = [f"{library}=={pypi_version}", "griffe", "setuptools<70"]
     index = ["--index", EXTRA_INDEX[library]] if library in EXTRA_INDEX else []
-    attempts = []
     deps = _requirements(dep_sets)
+    cutoff = (date.fromisoformat(released) + timedelta(days=120)).isoformat()
+    # resolve dependencies as of the release (avoids e.g. numpy 2 under an old scipy); griffe/setuptools are exempt
+    as_of = ["--exclude-newer", cutoff, "--exclude-newer-package", "griffe=false",
+             "--exclude-newer-package", "setuptools=false"]
+    attempts = []
+    if index:  # the extra index has no upload dates, so no cutoff there
+        attempts += [index + base + deps] if deps else []
+        attempts.append(index + base)
+        return attempts
     if deps:
-        attempts.append(index + base + deps)
-    if not index:
-        cutoff = (date.fromisoformat(released) + timedelta(days=120)).isoformat()
-        # resolve dependencies as of the release (avoids e.g. numpy 2 under an old scipy); griffe is exempt
-        attempts.append(["--exclude-newer", cutoff, "--exclude-newer-package", "griffe=false",
-                         "--exclude-newer-package", "setuptools=false"] + base)
-    attempts.append(index + base)
+        # the dataset's pins stay exact (exempt from the cutoff); everything else resolves as of the release date
+        pinned = [x for d in deps for x in ("--exclude-newer-package", f"{re.split(r'[=<>!~ ]', d)[0]}=false")]
+        attempts += [as_of + pinned + base + deps, base + deps]
+    attempts += [as_of + base, base]
     return attempts
 
 
@@ -144,33 +154,34 @@ class VenvInspector:
             return None
         tmp = Path(tempfile.mkdtemp(prefix=f"{library}-{pypi_version}-py{py}-", dir=self.work_dir))
         try:
-            venv = tmp / "venv"
-            r = _run(["uv", "venv", "-q", "-p", interp, str(venv)], 300)
-            if r.returncode != 0:
-                failures.append(f"py{py} venv: {r.stderr.strip()[-200:]}")
-                return None
-            vpy = venv / "bin" / "python"
-            cmd = None
-            for args in install_attempts(library, pypi_version, released, dep_sets):
-                full = ["uv", "pip", "install", "-q", "--python", str(vpy)]
+            for i, args in enumerate(install_attempts(library, pypi_version, released, dep_sets)):
+                # a fresh venv per attempt: uv keeps installed packages that already satisfy a later attempt
+                venv = tmp / f"venv{i}"
+                shutil.rmtree(tmp / f"venv{i - 1}", ignore_errors=True)
+                r = _run(["uv", "venv", "-q", "-p", interp, str(venv)], 300)
+                if r.returncode != 0:
+                    failures.append(f"py{py} venv: {r.stderr.strip()[-200:]}")
+                    return None
+                vpy = venv / "bin" / "python"
+                # --no-cache: one venv per release would otherwise fill the disk with uv's wheel cache (torch: GBs)
+                full = ["uv", "pip", "install", "-q", "--no-cache", "--python", str(vpy)]
                 full += (["--only-binary", ":all:"] if binary_only else []) + args
                 r = _run(full, INSTALL_TIMEOUT)
-                if r.returncode == 0:
-                    cmd = " ".join(full[3:])
-                    break
-                failures.append(f"py{py} install {' '.join(full[5:])}: {r.stderr.strip()[-300:]}")
-            if cmd is None:
-                return None
-            try:
-                res = self.run_worker(str(vpy), modules, owners, tmp)
-            except DynamicError as e:
-                failures.append(f"py{py} worker: {e}")
-                return None
-            res.install = cmd
-            if len(res.errors) == len(modules):  # nothing importable on this interpreter: try the next one
-                failures.append(f"py{py}: every module failed to import, e.g. {next(iter(res.errors.values()))}")
-                return None
-            return res
+                if r.returncode != 0:
+                    failures.append(f"py{py} install {' '.join(args)}: {r.stderr.strip()[-300:]}")
+                    continue
+                try:
+                    res = self.run_worker(str(vpy), modules, owners, tmp)
+                except DynamicError as e:
+                    failures.append(f"py{py} worker: {e}")
+                    continue
+                if len(res.errors) == len(modules):  # nothing importable with these dependencies: next attempt
+                    failures.append(f"py{py} {' '.join(args)}: every module failed to import, e.g. "
+                                    f"{next(iter(res.errors.values()))}")
+                    continue
+                res.install = " ".join(full[3:])
+                return res
+            return None
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
 

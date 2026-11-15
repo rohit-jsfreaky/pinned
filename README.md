@@ -9,7 +9,7 @@
 Your coding agent learned from whatever docs were newest. Pinned checks its code against the exact library versions
 you run, hands it the right call when an API changed — with the proof — and learns from every run.
 
-[Live demo](https://3000-agqwsud3k4vlguzsgfducr6rfq.instabox.tech) · [Add to your agent](#add-it-to-your-agent) · [Results](#results) · [How it works](#how-it-works) · [HACKATHON.md](HACKATHON.md)
+[Live demo](https://3000-agqwsud3k4vlguzsgfducr6rfq.instabox.tech) · [Video](https://www.loom.com/share/4ac7bd2e52a540ffa43029f8cbb8292d) · [Add to your agent](#add-it-to-your-agent) · [Results](#results) · [How it works](#how-it-works) · [HACKATHON.md](HACKATHON.md)
 
 </div>
 

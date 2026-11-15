@@ -5,7 +5,7 @@ tells a coding agent whether its code is valid for the exact version you run, wa
 and learns from every pass/fail the agent reports.
 
 - Live app: https://3000-agqwsud3k4vlguzsgfducr6rfq.instabox.tech (try **Break it**: paste code, pick a version) · MCP endpoint: https://3000-agqwsud3k4vlguzsgfducr6rfq.instabox.tech/mcp
-- Repo: this repository · Loom: `<loom-url>`
+- Repo: this repository · Loom: https://www.loom.com/share/4ac7bd2e52a540ffa43029f8cbb8292d
 
 ## What we built
 | piece | what it does | proof |

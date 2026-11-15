@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+/* Breakpoints from cal.com (desktop 1200, tablet 810), used as max-tablet: / max-desktop: like the source. */
+@custom-variant max-desktop (@media (width < 1200px));
+@custom-variant max-tablet (@media (width < 810px));
+
+@theme {
+  --font-sans: "Hanken Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Hanken Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+  /* cal.com light tokens; accent swapped to Klein blue (no warm accents) */
+  --color-hp-page: #ffffff;
+  --color-hp-ink: #242424;
+  --color-hp-body: #374151;
+  --color-hp-muted: #6a6e78;
+  --color-hp-line: #e5e7eb;
+  --color-hp-hairline: #0f234b12;
+  --color-hp-field: #f3f4f6;
+  --color-hp-chip: #f3f4f6;
+  --color-hp-plate: #f3f4f6;
+  --color-hp-plate-line: #0f234b0f;
+  --color-hp-raised: #ffffff;
+  --color-hp-on-ink: #ffffff;
+  --color-hp-accent: #002fa7;
+  --color-hp-accent-soft: #e8edfb;
+  --color-hp-mac-close: #ff5f57;
+  --color-hp-mac-minimize: #febc2e;
+  --color-hp-mac-zoom: #28c840;
+
+  /* verdicts: blue = valid, amber = broken */
+  --color-ok: #002fa7;
+  --color-ok-soft: #e8edfb;
+  --color-bad: #b45309;
+  --color-bad-soft: #fef3c7;
+  --color-warn: #6a6e78;
+  --color-warn-soft: #eef0f3;
+
+  --shadow-hp-float: 0 0 0 1px #0f234b0f, 0 2px 6px -2px #0f234b14;
+  --shadow-hp-lift: 0 0 0 1px #0f234b0f, 0 1px 2px #0f234b0a;
+  --shadow-hp-plate: inset 0 0 0 1px #0f234b0d;
+  --shadow-hp-raised: inset 0 1px 0 #fff, 0 0 0 1px #0f234b12, 0 1px 2px #0f234b0a;
+  --shadow-hp-window: 0 0 0 1px #0f234b14, 0 24px 48px -16px #0f234b29, 0 8px 16px -8px #0f234b14;
+
+  --animate-caret: caret 1s steps(1) infinite;
+  @keyframes caret {
+    50% { opacity: 0; }
+  }
+}
+
+:root {
+  --page-max: 1200px;
+  --page-margin: 24px;
+  --page-gutter: 0px;
+}
+
+/* cal.com layout primitives */
+.page-measure {
+  width: calc(100% - 2 * var(--page-margin));
+  max-width: var(--page-max);
+  padding-inline: var(--page-gutter);
+  margin-inline: auto;
+}
+.section-y { padding-block: 128px; }
+@media (width < 810px) {
+  .section-y { padding-block: 96px; }
+  :root { --page-margin: 16px; }
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--color-hp-page);
+  color: var(--color-hp-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+.font-display { letter-spacing: -0.035em; font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

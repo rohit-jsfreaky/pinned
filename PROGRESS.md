@@ -17,12 +17,21 @@ Hackathon cutoff 9:00 AM IST Mon 16 Nov 2026. Phases: PLAN.md section 6.
   names, `explain_api` timeline). Phase 1 deps pre-added (griffe, fastapi, uvicorn, mcp, huggingface_hub, matplotlib).
 - Repo: github.com/rohit-jsfreaky/pinned (private).
 
-## Phase 1 — RUNNING (5 cloud sessions; prompts in prompts/phase1/)
-| session | prompt | branch | status |
-|---|---|---|---|
-| B ingest | prompts/phase1/B-ingest.md | | |
-| C search | prompts/phase1/C-search.md | | |
-| D learn | prompts/phase1/D-learn.md | | |
-| E eval harness | prompts/phase1/E-eval.md | | |
-| F server + MCP | prompts/phase1/F-server.md | | |
-Merge rule: main session reviews each branch, merges into `main`, runs the whole suite, then writes Phase 2 prompts.
+## Phase 1 — 4 of 5 merged (15 Nov night)
+| session | branch | status |
+|---|---|---|
+| B ingest | claude/adoring-noether-1irw8x | still running (full real ingest of all 81 pairs); not pushed yet |
+| C search | claude/brave-cannon-wejqmm | merged |
+| D learn | claude/elegant-sagan-1ws0cr | merged |
+| E eval harness | claude/optimistic-brahmagupta-whpupo | merged — self-check 328/328; baselines on TEST: none 0.627, docs 0.675 |
+| F server + MCP | claude/relaxed-keller-38xtcp | merged |
+After the C/D/E/F merge: `uv run pytest -q` → 196 passed, 2 skipped.
+
+## Website (Rohit asked to start it while B finishes)
+- `web/` (Next.js 16, Tailwind 4, motion, Phosphor, Hanken Grotesk + JetBrains Mono). Landing: hero, product window,
+  problem, the chain, bento, agents (MCP install), proof, FAQ, CTA, footer; `/try` "Break it" playground on the real API.
+- Sections ported from real sites' extracted code (cal.com, dub.co, mintlify, attio). Research (14 sites' HTML/CSS)
+  lives in `design/` locally only (git-ignored).
+- Numbers come only from `evidence/` (`web/scripts/sync-evidence.mjs`, runs before dev/build).
+- Verified: `/try` against the real GraphSearch + GraphLearner on a seeded node (check + how both answered, 8–10 ms).
+- Run: `cd web && npm run build && PORT=3100 npm start` (API at PINNED_API_ORIGIN, default http://127.0.0.1:8000).

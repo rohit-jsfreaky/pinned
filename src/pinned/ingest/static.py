@@ -23,7 +23,7 @@ import griffe
 
 from .inspect_worker import summary_line
 from .deprecation import scan_class, scan_docstring, scan_function, scan_module_getattr
-from .model import ApiRecord
+from .model import ApiRecord, clean_signature
 
 log = logging.getLogger(__name__)
 
@@ -57,7 +57,7 @@ def summary(name: str, doc: str | None) -> str:
 
 
 def _default(value: object) -> str:
-    text = " ".join(str(value).split())
+    text = clean_signature(" ".join(str(value).split()))
     return text if len(text) <= MAX_DEFAULT else text[: MAX_DEFAULT - 3] + "..."
 
 
@@ -211,7 +211,8 @@ class StaticLoader:
                 starred = any(member.target_path.startswith(f"{m}.") for m in star_from)
                 if (exports is not None and name not in exports) or (exports is None and not hub and not starred):
                     continue
-                self._alias(member, f"{path}.{name}", exported=exports is not None)
+                self._alias(member, f"{path}.{name}", exported=exports is not None or path in self.relaxed,
+                            expand=path in self.relaxed)
             elif member.is_module:
                 if name not in SKIP_MODULES:
                     self._walk_module(member, f"{path}.{name}")
@@ -272,7 +273,7 @@ class StaticLoader:
             return ""
 
     # ------------------------------------------------------------------ aliases (re-exports)
-    def _alias(self, alias: griffe.Alias, path: str, exported: bool) -> None:
+    def _alias(self, alias: griffe.Alias, path: str, exported: bool, expand: bool = False) -> None:
         target_path = alias.target_path
         if not self._own(target_path):
             return  # imported from another project
@@ -286,6 +287,14 @@ class StaticLoader:
             if exported and path not in self.result.apis:
                 doc = target.docstring.value if target.docstring else ""
                 self.result.apis[path] = ApiRecord(path=path, kind="module", doc=first_line(doc), target=target.path)
+                if expand:  # a gap-filled module: also its module aliases' members (matplotlib.pyplot.style.use)
+                    for name, member in list(target.members.items()):
+                        if name.startswith("_") or name.endswith("*") or (not member.is_alias and member.is_module):
+                            continue
+                        if member.is_alias:
+                            self._alias(member, f"{path}.{name}", exported=False)
+                        else:
+                            self._object(member, f"{path}.{name}", in_class=False)
             return
         self._object(target, path, in_class=False)
 

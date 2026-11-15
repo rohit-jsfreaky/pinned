@@ -177,3 +177,22 @@ def test_reports_written(fake, ingestor, tmp_path):
     _ingest_all(ingestor, pkg)
     files = sorted((tmp_path / "reports" / pkg).glob("*.json"))
     assert [f.name for f in files] == ["1.0.0.json", "1.1.0.json", "1.2.0.json"]
+
+
+def test_fill_gap_probe_records_runtime_deprecation_then_removal(graph, fake, ingestor):
+    pkg, _ = fake
+    _ingest_all(ingestor, pkg)
+    path = f"{pkg}.lazy.old_alias"
+    ingestor.fill_gap(pkg, "1.1.0", path)
+    assert validity(graph, pkg, [path], "1.1.0")[path] == "valid"
+    ch = _changes(graph, pkg, path)
+    assert ch["1.1.0"]["kind"] == "deprecated" and "use lazy_thing instead" in ch["1.1.0"]["after"]
+    rep = ingestor.fill_gap(pkg, "1.2.0", path)
+    assert validity(graph, pkg, [path], "1.2.0")[path] == "removed"
+    ev = edges_from(graph, [api_id(pkg, path)], REMOVED_IN, props=("evidence",), dst_props=("version",))
+    assert any("old_alias was removed in 1.2" in e["evidence"] for e in ev if e["dst_version"] == "1.2.0")
+    by = edges_from(graph, [api_id(pkg, path)], REPLACED_BY, props=("w",), dst_props=("path",))
+    assert f"{pkg}.lazy.lazy_thing" in {e["dst_path"] for e in by}
+    # the 1.1.0 fill already recomputed the facts at the next rung (the removal at 1.2.0); this call adds the
+    # library's own message to that edge's evidence and the replacement it names
+    assert (rep.removed, rep.replaced) == (0, 1)

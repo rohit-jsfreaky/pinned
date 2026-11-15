@@ -14,6 +14,8 @@ What changes between releases (the facts the tests expect):
   fast_add     only in the compiled module _speed, star-imported by the package (dynamic inspection)
   mover        <pkg>.core.mover moves to <pkg>.extra.mover in 1.2 (REPLACED_BY, same object moved)
   lazy_thing   <pkg>.lazy creates it at runtime via __getattr__/__dir__ (only fill_gap sees it)
+  old_alias    <pkg>.lazy.old_alias: runtime only, not in __dir__; 1.1 warns "deprecated, use lazy_thing instead",
+               1.2 raises "old_alias was removed in 1.2; use lazy_thing instead" (fill_gap's runtime probe)
   gone_attr    never exists; 1.2's package source says "gone_attr was removed, use new_name instead" (fill_gap)
 """
 
@@ -86,15 +88,26 @@ def build(base: Path, pkg: str) -> dict[str, Path]:
                     """Moves house in 1.2."""
                     return x
             ''')
+        old_alias = {
+            0: "",
+            1: '''
+                if name == "old_alias":
+                    import warnings
+                    warnings.warn("old_alias is deprecated, use lazy_thing instead", DeprecationWarning)
+                    return __getattr__("lazy_thing")''',
+            2: '''
+                if name == "old_alias":
+                    raise AttributeError("old_alias was removed in 1.2; use lazy_thing instead")''',
+        }[minor]
         _write(src.parent, f"{pkg}/lazy.py", '''
-            """Builds an attribute at runtime."""
+            """Builds attributes at runtime."""
 
             def __getattr__(name):
                 if name == "lazy_thing":
                     def lazy_thing(n, scale=2.0):
                         """Made at runtime."""
                         return n * scale
-                    return lazy_thing
+                    return lazy_thing''' + old_alias + '''
                 raise AttributeError(name)
 
             def __dir__():
@@ -142,9 +155,11 @@ class LocalInspector(VenvInspector):
         self.dirs = dirs
         self.calls: list[tuple[str, list[str]]] = []
 
-    def inspect(self, library, pypi_version, released, python, files, dep_sets, modules, owners) -> DynamicResult:
+    def inspect(self, library, pypi_version, released, python, files, dep_sets, modules, owners,
+                probes=()) -> DynamicResult:
         self.calls.append((pypi_version, list(modules)))
         work = self.work_dir / f"{pypi_version}-{len(self.calls)}"
         work.mkdir(parents=True, exist_ok=True)
         # each call is a fresh process: no module cache leaks between releases
-        return self.run_worker(sys.executable, modules, owners, work, [str(self.dirs[pypi_version] / "full")])
+        return self.run_worker(sys.executable, modules, owners, work, [str(self.dirs[pypi_version] / "full")],
+                               probes=probes)

@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 from datetime import date, timedelta
 from pathlib import Path
 
-from .model import ApiRecord
+from .model import ApiRecord, Deprecation, clean_signature
 from .static import render_params
 
 log = logging.getLogger(__name__)
@@ -42,6 +42,7 @@ class DynamicResult:
     records: list[ApiRecord] = field(default_factory=list)
     errors: dict[str, str] = field(default_factory=dict)
     notes: dict[str, str] = field(default_factory=dict)
+    probes: list[dict] = field(default_factory=list)           # raw probe results (see inspect_worker.probe)
     python: str = ""
     install: str = ""            # the install command line that worked
 
@@ -129,8 +130,8 @@ class VenvInspector:
         self.work_dir = Path(work_dir)
 
     def inspect(self, library: str, pypi_version: str, released: str, python: str, files: list[dict],
-                dep_sets: list[str], modules: list[str], owners: list[str]) -> DynamicResult:
-        if not modules:
+                dep_sets: list[str], modules: list[str], owners: list[str], probes: list[str] = ()) -> DynamicResult:
+        if not modules and not probes:
             return DynamicResult()
         self.work_dir.mkdir(parents=True, exist_ok=True)
         failures: list[str] = []
@@ -138,13 +139,14 @@ class VenvInspector:
         # pass 2: allow building from source
         for binary_only in (True, False):
             for py in python_candidates(python, files):
-                res = self._try(library, pypi_version, released, py, dep_sets, modules, owners, binary_only, failures)
+                res = self._try(library, pypi_version, released, py, dep_sets, modules, owners, binary_only, failures,
+                                list(probes))
                 if res is not None:
                     return res
         raise DynamicError(f"{library} {pypi_version}: dynamic inspection failed: " + " | ".join(failures)[-1500:])
 
     def _try(self, library: str, pypi_version: str, released: str, py: str, dep_sets: list[str], modules: list[str],
-             owners: list[str], binary_only: bool, failures: list[str]) -> DynamicResult | None:
+             owners: list[str], binary_only: bool, failures: list[str], probes: list[str]) -> DynamicResult | None:
         try:
             interp = find_python(py)
         except DynamicError as e:
@@ -173,11 +175,11 @@ class VenvInspector:
                 # wins under uv's first-index rule) cannot block it. Best effort.
                 _run(["uv", "pip", "install", "-q", "--no-cache", "--python", str(vpy), "setuptools<70"], INSTALL_TIMEOUT)
                 try:
-                    res = self.run_worker(str(vpy), modules, owners, tmp)
+                    res = self.run_worker(str(vpy), modules, owners, tmp, probes=probes)
                 except DynamicError as e:
                     failures.append(f"py{py} worker: {e}")
                     continue
-                if len(res.errors) == len(modules):  # nothing importable with these dependencies: next attempt
+                if modules and len(res.errors) == len(modules):  # nothing importable with these deps: next attempt
                     failures.append(f"py{py} {' '.join(args)}: every module failed to import, e.g. "
                                     f"{next(iter(res.errors.values()))}")
                     continue
@@ -189,22 +191,24 @@ class VenvInspector:
 
     @staticmethod
     def run_worker(python: str, modules: list[str], owners: list[str], work: Path,
-                   extra_path: list[str] = ()) -> DynamicResult:
+                   extra_path: list[str] = (), probes: list[str] = ()) -> DynamicResult:
         """Run inspect_worker.py with `python` in isolated mode. `extra_path` = directories put first on the
         worker's sys.path (the venv's site-packages already are)."""
         req, out = work / "request.json", work / "result.json"
-        req.write_text(json.dumps({"modules": modules, "own": owners, "path": list(extra_path)}))
+        req.write_text(json.dumps({"modules": modules, "own": owners, "path": list(extra_path), "probe": list(probes)}))
         r = _run([python, "-I", str(WORKER), str(req), str(out)], INSPECT_TIMEOUT, cwd=work)
         if r.returncode != 0 or not out.exists():
             raise DynamicError(r.stderr.strip()[-400:] or f"worker exit {r.returncode}")
         data = json.loads(out.read_text())
         return DynamicResult(records=[_record(d) for d in data["records"]], errors=data.get("errors", {}),
-                             notes=data.get("notes", {}), python=data.get("python", ""))
+                             notes=data.get("notes", {}), probes=data.get("probes", []),
+                             python=data.get("python", ""))
 
 
 def _record(d: dict) -> ApiRecord:
     sig = d.get("sig", "")
     if "params" in d:
         sig = render_params([tuple(p) for p in d["params"]], bool(d.get("drop_first")))
-    return ApiRecord(path=d["path"], kind=d["kind"], sig=sig, doc=d.get("doc", ""), target=d.get("target", ""),
-                     origin="dynamic")
+    deps = [Deprecation(m, "warn", "object") for m in d.get("warnings", [])]
+    return ApiRecord(path=d["path"], kind=d["kind"], sig=clean_signature(sig), doc=d.get("doc", ""),
+                     target=d.get("target", ""), origin="dynamic", deprecations=deps)

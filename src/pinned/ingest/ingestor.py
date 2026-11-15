@@ -15,7 +15,7 @@ from pinned.contract import API, IngestReport
 from pinned.graph import HydraGraph, node_id
 
 from .dataset import Pair, load_pairs, read_pairs
-from .deprecation import replacement_names, resolve_name, scan_module_strings
+from .deprecation import replacement_names, resolve_name, says_gone, scan_module_strings
 from .diff import Replacement, VersionFacts, diff
 from .dynamic import VenvInspector
 from .ladder import Ladder, Rung, build_ladder
@@ -232,7 +232,7 @@ class PyPIIngestor:
         i = lad.rungs.index(rung)
         around = lad.rungs[i: i + 2]  # facts AT v and AT the next rung both depend on v's snapshot
         before = {r.version: self._facts(lad, r)[0].keys() for r in around}
-        self.snapshots.add_gap_modules(library, [module])  # invalidates this library's cached snapshots
+        self.snapshots.add_gap_modules(library, [module], probes=[path])  # invalidates cached snapshots of the library
         new_keys: set[tuple] = set()
         edges_total: dict[str, int] = {}
         for r in around:
@@ -283,32 +283,33 @@ class PyPIIngestor:
 
     @staticmethod
     def _module_of(snap: Snapshot, path: str) -> str:
-        """The deepest module on `path` (the path itself when it is a module). Unknown segments are kept as long as
-        no class / function sits above them: a module created at runtime is still worth importing."""
+        """The deepest module on `path` this release really has (the path itself when it is a module). A segment
+        that is not a known module (`matplotlib.pyplot.style` is a module ALIAS in pyplot) stays an attribute of the
+        module above it; a module that only exists at runtime is reached by the probe instead."""
         parts = path.split(".")
         module = parts[0]
         for i in range(1, len(parts) + 1):
-            m = ".".join(parts[:i])
-            rec = snap.apis.get(m)
-            if rec is not None and rec.kind != "module":
+            rec = snap.apis.get(".".join(parts[:i]))
+            if rec is None or rec.kind != "module" or rec.target:
                 break
-            if rec is not None or i < len(parts):
-                module = m
+            module = ".".join(parts[:i])
         return module
 
     def _removal_messages(self, facts: VersionFacts, snap: Snapshot, path: str, kinds: dict[str, str]) -> None:
-        """The hinted path does not exist at this version: look for the library's own words about it (a removal /
-        deprecation message in its module source) and record them as REMOVED_IN (+ REPLACED_BY when the message
-        names a replacement that exists)."""
+        """The hinted path does not exist at this version: take the library's own words about it (the error the
+        runtime probe got, e.g. numpy's "`np.float` was a deprecated alias for the builtin `float` ..."; or a
+        removal / deprecation string in the module source) and record them as REMOVED_IN (+ REPLACED_BY when the
+        words name a replacement that exists)."""
         if path in snap.apis:
             return
+        msgs = [snap.gone[path]] if path in snap.gone else []  # the error the library raised when probed
         parent, _, leaf = path.rpartition(".")
         src_file = snap.module_files.get(parent)
-        if not src_file or not Path(src_file).exists():
-            return
-        msgs = scan_module_strings(Path(src_file).read_text(encoding="utf-8", errors="replace"), leaf)
+        if src_file and Path(src_file).exists():
+            msgs += scan_module_strings(Path(src_file).read_text(encoding="utf-8", errors="replace"), leaf)
         if not msgs:
             return
+        msgs.sort(key=lambda m: not says_gone(m))  # the library's explanation first, a bare AttributeError last
         here = f"{snap.library} {facts.version}"
         facts.removed[path] = f"not in {here}; the library says: {msgs[0]}"[:500]
         kinds.setdefault(path, "attr")

@@ -209,6 +209,11 @@ def scan_docstring(doc: str) -> list[Deprecation]:
 _GONE = re.compile(r"deprecat|removed|no longer|expired|alias|instead|renamed|moved", re.I)
 
 
+def says_gone(text: str) -> bool:
+    """True when a message talks about removal / deprecation / a replacement (not a bare AttributeError)."""
+    return bool(_GONE.search(text))
+
+
 def scan_module_strings(source: str, name: str) -> list[str]:
     """String literals of a module that talk about `name` going away (numpy's `__former_attrs__` / expired-attribute
     tables, `__getattr__` messages): the literal must mention `name` as a word and use a removal / deprecation word.

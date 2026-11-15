@@ -2,9 +2,11 @@
 
     python -I inspect_worker.py <request.json> <result.json>
 
-request: {"modules": ["scipy.special", ...], "own": ["scipy"], "path": [optional dirs put first on sys.path]}
+request: {"modules": ["scipy.special", ...], "own": ["scipy"], "path": [dirs put first on sys.path],
+          "probe": ["numpy.float", ...]}   (paths fill_gap asks about)
 result:  {"griffe": "<version>", "python": "3.10.13", "records": [...], "errors": {"module": "import error"},
-          "notes": {"module": "griffe failed, runtime walk used"}}
+          "notes": {"module": "griffe failed, runtime walk used"},
+          "probes": [{"path", "found", "error" | record fields, "warnings": [deprecation messages]}]}
 
 Module members come from griffe's dynamic inspection (`griffe.inspect`, or `griffe.agents.inspector.inspect` on
 griffe 0.x). Members griffe models without parameters (numpy ufuncs, C builtins) get their parameters from
@@ -15,8 +17,11 @@ the MRO, keeping only members defined by classes of the same distribution.
 import importlib
 import inspect
 import json
+import re
 import sys
 import warnings
+
+_ADDRESS = re.compile(r" at 0x[0-9a-fA-F]+")
 
 try:  # griffe >= 0.40
     from griffe import inspect as griffe_inspect
@@ -82,7 +87,7 @@ def runtime_params(obj):
         return None
     out = []
     for p in sig.parameters.values():
-        default = None if p.default is inspect.Parameter.empty else repr(p.default)
+        default = None if p.default is inspect.Parameter.empty else _ADDRESS.sub("", repr(p.default))
         out.append([p.name, KINDS[p.kind], default])
     return out
 
@@ -255,6 +260,39 @@ def member_records(name, mod, mname, gmod, gmembers, exports, hub, owners, recor
         class_members(path, type(obj), owners, records, seen)
 
 
+DEPRECATIONS = (DeprecationWarning, FutureWarning, PendingDeprecationWarning)
+
+
+def probe(path, owners):
+    """Try `path` the way a user's code would (import the longest importable prefix, then getattr the rest) and
+    keep the library's own words: the error it raises, or the deprecation warnings that access emits."""
+    parts = path.split(".")
+    mod, i = None, len(parts)
+    while i > 0:
+        try:
+            mod = importlib.import_module(".".join(parts[:i]))
+            break
+        except BaseException:  # noqa: BLE001
+            i -= 1
+    if mod is None:
+        return {"path": path, "found": False, "error": "cannot import %s" % parts[0]}
+    obj = mod
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        try:
+            for part in parts[i:]:
+                obj = getattr(obj, part)
+            error = ""
+        except BaseException as e:  # noqa: BLE001
+            error = ("%s: %s" % (type(e).__name__, e))[:500]
+    msgs = [" ".join(str(w.message).split())[:500] for w in caught if issubclass(w.category, DEPRECATIONS)]
+    if error:
+        return {"path": path, "found": False, "error": error, "warnings": msgs}
+    rec = describe(path, obj, "module" if inspect.ismodule(obj) else "function")
+    rec.update({"found": True, "warnings": msgs})
+    return rec
+
+
 def _prepare_django():
     from django.conf import settings
     if not settings.configured:
@@ -288,6 +326,12 @@ def main():
                 notes[owner + " (prepare)"] = ("%s: %s" % (type(e).__name__, e))[:300]
     for name in req["modules"]:
         module_records(name, owners, records, errors, notes, seen)
+    probes = []
+    for path in req.get("probe") or []:
+        try:
+            probes.append(probe(path, owners))
+        except BaseException as e:  # noqa: BLE001
+            notes[path + " (probe)"] = ("%s: %s" % (type(e).__name__, e))[:300]
     try:
         import importlib.metadata as md
     except ImportError:
@@ -299,7 +343,7 @@ def main():
         except Exception:
             gver = ""
     out = {"griffe": gver, "python": "%d.%d.%d" % sys.version_info[:3], "records": records, "errors": errors,
-           "notes": notes}
+           "notes": notes, "probes": probes}
     with open(sys.argv[2], "w") as f:
         json.dump(out, f)
 

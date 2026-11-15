@@ -14,6 +14,7 @@ from pathlib import Path
 from packaging.utils import canonicalize_name
 
 from .dynamic import DynamicError, VenvInspector
+from .dynamic import _record as _probe_record
 from .ladder import Rung
 from .model import ApiRecord, Snapshot
 from .pypi import PyPIClient, Release, public_import_names
@@ -21,7 +22,7 @@ from .static import SKIP_MODULES, StaticResult, load_static
 
 log = logging.getLogger(__name__)
 
-SNAPSHOT_FORMAT = 10
+SNAPSHOT_FORMAT = 10  # 10 + address-free signatures applied on read (model.clean_signature)
 
 
 @dataclass
@@ -84,6 +85,26 @@ def merge(static: dict[str, ApiRecord], dynamic: list[ApiRecord], compiled: list
     return changed
 
 
+def merge_probes(snap: Snapshot, probes: list[dict]) -> None:
+    """fill_gap probes: a path that exists at runtime becomes an Api (with the deprecation warnings its access
+    emitted); one that does not keeps the library's own error message in `snap.gone`."""
+    for p in probes:
+        path = p.get("path", "")
+        if not path:
+            continue
+        if p.get("found"):
+            rec = _probe_record(p)
+            cur = snap.apis.get(path)
+            if cur is None:
+                snap.apis[path] = rec
+            else:
+                known = {d.message for d in cur.deprecations}
+                cur.deprecations += [d for d in rec.deprecations if d.message not in known]
+        elif p.get("error"):
+            words = " | ".join([p["error"]] + list(p.get("warnings", [])))
+            snap.gone[path] = words[:1000]
+
+
 class SnapshotBuilder:
     def __init__(self, client: PyPIClient, cache_dir: Path, dynamic: bool = True, inspector: VenvInspector | None = None):
         self.client = client
@@ -94,22 +115,31 @@ class SnapshotBuilder:
     def path(self, library: str, version: str) -> Path:
         return self.cache_dir / "snapshots" / canonicalize_name(library) / f"{version}.json"
 
-    # ------------------------------------------------------------------ gap modules (fill_gap), per library
+    # ------------------------------------------------------------------ gap modules / probes (fill_gap), per library
     def _gap_file(self) -> Path:
         return self.cache_dir / "gap-modules.json"
 
-    def gap_modules(self, library: str) -> list[str]:
-        f = self._gap_file()
-        return sorted(json.loads(f.read_text()).get(library, [])) if f.exists() else []
-
-    def add_gap_modules(self, library: str, modules: list[str]) -> bool:
-        """Remember modules to walk in full for every version of `library`. True when the set grew."""
+    def _gaps(self) -> dict:
         f = self._gap_file()
         data = json.loads(f.read_text()) if f.exists() else {}
-        cur = set(data.get(library, []))
-        if set(modules) <= cur:
+        return {lib: (v if isinstance(v, dict) else {"modules": v, "probes": []}) for lib, v in data.items()}
+
+    def gap_modules(self, library: str) -> list[str]:
+        return sorted(self._gaps().get(library, {}).get("modules", []))
+
+    def gap_probes(self, library: str) -> list[str]:
+        return sorted(self._gaps().get(library, {}).get("probes", []))
+
+    def add_gap_modules(self, library: str, modules: list[str], probes: list[str] = ()) -> bool:
+        """Remember modules to walk in full, and paths to probe at runtime, for every version of `library`.
+        True when anything new was added (cached snapshots of the library are then rebuilt on next use)."""
+        data = self._gaps()
+        cur = data.get(library, {"modules": [], "probes": []})
+        if set(modules) <= set(cur["modules"]) and set(probes) <= set(cur["probes"]):
             return False
-        data[library] = sorted(cur | set(modules))
+        data[library] = {"modules": sorted(set(cur["modules"]) | set(modules)),
+                         "probes": sorted(set(cur["probes"]) | set(probes))}
+        f = self._gap_file()
         f.parent.mkdir(parents=True, exist_ok=True)
         f.write_text(json.dumps(data, indent=1))
         return True
@@ -123,7 +153,7 @@ class SnapshotBuilder:
             return None
         d = json.loads(p.read_text())
         if d.get("format") != SNAPSHOT_FORMAT or d.get("gap_modules", []) != self.gap_modules(library) \
-                or d.get("dynamic", True) != self.dynamic:
+                or d.get("gap_probes", []) != self.gap_probes(library) or d.get("dynamic", True) != self.dynamic:
             return None
         return Snapshot.from_json(d)
 
@@ -133,7 +163,7 @@ class SnapshotBuilder:
             snap = self.cached(library, rung.pypi)
             if snap is not None:
                 return snap
-        gaps = self.gap_modules(library)
+        gaps, probes = self.gap_modules(library), self.gap_probes(library)
         ex = self.client.fetch_sources(library, release, rung.python)
         names = public_import_names(ex.top_level)
         loadable = [t for t in ex.top_level if t not in SKIP_MODULES]  # wheels that ship a stray `test/` package
@@ -141,11 +171,12 @@ class SnapshotBuilder:
         snap = Snapshot(library, rung.pypi, names, ex.file, apis=static.apis)
         plan = compiled_plan(static, ex.compiled)
         modules = sorted(set(plan.modules) | set(gaps))
-        if self.dynamic and modules:
+        if self.dynamic and (modules or probes):
             try:
                 res = self.inspector.inspect(library, rung.pypi, release.released, rung.python, release.files,
-                                             rung.deps, modules, ex.top_level)
+                                             rung.deps, modules, ex.top_level, probes=probes)
                 merge(snap.apis, res.records, ex.compiled)
+                merge_probes(snap, res.probes)
                 snap.python = res.python
                 snap.dynamic_modules = sorted(set(modules) - set(res.errors))
                 snap.dynamic_errors = [f"{m}: {e}" for m, e in sorted(res.errors.items())]
@@ -155,11 +186,11 @@ class SnapshotBuilder:
                 log.warning("%s", e)
         snap.dynamic_errors += [f"static: {e}" for e in static.errors]
         snap.module_files = {m: str(f) for m, f in static.modules.items()}
-        self.save(snap, gaps)
+        self.save(snap, gaps, probes)
         return snap
 
-    def save(self, snap: Snapshot, gaps: list[str]) -> None:
+    def save(self, snap: Snapshot, gaps: list[str], probes: list[str] = ()) -> None:
         p = self.path(snap.library, snap.version)
         p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(json.dumps({"format": SNAPSHOT_FORMAT, "gap_modules": gaps, "dynamic": self.dynamic,
-                                 **snap.to_json()}))
+        p.write_text(json.dumps({"format": SNAPSHOT_FORMAT, "gap_modules": gaps, "gap_probes": list(probes),
+                                 "dynamic": self.dynamic, **snap.to_json()}))

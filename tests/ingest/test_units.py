@@ -263,3 +263,10 @@ def test_star_import_in_plain_module_is_a_reexport(tmp_path):
     a = load_static(tmp_path, ["pl"], ["pl"]).apis
     assert a["pl.objects.Figure"].target == "pl.objs.Figure"
     assert "pl.other.Figure" not in a  # a plain `from x import y` in a plain module is still not a re-export
+
+
+def test_memory_addresses_never_reach_signatures():
+    from pinned.ingest.model import clean_signature
+    assert clean_signature("(f, finish=<function fmin at 0x7f97ae28ed40>)") == "(f, finish=<function fmin>)"
+    assert ApiRecord.from_json({"path": "a.b", "kind": "function", "sig": "(x=<object object at 0xAB12>)"}).sig == \
+        "(x=<object object>)"

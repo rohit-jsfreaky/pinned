@@ -12,6 +12,7 @@
   summarize --run-id           summary.json for a run
   curve-json                   evidence/curve.json from all runs
   curve  --run-id --iterations the learning curve (needs HydraDB + pinned.search / pinned.learn)
+         [--arm-kind graph|plain|shuffled]  ablation (plain store) / negative control (shuffled ranking)
 """
 
 from __future__ import annotations
@@ -21,7 +22,7 @@ import json
 import os
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from . import dataset as ds
@@ -30,11 +31,25 @@ from .docs import DEFAULT_DOCS_CACHE, DocsFetcher
 from .pipeline import VenvTester, solve_stage, test_stage
 from .report import build_curve, summarize
 from .runner import TIMEOUT_S
-from .solver import TEMPLATE_HASH, Backoff, ClaudeCLISolver, CompletionCache, SolverError, extract_code
+from .solver import (
+    TEMPLATE_HASH,
+    Backoff,
+    ClaudeCLISolver,
+    CompletionCache,
+    SolverError,
+    extract_code,
+)
 from .split import SPLIT_PATH, load_split, make_split, write_split_once
 from .store import RunStore, git_commit
-from .venvs import (DEFAULT_VENV_DIR, ERA_CONSTRAINTS, PYTHON_VERSIONS, VenvSpec, build_all, specs_for,
-                    total_disk_bytes)
+from .venvs import (
+    DEFAULT_VENV_DIR,
+    ERA_CONSTRAINTS,
+    PYTHON_VERSIONS,
+    VenvSpec,
+    build_all,
+    specs_for,
+    total_disk_bytes,
+)
 
 HARNESS = Path("evidence/harness")
 
@@ -50,7 +65,7 @@ def _write(path: Path, data: dict) -> None:
 
 
 def _now() -> str:
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+    return datetime.now(UTC).isoformat(timespec="seconds")
 
 
 # ---------------------------------------------------------------- setup commands
@@ -265,16 +280,17 @@ def cmd_curve(a) -> None:
     except ImportError as e:
         raise SystemExit(f"the curve needs pinned.search.GraphSearch and pinned.learn.GraphLearner: {e}") from e
     g = HydraGraph()
-    search = GraphSearch(g)
-    learner = GraphLearner(g, ingestor=_ingestor(g, a), run_id=a.run_id, split_path=str(a.split_path))
+    problems = ds.load_problems(Path(a.data_dir))
+    search, learner, arm_info = curve_parts(a.arm_kind, g, a, problems, GraphSearch, GraphLearner)
     store = RunStore(a.run_id)
     solver = ClaudeCLISolver(model=a.model)
     arm = GraphArm(search, a.arm_name, a.k)
     cfg = _run_config(a, arm, solver, "curve")
     cfg["iterations"] = a.iterations
+    cfg["arm_kind"] = arm_info
     store.write_config(cfg)
     split = load_split(Path(a.split_path))
-    drv = CurveDriver(store, ds.load_problems(Path(a.data_dir)), split, search, learner, solver,
+    drv = CurveDriver(store, problems, split, search, learner, solver,
                       CompletionCache(Path(a.cache)), VenvTester(a.workers), a.arm_name, a.k, a.concurrency,
                       Backoff(), _log)
     _record_runner(store)
@@ -282,6 +298,38 @@ def cmd_curve(a) -> None:
     _record_models(store)
     summarize(store, split)
     build_curve()
+
+
+ARM_KINDS = ("graph", "plain", "shuffled")
+SHUFFLE_SEED = 13
+
+
+def curve_parts(kind: str, g, a, problems: list[ds.Problem], search_cls, learner_cls):
+    """(search, learner, description) for one curve arm. Every arm uses the same solver / template / split.
+      graph     GraphSearch + GraphLearner on HydraDB (the product)
+      plain     ablation: PlainStore (same facts as plain dicts, no traversal) is BOTH search and learner
+      shuffled  negative control: ShuffledSearch(GraphSearch, seed 13) + GraphLearner"""
+    if kind == "graph":
+        return (search_cls(g), learner_cls(g, ingestor=_ingestor(g, a), run_id=a.run_id, split_path=str(a.split_path)),
+                {"kind": "graph"})
+    if kind == "plain":
+        from pinned.learn.plain import PlainStore
+
+        libs = sorted({p.library for p in problems})
+        t0 = time.monotonic()
+        store = PlainStore.from_graph(g, libs, split_path=str(a.split_path))
+        secs = round(time.monotonic() - t0, 1)
+        _log(f"plain store: exported {len(store.libs)} libraries from the graph in {secs}s")
+        return store, store, {"kind": "plain", "libraries": libs, "export_seconds": secs,
+                              "note": "PlainStore.from_graph: same facts as plain dicts; no traversal; learns in-memory"}
+    if kind == "shuffled":
+        from pinned.learn.shuffled import ShuffledSearch
+
+        search = ShuffledSearch(search_cls(g), seed=SHUFFLE_SEED)
+        learner = learner_cls(g, ingestor=_ingestor(g, a), run_id=a.run_id, split_path=str(a.split_path))
+        return search, learner, {"kind": "shuffled", "seed": SHUFFLE_SEED, "mode": search.mode,
+                                 "inner": type(search.inner).__name__}
+    raise SystemExit(f"unknown --arm-kind {kind!r} ({' | '.join(ARM_KINDS)})")
 
 
 def _ingestor(g, a):
@@ -373,6 +421,8 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--run-id", required=True)
     p.add_argument("--iterations", type=int, default=3)
     p.add_argument("--arm-name", default="pinned")
+    p.add_argument("--arm-kind", default="graph", choices=list(ARM_KINDS),
+                   help="graph (default) | plain (ablation: PlainStore) | shuffled (negative control)")
     p.add_argument("--k", type=int, default=8)
     p.add_argument("--model", default="haiku")
     p.add_argument("--concurrency", type=int, default=3)

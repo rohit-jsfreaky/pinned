@@ -15,13 +15,13 @@ import math
 import threading
 from collections import defaultdict
 from collections.abc import Iterable
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 from pinned.contract import (
     ADDED_IN,
-    API,
     CHANGED_IN,
     CUES,
     EPISODE,
@@ -283,42 +283,69 @@ def _scope(libs: list[str], alias: str) -> tuple[str, dict]:
     return (f"WHERE {alias}.library = $lib", {"lib": libs[0]}) if len(libs) == 1 else ("", {})
 
 
+EXPORT_THREADS = 8
+
+
 def _export(g: Graph, libs: list[str]) -> dict[str, LibData]:
+    """Read the facts of `libs` with ANCHORED reads only. On the full graph (~1M Api, ~4.6M edges) HydraDB 0.4.0
+    rejects an unanchored `MATCH (a:Api)-[r]->(v)` (label-candidate admission cap 250k) and a library-filtered edge
+    read is a full edge scan that hits the 30 s query timeout. Edges read INTO a known Version id, or INTO a chunk of
+    known Api ids, use the id index and return in milliseconds, so: versions -> ADDED_IN / REMOVED_IN / CHANGED_IN
+    per version -> CUES / SHORTCUT per chunk of Api ids. Same rows as before, just reached by id."""
     out = {lib: LibData() for lib in libs}
     for lib, data in out.items():
         row = node(g, "Library", library_id(lib), ("import_names",))
         data.import_names = [x.strip() for x in str((row or {}).get("import_names") or "").split(",") if x.strip()]
-    where, params = _scope(libs, "v")
-    for r in g.query(f"MATCH (v:{VERSION}) {where} RETURN v.library AS lib, v.version AS version, v.ord AS ord", params):
+    vids: list[int] = []
+    for r in g.query(f"MATCH (v:{VERSION}) RETURN v.id AS id, v.library AS lib, v.version AS version, v.ord AS ord"):
         if r["lib"] in out and r["version"] is not None and r["ord"] is not None:
             out[r["lib"]].versions[r["version"]] = int(r["ord"])
-    where, params = _scope(libs, "a")
-    for r in g.query(f"MATCH (a:{API})-[r:{ADDED_IN}]->(v) {where} RETURN a.library AS lib, a.path AS path, "
-                     "a.kind AS kind, r.sig AS sig, v.ord AS ord", params):
-        if r["lib"] in out and r["path"] and r["ord"] is not None:
-            out[r["lib"]].events.setdefault(r["path"], []).append([int(r["ord"]), ADDED_IN, r["sig"] or ""])
-            out[r["lib"]].kinds[r["path"]] = r["kind"] or ""
-    for r in g.query(f"MATCH (a:{API})-[r:{REMOVED_IN}]->(v) {where} RETURN a.library AS lib, a.path AS path, "
-                     "v.ord AS ord", params):
-        if r["lib"] in out and r["path"] and r["ord"] is not None:
-            out[r["lib"]].events.setdefault(r["path"], []).append([int(r["ord"]), REMOVED_IN, ""])
-    for r in g.query(f"MATCH (a:{API})-[r:{CHANGED_IN}]->(v) {where} RETURN a.library AS lib, a.path AS path, "
-                     "r.kind AS kind, r.after AS after, v.ord AS ord", params):
-        if r["lib"] in out and r["path"] and r["ord"] is not None:
-            out[r["lib"]].changes.setdefault(r["path"], []).append([int(r["ord"]), r["kind"] or "", r["after"] or ""])
-    for rel in (CUES, SHORTCUT):
-        q = (f"MATCH (t)-[r:{rel}]->(a:{API}) {where} RETURN a.library AS lib, t.word AS word, t.key AS key, "
+            vids.append(int(r["id"]))
+    rel_cols = {ADDED_IN: "a.kind AS kind, r.sig AS sig", REMOVED_IN: "a.kind AS kind",
+                CHANGED_IN: "r.kind AS ckind, r.after AS after"}
+
+    def by_version(job: tuple[str, int]) -> tuple[str, list[dict]]:
+        rel, vid = job
+        q = (f"MATCH (a)-[r:{rel}]->(v) WHERE v.id IN $ids RETURN a.id AS aid, a.library AS lib, a.path AS path, "
+             f"v.ord AS ord, {rel_cols[rel]}")
+        return rel, g.query(q, {"ids": [vid]})
+
+    api_ids: set[int] = set()
+    with ThreadPoolExecutor(EXPORT_THREADS) as pool:
+        for rel, rows in pool.map(by_version, [(rel, v) for rel in rel_cols for v in vids]):
+            for r in rows:
+                if r["lib"] not in out or not r["path"] or r["ord"] is None:
+                    continue
+                data = out[r["lib"]]
+                api_ids.add(int(r["aid"]))
+                if rel == ADDED_IN:
+                    data.events.setdefault(r["path"], []).append([int(r["ord"]), ADDED_IN, r["sig"] or ""])
+                    data.kinds[r["path"]] = r["kind"] or ""
+                elif rel == REMOVED_IN:
+                    data.events.setdefault(r["path"], []).append([int(r["ord"]), REMOVED_IN, ""])
+                else:
+                    data.changes.setdefault(r["path"], []).append([int(r["ord"]), r["ckind"] or "", r["after"] or ""])
+
+    def cues_into(job: tuple[str, list[int]]) -> tuple[str, list[dict]]:
+        rel, ids = job
+        q = (f"MATCH (t)-[r:{rel}]->(a) WHERE a.id IN $ids RETURN a.library AS lib, t.word AS word, t.key AS key, "
              "a.path AS path, r.w AS w, r.n_pass AS n_pass, r.n_fail AS n_fail")
-        for r in g.query(q, params):
-            word = r["word"] or r["key"]
-            if r["lib"] not in out or not word or not r["path"]:
-                continue
-            data = out[r["lib"]]
-            w = 1.0 if r["w"] is None else float(r["w"])
-            row = data.cues.setdefault(word, {})
-            row[r["path"]] = max(w, row.get(r["path"], 0.0)) if rel == SHORTCUT else w
-            if rel == CUES and (r["n_pass"] or r["n_fail"]):
-                data.stats.setdefault(word, {})[r["path"]] = [int(r["n_pass"] or 0), int(r["n_fail"] or 0)]
+        return rel, g.query(q, {"ids": ids})
+
+    ids = sorted(api_ids)
+    chunks = [ids[i:i + 1000] for i in range(0, len(ids), 1000)]
+    with ThreadPoolExecutor(EXPORT_THREADS) as pool:
+        for rel, rows in pool.map(cues_into, [(rel, c) for rel in (CUES, SHORTCUT) for c in chunks]):
+            for r in rows:
+                word = r["word"] or r["key"]
+                if r["lib"] not in out or not word or not r["path"]:
+                    continue
+                data = out[r["lib"]]
+                w = 1.0 if r["w"] is None else float(r["w"])
+                row = data.cues.setdefault(word, {})
+                row[r["path"]] = max(w, row.get(r["path"], 0.0)) if rel == SHORTCUT else w
+                if rel == CUES and (r["n_pass"] or r["n_fail"]):
+                    data.stats.setdefault(word, {})[r["path"]] = [int(r["n_pass"] or 0), int(r["n_fail"] or 0)]
     for data in out.values():
         for rows in (data.events, data.changes):
             for v in rows.values():

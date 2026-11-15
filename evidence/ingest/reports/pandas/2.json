@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "pandas",
+  "version": "2",
+  "apis": 18915,
+  "added": 502,
+  "removed": 2841,
+  "changed": 2109,
+  "replaced": 149,
+  "seconds": 4.241
+ },
+ "kind": "version",
+ "pypi": "2.0.0",
+ "needed": true,
+ "source_file": "pandas-2.0.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 103,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 502,
+  "REMOVED_IN": 2841,
+  "CHANGED_IN": 2109,
+  "REPLACED_BY": 149,
+  "ALIAS_OF": 351,
+  "MEMBER_OF": 502,
+  "CUES": 1293
+ },
+ "nodes_written": 6150,
+ "load_seconds": 0.249,
+ "write_seconds": 3.992
+}

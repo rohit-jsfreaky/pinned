@@ -1,0 +1,14 @@
+{
+ "note": "consecutive-rung signature differences in cached snapshots that disappear once memory addresses are removed from repr() defaults (model.clean_signature); measured on the raw snapshot JSON",
+ "libraries": {
+  "falcon": 4,
+  "matplotlib": 24,
+  "numpy": 4,
+  "pandas": 55,
+  "scipy": 32,
+  "spacy": 29,
+  "sympy": 832,
+  "torch": 15
+ },
+ "total": 995
+}

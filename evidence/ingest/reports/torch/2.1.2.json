@@ -1,0 +1,35 @@
+{
+ "report": {
+  "library": "torch",
+  "version": "2.1.2",
+  "apis": 108241,
+  "added": 4326,
+  "removed": 1117,
+  "changed": 3728,
+  "replaced": 325,
+  "seconds": 18.691
+ },
+ "kind": "version",
+ "pypi": "2.1.2",
+ "needed": false,
+ "source_file": "torch-2.1.2-cp310-cp310-manylinux1_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 79,
+ "dynamic_errors": [
+  "functorch.dim.batch_tensor: ImportError: cannot import name '_vmap_add_layers' from 'torch._C._functorch' (unknown location)",
+  "functorch.dim.reference: ImportError: cannot import name '_vmap_add_layers' from 'torch._C._functorch' (unknown location)",
+  "torch.utils.benchmark: ModuleNotFoundError: No module named 'numpy'"
+ ],
+ "edges_written": {
+  "ADDED_IN": 4326,
+  "REMOVED_IN": 1117,
+  "CHANGED_IN": 3728,
+  "REPLACED_BY": 325,
+  "ALIAS_OF": 3677,
+  "MEMBER_OF": 4326,
+  "CUES": 6460
+ },
+ "nodes_written": 12696,
+ "load_seconds": 1.132,
+ "write_seconds": 17.56
+}

@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "seaborn",
+  "version": "0.11.2",
+  "apis": 568,
+  "added": 568,
+  "removed": 0,
+  "changed": 69,
+  "replaced": 0,
+  "seconds": 1.732
+ },
+ "kind": "version",
+ "pypi": "0.11.2",
+ "needed": false,
+ "source_file": "seaborn-0.11.2-py3-none-any.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 1,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 568,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 69,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 281,
+  "MEMBER_OF": 567,
+  "CUES": 2324
+ },
+ "nodes_written": 1145,
+ "load_seconds": 0.003,
+ "write_seconds": 1.729
+}

@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "pillow",
+  "version": "6.2.2",
+  "apis": 4819,
+  "added": 4819,
+  "removed": 0,
+  "changed": 1,
+  "replaced": 0,
+  "seconds": 9.846
+ },
+ "kind": "version",
+ "pypi": "6.2.2",
+ "needed": false,
+ "source_file": "Pillow-6.2.2-cp37-cp37m-manylinux1_x86_64.whl",
+ "dynamic_python": "3.7.9",
+ "dynamic_modules": 6,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 4819,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 1,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 3309,
+  "MEMBER_OF": 4818,
+  "CUES": 10654
+ },
+ "nodes_written": 6514,
+ "load_seconds": 0.023,
+ "write_seconds": 9.824
+}

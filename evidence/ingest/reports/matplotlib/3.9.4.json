@@ -1,0 +1,33 @@
+{
+ "report": {
+  "library": "matplotlib",
+  "version": "3.9.4",
+  "apis": 37323,
+  "added": 547,
+  "removed": 6332,
+  "changed": 309,
+  "replaced": 3980,
+  "seconds": 12.589
+ },
+ "kind": "version",
+ "pypi": "3.9.4",
+ "needed": false,
+ "source_file": "matplotlib-3.9.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 17,
+ "dynamic_errors": [
+  "matplotlib.backends.backend_wx: ModuleNotFoundError: No module named 'wx'"
+ ],
+ "edges_written": {
+  "ADDED_IN": 547,
+  "REMOVED_IN": 6332,
+  "CHANGED_IN": 309,
+  "REPLACED_BY": 3979,
+  "ALIAS_OF": 480,
+  "MEMBER_OF": 547,
+  "CUES": 659
+ },
+ "nodes_written": 10934,
+ "load_seconds": 0.363,
+ "write_seconds": 12.226
+}

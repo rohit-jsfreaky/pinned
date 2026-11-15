@@ -1,0 +1,35 @@
+{
+ "report": {
+  "library": "librosa",
+  "version": "0.6.3",
+  "apis": 355,
+  "added": 33,
+  "removed": 4,
+  "changed": 17,
+  "replaced": 4,
+  "seconds": 0.556
+ },
+ "kind": "version",
+ "pypi": "0.6.3",
+ "needed": false,
+ "source_file": "librosa-0.6.3.tar.gz",
+ "dynamic_python": "3.7.9",
+ "dynamic_modules": 3,
+ "dynamic_errors": [
+  "librosa.core: note: griffe inspection failed, runtime walk used: AttributeError: 'CacheManager' object has no attribute '__spec__'",
+  "librosa.feature: note: griffe inspection failed, runtime walk used: AttributeError: 'CacheManager' object has no attribute '__spec__'",
+  "librosa.util: note: griffe inspection failed, runtime walk used: AttributeError: 'CacheManager' object has no attribute '__spec__'"
+ ],
+ "edges_written": {
+  "ADDED_IN": 33,
+  "REMOVED_IN": 4,
+  "CHANGED_IN": 17,
+  "REPLACED_BY": 4,
+  "ALIAS_OF": 15,
+  "MEMBER_OF": 33,
+  "CUES": 189
+ },
+ "nodes_written": 153,
+ "load_seconds": 0.003,
+ "write_seconds": 0.552
+}

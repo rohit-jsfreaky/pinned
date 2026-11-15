@@ -1,0 +1,33 @@
+{
+ "report": {
+  "library": "pandas",
+  "version": "1.3.5",
+  "apis": 24654,
+  "added": 24654,
+  "removed": 0,
+  "changed": 1197,
+  "replaced": 122,
+  "seconds": 67.175
+ },
+ "kind": "version",
+ "pypi": "1.3.5",
+ "needed": false,
+ "source_file": "pandas-1.3.5-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 104,
+ "dynamic_errors": [
+  "pandas.io.formats.style_render: ImportError: Missing optional dependency 'Jinja2'. DataFrame.style requires jinja2. Use pip or conda to install Jinja2."
+ ],
+ "edges_written": {
+  "ADDED_IN": 24654,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 1197,
+  "REPLACED_BY": 122,
+  "ALIAS_OF": 19135,
+  "MEMBER_OF": 24653,
+  "CUES": 53001
+ },
+ "nodes_written": 29071,
+ "load_seconds": 0.18,
+ "write_seconds": 66.996
+}

@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "tornado",
+  "version": "6.0.4",
+  "apis": 1666,
+  "added": 2,
+  "removed": 2,
+  "changed": 0,
+  "replaced": 0,
+  "seconds": 0.111
+ },
+ "kind": "version",
+ "pypi": "6.0.4",
+ "needed": false,
+ "source_file": "tornado-6.0.4.tar.gz",
+ "dynamic_python": "",
+ "dynamic_modules": 0,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 2,
+  "REMOVED_IN": 2,
+  "CHANGED_IN": 0,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 0,
+  "MEMBER_OF": 2,
+  "CUES": 14
+ },
+ "nodes_written": 15,
+ "load_seconds": 0.012,
+ "write_seconds": 0.098
+}

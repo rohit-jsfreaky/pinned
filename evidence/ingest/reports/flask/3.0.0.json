@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "flask",
+  "version": "3.0.0",
+  "apis": 990,
+  "added": 217,
+  "removed": 76,
+  "changed": 1,
+  "replaced": 47,
+  "seconds": 1.044
+ },
+ "kind": "version",
+ "pypi": "3.0.0",
+ "needed": true,
+ "source_file": "flask-3.0.0-py3-none-any.whl",
+ "dynamic_python": "",
+ "dynamic_modules": 0,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 217,
+  "REMOVED_IN": 76,
+  "CHANGED_IN": 1,
+  "REPLACED_BY": 47,
+  "ALIAS_OF": 334,
+  "MEMBER_OF": 217,
+  "CUES": 1032
+ },
+ "nodes_written": 847,
+ "load_seconds": 0.007,
+ "write_seconds": 1.037
+}

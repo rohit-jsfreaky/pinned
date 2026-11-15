@@ -1,0 +1,39 @@
+{
+ "report": {
+  "library": "django",
+  "version": "3.2.25",
+  "apis": 66748,
+  "added": 66748,
+  "removed": 0,
+  "changed": 60,
+  "replaced": 0,
+  "seconds": 190.775
+ },
+ "kind": "version",
+ "pypi": "3.2.25",
+ "needed": false,
+ "source_file": "Django-3.2.25-py3-none-any.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 5,
+ "dynamic_errors": [
+  "django.contrib.auth.forms: ImproperlyConfigured: The SECRET_KEY setting must not be empty.",
+  "django.contrib.flatpages.forms: RuntimeError: Model class django.contrib.sites.models.Site doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.",
+  "django.contrib.gis.admin: ImproperlyConfigured: Could not find the GDAL library (tried \"gdal\", \"GDAL\", \"gdal3.2.0\", \"gdal3.1.0\", \"gdal3.0.0\", \"gdal2.4.0\", \"gdal2.3.0\", \"gdal2.2.0\", \"gdal2.1.0\", \"gdal2.0.0\"). Is GDAL installed? If it is, try setting GDAL_LIBRARY_PATH in your settings.",
+  "django.contrib.gis.db.models: ImproperlyConfigured: Could not find the GDAL library (tried \"gdal\", \"GDAL\", \"gdal3.2.0\", \"gdal3.1.0\", \"gdal3.0.0\", \"gdal2.4.0\", \"gdal2.3.0\", \"gdal2.2.0\", \"gdal2.1.0\", \"gdal2.0.0\"). Is GDAL installed? If it is, try setting GDAL_LIBRARY_PATH in your settings.",
+  "django.contrib.gis.geos.prototypes: ImproperlyConfigured: Could not find the GDAL library (tried \"gdal\", \"GDAL\", \"gdal3.2.0\", \"gdal3.1.0\", \"gdal3.0.0\", \"gdal2.4.0\", \"gdal2.3.0\", \"gdal2.2.0\", \"gdal2.1.0\", \"gdal2.0.0\"). Is GDAL installed? If it is, try setting GDAL_LIBRARY_PATH in your settings.",
+  "django.contrib.postgres.forms: ModuleNotFoundError: No module named 'psycopg2'",
+  "django (prepare): note: ImproperlyConfigured: The SECRET_KEY setting must not be empty."
+ ],
+ "edges_written": {
+  "ADDED_IN": 66748,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 60,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 53256,
+  "MEMBER_OF": 66747,
+  "CUES": 152264
+ },
+ "nodes_written": 75367,
+ "load_seconds": 0.657,
+ "write_seconds": 190.118
+}

@@ -1,0 +1,41 @@
+{
+ "report": {
+  "library": "torch",
+  "version": "1.11.0",
+  "apis": 85601,
+  "added": 7419,
+  "removed": 1139,
+  "changed": 449,
+  "replaced": 650,
+  "seconds": 37.278
+ },
+ "kind": "version",
+ "pypi": "1.11.0",
+ "needed": false,
+ "source_file": "torch-1.11.0-cp37-cp37m-manylinux1_x86_64.whl",
+ "dynamic_python": "3.7.9",
+ "dynamic_modules": 54,
+ "dynamic_errors": [
+  "caffe2.proto: ModuleNotFoundError: No module named 'google'",
+  "caffe2.python.brew: ModuleNotFoundError: No module named 'google'",
+  "torch.fx.experimental.fx2trt: ModuleNotFoundError: No module named 'tensorrt'",
+  "torch.fx.experimental.fx2trt.converters: ModuleNotFoundError: No module named 'tensorrt'",
+  "torch.fx.experimental.fx2trt.converters.acc_ops_converters: ModuleNotFoundError: No module named 'tensorrt'",
+  "torch.fx.experimental.fx2trt.converters.converter_utils: ModuleNotFoundError: No module named 'tensorrt'",
+  "torch.fx.experimental.fx2trt.tools: ModuleNotFoundError: No module named 'tensorrt'",
+  "torch.utils.benchmark: ModuleNotFoundError: No module named 'setuptools'",
+  "torch: note: griffe inspection failed, runtime walk used: TypeError: '_ClassNamespace' object is not iterable"
+ ],
+ "edges_written": {
+  "ADDED_IN": 7419,
+  "REMOVED_IN": 1139,
+  "CHANGED_IN": 449,
+  "REPLACED_BY": 650,
+  "ALIAS_OF": 6175,
+  "MEMBER_OF": 7419,
+  "CUES": 16146
+ },
+ "nodes_written": 12532,
+ "load_seconds": 1.109,
+ "write_seconds": 36.17
+}

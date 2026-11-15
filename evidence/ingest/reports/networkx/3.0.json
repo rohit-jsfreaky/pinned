@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "networkx",
+  "version": "3.0",
+  "apis": 4494,
+  "added": 45,
+  "removed": 557,
+  "changed": 89,
+  "replaced": 2,
+  "seconds": 0.766
+ },
+ "kind": "version",
+ "pypi": "3.0",
+ "needed": false,
+ "source_file": "networkx-3.0-py3-none-any.whl",
+ "dynamic_python": "",
+ "dynamic_modules": 0,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 45,
+  "REMOVED_IN": 557,
+  "CHANGED_IN": 89,
+  "REPLACED_BY": 2,
+  "ALIAS_OF": 28,
+  "MEMBER_OF": 45,
+  "CUES": 194
+ },
+ "nodes_written": 785,
+ "load_seconds": 0.027,
+ "write_seconds": 0.739
+}

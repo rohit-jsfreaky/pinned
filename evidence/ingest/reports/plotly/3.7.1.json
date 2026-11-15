@@ -1,0 +1,35 @@
+{
+ "report": {
+  "library": "plotly",
+  "version": "3.7.1",
+  "apis": 106247,
+  "added": 1902,
+  "removed": 0,
+  "changed": 205,
+  "replaced": 0,
+  "seconds": 7.348
+ },
+ "kind": "version",
+ "pypi": "3.7.1",
+ "needed": false,
+ "source_file": "plotly-3.7.1-py2.py3-none-any.whl",
+ "dynamic_python": "3.9.25",
+ "dynamic_modules": 3,
+ "dynamic_errors": [
+  "plotly.widgets.graph_widget: ModuleNotFoundError: No module named 'ipywidgets'",
+  "plotly.grid_objs.grid_objs: note: griffe inspection failed, runtime walk used: TypeError: 'NoneType' object is not iterable",
+  "plotly.plotly.plotly: note: griffe inspection failed, runtime walk used: TypeError: 'NoneType' object is not iterable"
+ ],
+ "edges_written": {
+  "ADDED_IN": 1902,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 205,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 1644,
+  "MEMBER_OF": 1902,
+  "CUES": 2120
+ },
+ "nodes_written": 2420,
+ "load_seconds": 1.528,
+ "write_seconds": 5.82
+}

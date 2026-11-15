@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "falcon",
+  "version": "3.0.0",
+  "apis": 3520,
+  "added": 1552,
+  "removed": 210,
+  "changed": 134,
+  "replaced": 56,
+  "seconds": 3.622
+ },
+ "kind": "version",
+ "pypi": "3.0.0",
+ "needed": true,
+ "source_file": "falcon-3.0.0-cp39-cp39-manylinux1_x86_64.whl",
+ "dynamic_python": "3.9.25",
+ "dynamic_modules": 58,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 1552,
+  "REMOVED_IN": 210,
+  "CHANGED_IN": 134,
+  "REPLACED_BY": 56,
+  "ALIAS_OF": 1079,
+  "MEMBER_OF": 1546,
+  "CUES": 5469
+ },
+ "nodes_written": 2885,
+ "load_seconds": 0.05,
+ "write_seconds": 3.572
+}

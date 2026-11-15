@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "tqdm",
+  "version": "4.30.0",
+  "apis": 249,
+  "added": 8,
+  "removed": 0,
+  "changed": 6,
+  "replaced": 0,
+  "seconds": 0.133
+ },
+ "kind": "version",
+ "pypi": "4.30.0",
+ "needed": false,
+ "source_file": "tqdm-4.30.0-py2.py3-none-any.whl",
+ "dynamic_python": "",
+ "dynamic_modules": 0,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 8,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 6,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 6,
+  "MEMBER_OF": 8,
+  "CUES": 15
+ },
+ "nodes_written": 32,
+ "load_seconds": 0.001,
+ "write_seconds": 0.131
+}

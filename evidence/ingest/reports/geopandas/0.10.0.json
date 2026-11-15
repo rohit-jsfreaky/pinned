@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "geopandas",
+  "version": "0.10.0",
+  "apis": 575,
+  "added": 27,
+  "removed": 2,
+  "changed": 15,
+  "replaced": 0,
+  "seconds": 0.302
+ },
+ "kind": "version",
+ "pypi": "0.10.0",
+ "needed": true,
+ "source_file": "geopandas-0.10.0-py2.py3-none-any.whl",
+ "dynamic_python": "",
+ "dynamic_modules": 0,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 27,
+  "REMOVED_IN": 2,
+  "CHANGED_IN": 15,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 11,
+  "MEMBER_OF": 27,
+  "CUES": 233
+ },
+ "nodes_written": 117,
+ "load_seconds": 0.004,
+ "write_seconds": 0.298
+}

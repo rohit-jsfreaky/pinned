@@ -1,0 +1,37 @@
+{
+ "report": {
+  "library": "django",
+  "version": "4.1.13",
+  "apis": 73608,
+  "added": 2191,
+  "removed": 146,
+  "changed": 310,
+  "replaced": 0,
+  "seconds": 6.291
+ },
+ "kind": "version",
+ "pypi": "4.1.13",
+ "needed": false,
+ "source_file": "Django-4.1.13-py3-none-any.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 7,
+ "dynamic_errors": [
+  "django.contrib.flatpages.forms: RuntimeError: Model class django.contrib.sites.models.Site doesn't declare an explicit app_label and isn't in an application in INSTALLED_APPS.",
+  "django.contrib.gis.admin: ImproperlyConfigured: Could not find the GDAL library (tried \"gdal\", \"GDAL\", \"gdal3.4.0\", \"gdal3.3.0\", \"gdal3.2.0\", \"gdal3.1.0\", \"gdal3.0.0\", \"gdal2.4.0\", \"gdal2.3.0\", \"gdal2.2.0\"). Is GDAL installed? If it is, try setting GDAL_LIBRARY_PATH in your settings.",
+  "django.contrib.gis.db.models: ImproperlyConfigured: Could not find the GDAL library (tried \"gdal\", \"GDAL\", \"gdal3.4.0\", \"gdal3.3.0\", \"gdal3.2.0\", \"gdal3.1.0\", \"gdal3.0.0\", \"gdal2.4.0\", \"gdal2.3.0\", \"gdal2.2.0\"). Is GDAL installed? If it is, try setting GDAL_LIBRARY_PATH in your settings.",
+  "django.contrib.gis.geos.prototypes: ImproperlyConfigured: Could not find the GDAL library (tried \"gdal\", \"GDAL\", \"gdal3.4.0\", \"gdal3.3.0\", \"gdal3.2.0\", \"gdal3.1.0\", \"gdal3.0.0\", \"gdal2.4.0\", \"gdal2.3.0\", \"gdal2.2.0\"). Is GDAL installed? If it is, try setting GDAL_LIBRARY_PATH in your settings.",
+  "django.contrib.postgres.forms: ModuleNotFoundError: No module named 'psycopg2'"
+ ],
+ "edges_written": {
+  "ADDED_IN": 2191,
+  "REMOVED_IN": 146,
+  "CHANGED_IN": 310,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 1947,
+  "MEMBER_OF": 2191,
+  "CUES": 3310
+ },
+ "nodes_written": 4442,
+ "load_seconds": 1.258,
+ "write_seconds": 5.033
+}

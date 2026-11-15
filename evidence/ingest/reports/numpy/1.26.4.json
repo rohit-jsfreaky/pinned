@@ -1,0 +1,33 @@
+{
+ "report": {
+  "library": "numpy",
+  "version": "1.26.4",
+  "apis": 31005,
+  "added": 28,
+  "removed": 34,
+  "changed": 1,
+  "replaced": 1,
+  "seconds": 0.531
+ },
+ "kind": "version",
+ "pypi": "1.26.4",
+ "needed": false,
+ "source_file": "numpy-1.26.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 65,
+ "dynamic_errors": [
+  "numpy.core.umath_tests: RuntimeError: cannot load _umath_tests module."
+ ],
+ "edges_written": {
+  "ADDED_IN": 28,
+  "REMOVED_IN": 34,
+  "CHANGED_IN": 1,
+  "REPLACED_BY": 1,
+  "ALIAS_OF": 10,
+  "MEMBER_OF": 28,
+  "CUES": 146
+ },
+ "nodes_written": 141,
+ "load_seconds": 0.222,
+ "write_seconds": 0.309
+}

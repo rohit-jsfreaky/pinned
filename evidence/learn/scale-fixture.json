@@ -1,0 +1,104 @@
+{
+  "what": "SYNTHETIC fixture-scale cost run of pinned.learn (not real data, not accuracy)",
+  "utc": "2026-11-15T11:35:38+00:00",
+  "hydradb_url": "http://127.0.0.1:28443",
+  "seed": 13,
+  "graph": {
+    "apis": 20400,
+    "added_in": 20400,
+    "removed_in": 2000,
+    "replaced_by": 1779,
+    "cues": 60000,
+    "versions": 20
+  },
+  "build_seconds": 42.3,
+  "episodes": 450,
+  "record_c1": {
+    "concurrency": 1,
+    "calls": 300,
+    "errors": 0,
+    "qps": 13.9,
+    "p50_ms": 76.88,
+    "p95_ms": 80.31,
+    "p99_ms": 90.53,
+    "mean_ms": 71.67
+  },
+  "record_c8": {
+    "concurrency": 8,
+    "calls": 150,
+    "errors": 0,
+    "qps": 14.4,
+    "p50_ms": 548.7,
+    "p95_ms": 588.32,
+    "p99_ms": 600.25,
+    "mean_ms": 542.72
+  },
+  "record_graph_requests_per_call": 13.53,
+  "record_totals": {
+    "edges_reweighted": 300,
+    "gaps_ingested": 47,
+    "fill_gap_calls": 65
+  },
+  "maintain_seconds": {
+    "first_full_pass": 24.993,
+    "after_150_more_episodes": 12.909,
+    "nothing_new": 0.613
+  },
+  "maintain_reports": [
+    {
+      "shortcuts_added": 0,
+      "merged": 360,
+      "split": 0,
+      "edges_reweighted": 0,
+      "notes": [
+        "libraries=1 shortcuts=0 merged=360 split=0 decayed=0"
+      ]
+    },
+    {
+      "shortcuts_added": 162,
+      "merged": 0,
+      "split": 18,
+      "edges_reweighted": 0,
+      "notes": [
+        "libraries=1 shortcuts=162 merged=0 split=18 decayed=0"
+      ]
+    },
+    {
+      "shortcuts_added": 0,
+      "merged": 0,
+      "split": 0,
+      "edges_reweighted": 0,
+      "notes": [
+        "libraries=1 shortcuts=0 merged=0 split=0 decayed=0"
+      ]
+    }
+  ],
+  "shortcut_edges_in_graph": 162,
+  "learned_cue_edges_in_graph": 729,
+  "moves_logged": {
+    "episode": 450,
+    "gap_fill": 65,
+    "gap_known": 60,
+    "learn_cue": 729,
+    "merge": 360,
+    "reweight": 792,
+    "shortcut": 162,
+    "split": 18
+  },
+  "plainstore": {
+    "export_seconds": 34.6,
+    "paths": 20400,
+    "words": 2001,
+    "context_for_c1": {
+      "concurrency": 1,
+      "calls": 200,
+      "errors": 0,
+      "qps": 2644.0,
+      "p50_ms": 0.27,
+      "p95_ms": 0.79,
+      "p99_ms": 2.3,
+      "mean_ms": 0.36
+    }
+  },
+  "alias_edges_total_on_node": 360
+}

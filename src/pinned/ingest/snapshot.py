@@ -17,7 +17,7 @@ from .dynamic import DynamicError, VenvInspector
 from .ladder import Rung
 from .model import ApiRecord, Snapshot
 from .pypi import PyPIClient, Release, public_import_names
-from .static import StaticResult, load_static
+from .static import SKIP_MODULES, StaticResult, load_static
 
 log = logging.getLogger(__name__)
 
@@ -133,7 +133,8 @@ class SnapshotBuilder:
         gaps = self.gap_modules(library)
         ex = self.client.fetch_sources(library, release, rung.python)
         names = public_import_names(ex.top_level)
-        static = load_static(ex.root, ex.top_level, names, relaxed=set(gaps))
+        loadable = [t for t in ex.top_level if t not in SKIP_MODULES]  # wheels that ship a stray `test/` package
+        static = load_static(ex.root, loadable, names, relaxed=set(gaps))
         snap = Snapshot(library, rung.pypi, names, ex.file, apis=static.apis)
         plan = compiled_plan(static, ex.compiled)
         modules = sorted(set(plan.modules) | set(gaps))

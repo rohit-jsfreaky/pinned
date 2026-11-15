@@ -189,8 +189,8 @@ def test_python_candidates_and_install_attempts():
     assert python_candidates("3.10", files) == ["3.10", "3.9", "3.8"]
     assert python_candidates("3.9", files) == ["3.9"]
     att = install_attempts("scipy", "1.7.3", "2021-11-24", ["", "numpy==1.21.6"])
-    assert att[0] == ["scipy==1.7.3", "griffe", "numpy==1.21.6"]
-    assert att[1][:2] == ["--exclude-newer", "2022-03-24"] and att[-1] == ["scipy==1.7.3", "griffe"]
+    assert att[0] == ["scipy==1.7.3", "griffe", "setuptools<70", "numpy==1.21.6"]
+    assert att[1][:2] == ["--exclude-newer", "2022-03-24"] and att[-1] == ["scipy==1.7.3", "griffe", "setuptools<70"]
     torch = install_attempts("torch", "1.9.0", "2021-06-15", [""])
     assert all(a[:2] == ["--index", "https://download.pytorch.org/whl/cpu"] for a in torch)
 
@@ -225,3 +225,12 @@ def test_canonical_path_prefers_public_definition_then_shortest():
     s = _snap("1", ApiRecord("lib.a.B", "class", target="lib._x.B"), ApiRecord("lib.B", "class", target="lib._x.B"),
               ApiRecord("lib.c.D", "class"), ApiRecord("lib.D", "class", target="lib.c.D"))
     assert canonical_paths(s) == {"lib.a.B": "lib.B", "lib.D": "lib.c.D"}
+
+
+def test_cues_go_to_definitions_and_shortest_reexport_only():
+    from pinned.ingest.diff import cue_paths
+    s = _snap("1", ApiRecord("lib.core.Base.run", "method"),
+              ApiRecord("lib.Base.run", "method", target="lib.core.Base.run"),
+              ApiRecord("lib.core.A.run", "method", target="lib.core.Base.run"),
+              ApiRecord("lib.core.B.run", "method", target="lib.core.Base.run"))
+    assert cue_paths(s) == {"lib.core.Base.run", "lib.Base.run"}

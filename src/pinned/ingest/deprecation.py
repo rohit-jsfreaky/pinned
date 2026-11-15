@@ -14,6 +14,7 @@ from __future__ import annotations
 import ast
 import re
 import textwrap
+import warnings
 
 from .model import Deprecation
 
@@ -108,10 +109,13 @@ class _Finder(ast.NodeVisitor):
 
 
 def _parse(source: str) -> ast.AST | None:
-    try:
-        return ast.parse(textwrap.dedent(source))
-    except (SyntaxError, ValueError):
-        return None
+    """Parse foreign code quietly (old releases are full of invalid escape sequences)."""
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        try:
+            return ast.parse(textwrap.dedent(source))
+        except (SyntaxError, ValueError):
+            return None
 
 
 def _decorators(node: ast.FunctionDef | ast.AsyncFunctionDef | ast.ClassDef) -> list[Deprecation]:

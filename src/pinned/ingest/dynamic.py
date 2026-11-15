@@ -100,7 +100,8 @@ def _requirements(dep_sets: list[str]) -> list[str]:
 
 def install_attempts(library: str, pypi_version: str, released: str, dep_sets: list[str]) -> list[list[str]]:
     """uv pip install argument lists, most faithful first."""
-    base = [f"{library}=={pypi_version}", "griffe"]
+    # setuptools<70 keeps `pkg_resources`, which many older releases import at module level (spacy 3.4, ...)
+    base = [f"{library}=={pypi_version}", "griffe", "setuptools<70"]
     index = ["--index", EXTRA_INDEX[library]] if library in EXTRA_INDEX else []
     attempts = []
     deps = _requirements(dep_sets)
@@ -109,7 +110,8 @@ def install_attempts(library: str, pypi_version: str, released: str, dep_sets: l
     if not index:
         cutoff = (date.fromisoformat(released) + timedelta(days=120)).isoformat()
         # resolve dependencies as of the release (avoids e.g. numpy 2 under an old scipy); griffe is exempt
-        attempts.append(["--exclude-newer", cutoff, "--exclude-newer-package", "griffe=false"] + base)
+        attempts.append(["--exclude-newer", cutoff, "--exclude-newer-package", "griffe=false",
+                         "--exclude-newer-package", "setuptools=false"] + base)
     attempts.append(index + base)
     return attempts
 
@@ -124,46 +126,53 @@ class VenvInspector:
             return DynamicResult()
         self.work_dir.mkdir(parents=True, exist_ok=True)
         failures: list[str] = []
-        for py in python_candidates(python, files):
-            try:
-                interp = find_python(py)
-            except DynamicError as e:
-                failures.append(str(e))
-                continue
-            tmp = Path(tempfile.mkdtemp(prefix=f"{library}-{pypi_version}-py{py}-", dir=self.work_dir))
-            try:
-                venv = tmp / "venv"
-                r = _run(["uv", "venv", "-q", "--seed", "-p", interp, str(venv)], 300)
-                if r.returncode != 0:
-                    failures.append(f"py{py} venv: {r.stderr.strip()[-200:]}")
-                    continue
-                vpy = venv / "bin" / "python"
-                cmd = None
-                for args in install_attempts(library, pypi_version, released, dep_sets):
-                    full = ["uv", "pip", "install", "-q", "--python", str(vpy), "--only-binary", ":all:"] + args
-                    r = _run(full, INSTALL_TIMEOUT)
-                    if r.returncode != 0:  # some releases only ship an sdist for the library itself
-                        full = ["uv", "pip", "install", "-q", "--python", str(vpy)] + args
-                        r = _run(full, INSTALL_TIMEOUT)
-                    if r.returncode == 0:
-                        cmd = " ".join(full[3:])
-                        break
-                    failures.append(f"py{py} install {' '.join(args)}: {r.stderr.strip()[-300:]}")
-                if cmd is None:
-                    continue
-                try:
-                    res = self.run_worker(str(vpy), modules, owners, tmp)
-                except DynamicError as e:
-                    failures.append(f"py{py} worker: {e}")
-                    continue
-                res.install = cmd
-                if len(res.errors) == len(modules):  # nothing importable on this interpreter: try the next one
-                    failures.append(f"py{py}: every module failed to import, e.g. {next(iter(res.errors.values()))}")
-                    continue
-                return res
-            finally:
-                shutil.rmtree(tmp, ignore_errors=True)
+        # pass 1: wheels only, on every candidate Python (a source build may silently drop compiled modules);
+        # pass 2: allow building from source
+        for binary_only in (True, False):
+            for py in python_candidates(python, files):
+                res = self._try(library, pypi_version, released, py, dep_sets, modules, owners, binary_only, failures)
+                if res is not None:
+                    return res
         raise DynamicError(f"{library} {pypi_version}: dynamic inspection failed: " + " | ".join(failures)[-1500:])
+
+    def _try(self, library: str, pypi_version: str, released: str, py: str, dep_sets: list[str], modules: list[str],
+             owners: list[str], binary_only: bool, failures: list[str]) -> DynamicResult | None:
+        try:
+            interp = find_python(py)
+        except DynamicError as e:
+            failures.append(str(e))
+            return None
+        tmp = Path(tempfile.mkdtemp(prefix=f"{library}-{pypi_version}-py{py}-", dir=self.work_dir))
+        try:
+            venv = tmp / "venv"
+            r = _run(["uv", "venv", "-q", "-p", interp, str(venv)], 300)
+            if r.returncode != 0:
+                failures.append(f"py{py} venv: {r.stderr.strip()[-200:]}")
+                return None
+            vpy = venv / "bin" / "python"
+            cmd = None
+            for args in install_attempts(library, pypi_version, released, dep_sets):
+                full = ["uv", "pip", "install", "-q", "--python", str(vpy)]
+                full += (["--only-binary", ":all:"] if binary_only else []) + args
+                r = _run(full, INSTALL_TIMEOUT)
+                if r.returncode == 0:
+                    cmd = " ".join(full[3:])
+                    break
+                failures.append(f"py{py} install {' '.join(full[5:])}: {r.stderr.strip()[-300:]}")
+            if cmd is None:
+                return None
+            try:
+                res = self.run_worker(str(vpy), modules, owners, tmp)
+            except DynamicError as e:
+                failures.append(f"py{py} worker: {e}")
+                return None
+            res.install = cmd
+            if len(res.errors) == len(modules):  # nothing importable on this interpreter: try the next one
+                failures.append(f"py{py}: every module failed to import, e.g. {next(iter(res.errors.values()))}")
+                return None
+            return res
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
 
     @staticmethod
     def run_worker(python: str, modules: list[str], owners: list[str], work: Path,

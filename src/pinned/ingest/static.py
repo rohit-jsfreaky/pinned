@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import ast
 import logging
+import warnings
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -99,10 +100,12 @@ def _is_static(fn: griffe.Function) -> bool:
 def type_checking_names(source: str) -> set[str]:
     """Names imported only under `if TYPE_CHECKING:` / `if t.TYPE_CHECKING:` (not there at runtime, so not API).
     griffe flags plain `TYPE_CHECKING` / `typing.TYPE_CHECKING` but not an aliased module (`import typing as t`)."""
-    try:
-        tree = ast.parse(source)
-    except (SyntaxError, ValueError):
-        return set()
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        try:
+            tree = ast.parse(source)
+        except (SyntaxError, ValueError):
+            return set()
     out: set[str] = set()
     for node in getattr(tree, "body", []):
         if not isinstance(node, ast.If):
@@ -287,4 +290,6 @@ class StaticLoader:
 
 def load_static(root: Path, top_level: list[str], import_names: list[str], relaxed: set[str] = frozenset()) -> StaticResult:
     logging.getLogger("griffe").setLevel(logging.ERROR)
-    return StaticLoader(root, top_level, import_names, relaxed).load()
+    with warnings.catch_warnings():  # griffe parses foreign code: silence its SyntaxWarnings
+        warnings.simplefilter("ignore", SyntaxWarning)
+        return StaticLoader(root, top_level, import_names, relaxed).load()

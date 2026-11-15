@@ -20,7 +20,7 @@ from pinned.graph import (
     HydraGraph, edges_from, link_many, link_props_many, node_id, unlink, upsert_nodes, version_ord,
 )
 
-from .diff import VersionFacts
+from .diff import VersionFacts, cue_paths
 from .ladder import Ladder
 from .model import Snapshot
 from .terms import cue_terms
@@ -129,10 +129,13 @@ def write_facts(g: HydraGraph, facts: VersionFacts, cur: Snapshot, kinds: dict[s
     counts[MEMBER_OF] = link_many(g, MEMBER_OF, [(api_id(lib, p), api_id(lib, parent))
                                                  for p, parent in facts.members.items()])
 
-    # ---------------- cue terms for new Api nodes
+    # ---------------- cue terms for new Api nodes (definitions + the shortest path of each re-export)
     cues: dict[tuple[int, int], str] = {}
     words: set[str] = set()
+    cued = cue_paths(cur)
     for p in facts.new_apis:
+        if p not in cued:
+            continue
         for w, src in cue_terms(p, docs.get(p, ""), cur.import_names).items():
             cues[(node_id(TERM, w), api_id(lib, p))] = src
             words.add(w)

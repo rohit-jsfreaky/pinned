@@ -73,6 +73,22 @@ def canonical_paths(snap: Snapshot) -> dict[str, str]:
     return out
 
 
+def cue_paths(snap: Snapshot) -> set[str]:
+    """Paths that get CUES edges: every definition, plus the shortest public path of each re-exported object.
+    Inherited copies (`sympy.Symbol.subs` for each of ~1,000 subclasses) and longer re-exports reach their words
+    through ALIAS_OF instead, so a word does not fan out to a thousand copies of one method."""
+    out: set[str] = set()
+    shortest: dict[str, str] = {}
+    for path, rec in snap.apis.items():
+        if not rec.target:
+            out.add(path)
+            continue
+        cur = shortest.get(rec.target)
+        if cur is None or (path.count("."), len(path), path) < (cur.count("."), len(cur), cur):
+            shortest[rec.target] = path
+    return out | set(shortest.values())
+
+
 def diff(prev: Snapshot | None, cur: Snapshot, version: str, prev_version: str = "",
          later_paths: set[str] | None = None) -> VersionFacts:
     """Facts that happen at `version` (graph spelling of cur). `later_paths` = paths of newer snapshots, used only

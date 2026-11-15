@@ -18,6 +18,24 @@ const search = read("search/latency.json");
 const ingest = read("ingest/summary.json");
 const lat = (rows, c) => rows?.find((r) => r.concurrency === c) ?? null;
 
+// Wrong-version API errors on the TEST split, per arm and iteration, counted from every run's results.jsonl.
+const API_ERRORS = new Set(["AttributeError", "ImportError", "ModuleNotFoundError", "TypeError"]);
+const apiErrors = {};
+if (existsSync(join(root, "runs"))) {
+  for (const run of readdirSync(join(root, "runs"))) {
+    const f = join(root, "runs", run, "results.jsonl");
+    if (!existsSync(f)) continue;
+    for (const line of readFileSync(f, "utf8").split("\n").filter(Boolean)) {
+      const r = JSON.parse(line);
+      if (r.split !== "test") continue;
+      const k = `${r.arm}:${r.iteration}`;
+      apiErrors[k] ??= { n: 0, api_errors: 0 };
+      apiErrors[k].n += 1;
+      if (!r.passed && API_ERRORS.has(r.error_type)) apiErrors[k].api_errors += 1;
+    }
+  }
+}
+
 const out = {
   curve: curve ? { metric: curve.metric, baselines: curve.baselines ?? {}, curves: curve.curves ?? [] } : null,
   split: split ? { train: split.train.length, test: split.test.length } : null,
@@ -29,6 +47,7 @@ const out = {
         graph_queries: search.graph_queries_per_call ?? null,
       }
     : null,
+  api_errors: apiErrors,
   load: latest("load"),
   ingest: ingest ?? null,
 };

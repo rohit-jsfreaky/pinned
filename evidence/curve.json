@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-15T19:49:44+00:00",
+ "generated": "2026-11-15T20:09:46+00:00",
  "metric": "pass@1 on the held-out TEST split (evidence/split.json)",
  "baselines": {
   "docs": {
@@ -45,6 +45,19 @@
      "n": 169,
      "passed": 114,
      "pass_at_1": 0.6746,
+     "expected": 169
+    }
+   ]
+  },
+  {
+   "run_id": "shuffled-curve-1",
+   "arm": "shuffled",
+   "points": [
+    {
+     "iteration": 0,
+     "n": 169,
+     "passed": 116,
+     "pass_at_1": 0.6864,
      "expected": 169
     }
    ]

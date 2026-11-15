@@ -8,6 +8,7 @@ type CurvePoint = { iteration: number; pass_at_1: number; n?: number };
 export type Evidence = {
   curve: { metric: string; baselines: Record<string, Baseline>; curves: { arm?: string; points?: CurvePoint[] }[] } | null;
   split: { train: number; test: number } | null;
+  api_errors: Record<string, { n: number; api_errors: number }>;
   search: {
     context_for: { c1: Lat; c8: Lat; c32: Lat };
     check_calls: { c1: Lat; c8: Lat };

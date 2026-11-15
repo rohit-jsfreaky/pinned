@@ -117,7 +117,7 @@ export function Bento() {
             </div>
           </div>
         </Tile>
-        <Tile title="Gets sharper with every run" className="min-h-[260px]">
+        <Tile title="Learns from every run" className="min-h-[260px]">
           <svg viewBox="0 0 240 110" className="w-full max-w-[260px]" aria-hidden>
             <motion.path
               d="M4 96 C 50 92, 70 80, 100 70 S 160 40, 236 14"

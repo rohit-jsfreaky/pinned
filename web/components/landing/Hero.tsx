@@ -48,7 +48,7 @@ export function Hero() {
       </h1>
       <p className="mx-auto mt-6 mb-0 max-w-[720px] text-xl leading-[1.45] font-medium text-balance text-hp-muted max-tablet:text-[17px]">
         Your coding agent learned from whatever docs were newest. Pinned checks its code against the exact libraries you run,
-        hands it the right call when an API changed, and gets sharper every time the code runs.
+        hands it the right call when an API changed, and learns from every run.
       </p>
       <div className="mx-auto mt-9 flex max-w-[460px] flex-col justify-center gap-3 sm:flex-row">
         <ButtonDark href="#agents">Add to your agent</ButtonDark>

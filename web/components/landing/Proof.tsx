@@ -15,7 +15,11 @@ export function Proof() {
   const maxIt = Math.max(1, ...pts.map((p) => p.iteration));
   const x = (it: number) => PAD + (it / maxIt) * (W - 2 * PAD);
   const path = pts.map((p, n) => `${n ? "L" : "M"}${x(p.iteration)},${y(p.pass_at_1)}`).join(" ");
-  const best = pts.length ? pts.reduce((a, b) => (b.pass_at_1 > a.pass_at_1 ? b : a)) : null;
+  const static0 = pts.find((p) => p.iteration === 0) ?? null;
+  const shuffled = curves.find((c) => /shuffl/i.test(c.arm ?? ""))?.points?.[0] ?? null;
+  const errNone = evidence.api_errors?.["none:0"]?.api_errors;
+  const errPinned = evidence.api_errors?.["pinned:0"]?.api_errors;
+  const fewer = errNone && errPinned != null ? Math.round((1 - errPinned / errNone) * 100) : null;
   const c1 = evidence.search?.context_for.c1;
   const k1 = evidence.search?.check_calls.c1;
   const q = evidence.search?.graph_queries?.context_for_warm?.p50;
@@ -23,7 +27,8 @@ export function Proof() {
   const stats: [string, string][] = [
     ...(base.none ? [[pct(base.none.pass_at_1), "agent alone"] as [string, string]] : []),
     ...(base.docs ? [[pct(base.docs.pass_at_1), "agent + official docs"] as [string, string]] : []),
-    ...(best ? [[pct(best.pass_at_1), "agent + Pinned"] as [string, string]] : []),
+    ...(static0 ? [[pct(static0.pass_at_1), "agent + Pinned"] as [string, string]] : []),
+    ...(fewer != null ? [[`${fewer}% fewer`, `wrong-version API errors (${errNone} → ${errPinned})`] as [string, string]] : []),
     ...(c1 ? [[`${Math.round(c1.p50_ms)} ms`, "to answer how-to, median"] as [string, string]] : []),
     ...(k1 ? [[`${Math.round(k1.p50_ms)} ms`, "to check code, median"] as [string, string]] : []),
     ...(q ? [[`${q}`, "graph hops per answer"] as [string, string]] : []),
@@ -84,6 +89,11 @@ export function Proof() {
               <text x={W / 2} y={y(0.9)} textAnchor="middle" fontSize="14" fill="var(--color-hp-muted)">Pinned learning rounds are being measured</text>
             )}
           </svg>
+          <p className="mt-4 mb-0 max-w-3xl text-sm text-hp-muted">
+            Honest read: the learning rounds are flat so far — within run-to-run noise on one sample per task.
+            {shuffled && <> A control that hands the agent random valid APIs scored {pct(shuffled.pass_at_1)}.</>} The
+            clear win today is fewer wrong-version API errors; turning learning into a rising curve is the next step.
+          </p>
           <div className="mt-2 text-right font-mono text-[11px] text-hp-muted">{evidence.curve?.metric}</div>
         </div>
       </div>

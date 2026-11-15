@@ -91,22 +91,18 @@ class PlainStore:
     # ------------------------------------------------------------------ build from the graph (identical data)
     @classmethod
     def from_graph(cls, graph: Graph, library: str | Iterable[str], split_path: str | Path | None = None) -> PlainStore:
-        names = [library] if isinstance(library, str) else list(library)
-        store = cls(split_path=split_path)
-        for lib in names:
-            store.libs[lib] = _export_facts(graph, lib)
-            _export_signals(graph, lib, store.libs[lib])
-            store.episodes.extend(_export_episodes(graph, lib))
-        store._seen = {e["key"] for e in store.episodes}
+        names = [library] if isinstance(library, str) else list(dict.fromkeys(library))
+        names = [n.strip().lower() for n in names]
+        store = cls(_export(graph, names), _export_episodes(graph, names), split_path=split_path)
         return store
 
     def refresh_facts(self, graph: Graph) -> None:
         """Re-read the FACTS (after gap-driven ingestion grew the graph) but keep this store's own learned weights:
         word -> path pairs it already holds keep their weight; new ingested cues come in at their graph weight."""
         with self._lock:
+            fresh_all = _export(graph, list(self.libs))
             for lib, old in self.libs.items():
-                fresh = _export_facts(graph, lib)
-                _export_signals(graph, lib, fresh)
+                fresh = fresh_all[lib]
                 for word, row in fresh.cues.items():
                     mine = old.cues.setdefault(word, {})
                     for path, w in row.items():
@@ -281,53 +277,65 @@ class PlainStore:
 
 
 # ---------------------------------------------------------------------- graph export (read once, then dicts only)
-def _export_facts(g: Graph, lib: str) -> LibData:
-    data = LibData()
-    row = node(g, "Library", library_id(lib), ("import_names",))
-    data.import_names = [x.strip() for x in str((row or {}).get("import_names") or "").split(",") if x.strip()]
-    for r in g.query(f"MATCH (v:{VERSION}) WHERE v.library = $lib RETURN v.version AS version, v.ord AS ord", {"lib": lib}):
-        if r["version"] is not None and r["ord"] is not None:
-            data.versions[r["version"]] = int(r["ord"])
-    for r in g.query(f"MATCH (a:{API})-[r:{ADDED_IN}]->(v) WHERE a.library = $lib RETURN a.path AS path, "
-                     "a.kind AS kind, r.sig AS sig, v.ord AS ord", {"lib": lib}):
-        if r["path"] and r["ord"] is not None:
-            data.events.setdefault(r["path"], []).append([int(r["ord"]), ADDED_IN, r["sig"] or ""])
-            data.kinds[r["path"]] = r["kind"] or ""
-    for r in g.query(f"MATCH (a:{API})-[r:{REMOVED_IN}]->(v) WHERE a.library = $lib RETURN a.path AS path, v.ord AS ord",
-                     {"lib": lib}):
-        if r["path"] and r["ord"] is not None:
-            data.events.setdefault(r["path"], []).append([int(r["ord"]), REMOVED_IN, ""])
-    for r in g.query(f"MATCH (a:{API})-[r:{CHANGED_IN}]->(v) WHERE a.library = $lib RETURN a.path AS path, "
-                     "r.kind AS kind, r.after AS after, v.ord AS ord", {"lib": lib}):
-        if r["path"] and r["ord"] is not None:
-            data.changes.setdefault(r["path"], []).append([int(r["ord"]), r["kind"] or "", r["after"] or ""])
-    for rows in (data.events, data.changes):
-        for v in rows.values():
-            v.sort()
-    return data
+def _scope(libs: list[str], alias: str) -> tuple[str, dict]:
+    """One library: filter on the server. Several: one unfiltered read, filtered here (HydraDB 0.4.0 runs a
+    library-filtered edge read as a full scan of that edge type anyway, so one scan beats one per library)."""
+    return (f"WHERE {alias}.library = $lib", {"lib": libs[0]}) if len(libs) == 1 else ("", {})
 
 
-def _export_signals(g: Graph, lib: str, data: LibData) -> None:
+def _export(g: Graph, libs: list[str]) -> dict[str, LibData]:
+    out = {lib: LibData() for lib in libs}
+    for lib, data in out.items():
+        row = node(g, "Library", library_id(lib), ("import_names",))
+        data.import_names = [x.strip() for x in str((row or {}).get("import_names") or "").split(",") if x.strip()]
+    where, params = _scope(libs, "v")
+    for r in g.query(f"MATCH (v:{VERSION}) {where} RETURN v.library AS lib, v.version AS version, v.ord AS ord", params):
+        if r["lib"] in out and r["version"] is not None and r["ord"] is not None:
+            out[r["lib"]].versions[r["version"]] = int(r["ord"])
+    where, params = _scope(libs, "a")
+    for r in g.query(f"MATCH (a:{API})-[r:{ADDED_IN}]->(v) {where} RETURN a.library AS lib, a.path AS path, "
+                     "a.kind AS kind, r.sig AS sig, v.ord AS ord", params):
+        if r["lib"] in out and r["path"] and r["ord"] is not None:
+            out[r["lib"]].events.setdefault(r["path"], []).append([int(r["ord"]), ADDED_IN, r["sig"] or ""])
+            out[r["lib"]].kinds[r["path"]] = r["kind"] or ""
+    for r in g.query(f"MATCH (a:{API})-[r:{REMOVED_IN}]->(v) {where} RETURN a.library AS lib, a.path AS path, "
+                     "v.ord AS ord", params):
+        if r["lib"] in out and r["path"] and r["ord"] is not None:
+            out[r["lib"]].events.setdefault(r["path"], []).append([int(r["ord"]), REMOVED_IN, ""])
+    for r in g.query(f"MATCH (a:{API})-[r:{CHANGED_IN}]->(v) {where} RETURN a.library AS lib, a.path AS path, "
+                     "r.kind AS kind, r.after AS after, v.ord AS ord", params):
+        if r["lib"] in out and r["path"] and r["ord"] is not None:
+            out[r["lib"]].changes.setdefault(r["path"], []).append([int(r["ord"]), r["kind"] or "", r["after"] or ""])
     for rel in (CUES, SHORTCUT):
-        q = (f"MATCH (t)-[r:{rel}]->(a:{API}) WHERE a.library = $lib RETURN t.word AS word, t.key AS key, "
+        q = (f"MATCH (t)-[r:{rel}]->(a:{API}) {where} RETURN a.library AS lib, t.word AS word, t.key AS key, "
              "a.path AS path, r.w AS w, r.n_pass AS n_pass, r.n_fail AS n_fail")
-        for r in g.query(q, {"lib": lib}):
+        for r in g.query(q, params):
             word = r["word"] or r["key"]
-            if not word or not r["path"]:
+            if r["lib"] not in out or not word or not r["path"]:
                 continue
+            data = out[r["lib"]]
             w = 1.0 if r["w"] is None else float(r["w"])
             row = data.cues.setdefault(word, {})
             row[r["path"]] = max(w, row.get(r["path"], 0.0)) if rel == SHORTCUT else w
             if rel == CUES and (r["n_pass"] or r["n_fail"]):
                 data.stats.setdefault(word, {})[r["path"]] = [int(r["n_pass"] or 0), int(r["n_fail"] or 0)]
+    for data in out.values():
+        for rows in (data.events, data.changes):
+            for v in rows.values():
+                v.sort()
+    return out
 
 
-def _export_episodes(g: Graph, lib: str) -> list[dict]:
-    q = (f"MATCH (e:{EPISODE})-[u:{USED}]->(a) WHERE e.library = $lib RETURN e.key AS key, e.version AS version, "
+def _export_episodes(g: Graph, libs: list[str]) -> list[dict]:
+    where, params = _scope(libs, "e")
+    q = (f"MATCH (e:{EPISODE})-[u:{USED}]->(a) {where} RETURN e.key AS key, e.library AS lib, e.version AS version, "
          "e.passed AS passed, e.error_type AS error_type, a.path AS path")
+    wanted = set(libs)
     eps: dict[str, dict] = {}
-    for r in g.query(q, {"lib": lib}):
-        e = eps.setdefault(r["key"], {"key": r["key"], "library": lib, "version": r["version"],
+    for r in g.query(q, params):
+        if r["lib"] not in wanted:
+            continue
+        e = eps.setdefault(r["key"], {"key": r["key"], "library": r["lib"], "version": r["version"],
                                       "passed": bool(r["passed"]), "error_type": r["error_type"] or "", "used": []})
         if r["path"]:
             e["used"].append(r["path"])

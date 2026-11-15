@@ -50,9 +50,24 @@ class _Use:
     cue_terms: list[str] = field(default_factory=list)
 
 
+@dataclass
+class MaintainState:
+    """What maintain() remembers between calls in one process, so it re-reads only what can have changed.
+
+    Merge depends only on ingested facts, which change only through ingestion, so a library is merged once per process
+    and again only after a gap fill touched it (`dirty_libs`). Decay depends only on n_fail/n_pass, which change only
+    in record(), so after one full scan per process only the edges record() touched are checked (`touched`).
+    (HydraDB 0.4.0 runs library-filtered edge reads as full edge scans; see docs/progress/D-learn.md.)"""
+
+    merged_libs: set[str] = field(default_factory=set)
+    dirty_libs: set[str] = field(default_factory=set)
+    touched: dict[str, set[tuple[int, int]]] = field(default_factory=lambda: defaultdict(set))
+    full_decay_done: bool = False
+
+
 class Maintainer:
-    def __init__(self, g: Graph, run_id: str, log: MoveLog, merge_sizes: dict[str, int]):
-        self.g, self.run_id, self.log, self.merge_sizes = g, run_id, log, merge_sizes
+    def __init__(self, g: Graph, run_id: str, log: MoveLog, state: MaintainState):
+        self.g, self.run_id, self.log, self.state = g, run_id, log, state
 
     def run(self) -> LearnReport:
         rep = LearnReport()
@@ -60,7 +75,8 @@ class Maintainer:
         for lib, uses in sorted(by_lib.items()):
             rep.shortcuts_added += self.compress(lib, uses)
             rep.split += self.split(lib, uses)
-            rep.merged += self.merge(lib)
+        need = {lib for lib in by_lib if lib not in self.state.merged_libs} | (self.state.dirty_libs & set(by_lib))
+        rep.merged += self.merge(sorted(need))
         decayed = self.decay()
         rep.edges_reweighted += decayed
         rep.notes.append(
@@ -198,33 +214,34 @@ class Maintainer:
         return len(rows)
 
     # ---------------------------------------------------------------- entity merge
-    def merge(self, lib: str) -> int:
-        """Two Api nodes that are the same object -> ALIAS_OF (re-export -> definition). Same object = same last name,
-        same kind (function/class), identical ADDED_IN/REMOVED_IN history with identical non-trivial signatures, and
-        either one path re-exports the other (its module is a parent package of the other's module) or both carry the
-        same non-empty docstring line (`doc`)."""
+    def merge(self, libs: list[str]) -> int:
+        """Two Api nodes that are the same object -> ALIAS_OF (re-export -> definition). Same object = same library,
+        same last name, same kind (function/class), identical ADDED_IN/REMOVED_IN history with identical non-trivial
+        signatures, and either one path re-exports the other (its module is a parent package of the other's module) or
+        both carry the same non-empty docstring line (`doc`). One read for all libraries asked."""
+        if not libs:
+            return 0
+        where, params = ("WHERE a.library = $lib", {"lib": libs[0]}) if len(libs) == 1 else ("", {})
+        wanted = set(libs)
         adds = self.g.query(
-            f"MATCH (a:{API})-[r:{ADDED_IN}]->(v) WHERE a.library = $lib RETURN a.id AS id, a.path AS path, "
-            "a.kind AS kind, a.doc AS doc, r.sig AS sig, v.ord AS ord", {"lib": lib})
-        if self.merge_sizes.get(lib) == len(adds):
-            return 0  # nothing new was ingested for this library since the last merge pass
-        rems = self.g.query(f"MATCH (a:{API})-[r:{REMOVED_IN}]->(v) WHERE a.library = $lib RETURN a.id AS id, v.ord AS ord",
-                            {"lib": lib})
-        info: dict[int, tuple[str, str, str]] = {}
+            f"MATCH (a:{API})-[r:{ADDED_IN}]->(v) {where} RETURN a.id AS id, a.library AS lib, a.path AS path, "
+            "a.kind AS kind, a.doc AS doc, r.sig AS sig, v.ord AS ord", params)
+        rems = self.g.query(f"MATCH (a:{API})-[r:{REMOVED_IN}]->(v) {where} RETURN a.id AS id, v.ord AS ord", params)
+        info: dict[int, tuple[str, str, str, str]] = {}
         hist: dict[int, list[tuple]] = defaultdict(list)
         for r in adds:
-            if r["kind"] in MERGE_KINDS and r["path"] and r["ord"] is not None:
-                info[r["id"]] = (r["path"], r["kind"], r["doc"] or "")
+            if r["lib"] in wanted and r["kind"] in MERGE_KINDS and r["path"] and r["ord"] is not None:
+                info[r["id"]] = (r["path"], r["kind"], r["doc"] or "", r["lib"])
                 hist[r["id"]].append((int(r["ord"]), "A", r["sig"] or ""))
         for r in rems:
             if r["id"] in info and r["ord"] is not None:
                 hist[r["id"]].append((int(r["ord"]), "R", ""))
         groups: dict[tuple, list[int]] = defaultdict(list)
-        for aid, (path, kind, _) in info.items():
+        for aid, (path, kind, _, lib) in info.items():
             h = tuple(sorted(hist[aid]))
             if all(e[2].strip() in TRIVIAL_SIGS for e in h if e[1] == "A"):
                 continue
-            groups[(path.rsplit(".", 1)[-1], kind, h)].append(aid)
+            groups[(lib, path.rsplit(".", 1)[-1], kind, h)].append(aid)
         candidates: list[tuple[int, int, str]] = []
         for ids in groups.values():
             if len(ids) < 2:
@@ -232,35 +249,50 @@ class Maintainer:
             ids.sort(key=lambda i: (info[i][0].count("."), info[i][0]))
             for i, x in enumerate(ids):
                 for y in ids[i + 1:]:
-                    why = _same_object(info[x], info[y])
+                    why = _same_object(info[x][:3], info[y][:3])
                     if why:
                         candidates.append((x, y, why))
         rows: list[tuple[int, int, dict]] = []
         if candidates:
             ids = list({i for x, y, _ in candidates for i in (x, y)})
-            linked = {(r["s"], r["d"]) for r in self.g.query(
-                f"MATCH (a)-[r:{ALIAS_OF}]->(b) WHERE a.id IN $ids RETURN a.id AS s, b.id AS d", {"ids": ids})}
+            linked: set[tuple[int, int]] = set()
+            for i in range(0, len(ids), 1000):
+                linked |= {(r["s"], r["d"]) for r in self.g.query(
+                    f"MATCH (a)-[r:{ALIAS_OF}]->(b) WHERE a.id IN $ids RETURN a.id AS s, b.id AS d",
+                    {"ids": ids[i : i + 1000]})}
             for x, y, why in candidates:
                 if (x, y) in linked or (y, x) in linked:
                     continue
                 props = {"evidence": f"learned: {why}"}
                 rows.append((x, y, props))
+                lib = info[x][3]
                 self.log.write("merge", {"src": f"{lib}|{info[x][0]}", "rel": ALIAS_OF, "dst": f"{lib}|{info[y][0]}"},
                                None, props, why, [])
             if rows:
                 link_props_many(self.g, ALIAS_OF, rows)
-        self.merge_sizes[lib] = len(adds)
+        self.state.merged_libs |= wanted
+        self.state.dirty_libs -= wanted
         return len(rows)
 
     # ---------------------------------------------------------------- decay
     def decay(self) -> int:
-        """Edges that keep leading to failures (weights.should_decay) drop to W_DECAYED < W_FLOOR."""
+        """Edges that keep leading to failures (weights.should_decay) drop to W_DECAYED < W_FLOOR. The first call in a
+        process scans every reweighted edge; later calls check only the edges record() touched since."""
         total = 0
+        cols = ("RETURN a.id AS src, b.id AS dst, a.key AS src_key, b.key AS dst_key, r.w AS w, "
+                "r.n_pass AS n_pass, r.n_fail AS n_fail")
         for rel, label in ((CUES, TERM), (SHORTCUT, TERM), (REPLACED_BY, API)):
-            rows = self.g.query(
-                f"MATCH (a:{label})-[r:{rel}]->(b) WHERE r.n_fail >= $n RETURN a.id AS src, b.id AS dst, "
-                "a.key AS src_key, b.key AS dst_key, r.w AS w, r.n_pass AS n_pass, r.n_fail AS n_fail",
-                {"n": DECAY_MIN_FAILS})
+            if not self.state.full_decay_done:
+                rows = self.g.query(f"MATCH (a:{label})-[r:{rel}]->(b) WHERE r.n_fail >= $n {cols}", {"n": DECAY_MIN_FAILS})
+            else:
+                pairs = self.state.touched.get(rel, set())
+                rows = []
+                plist = sorted(pairs)
+                for i in range(0, len(plist), 1000):
+                    chunk = plist[i : i + 1000]
+                    got = self.g.query(f"MATCH (a)-[r:{rel}]->(b) WHERE a.id IN $s AND b.id IN $d {cols}",
+                                       {"s": list({p[0] for p in chunk}), "d": list({p[1] for p in chunk})})
+                    rows += [r for r in got if (r["src"], r["dst"]) in pairs]
             batch = []
             for r in rows:
                 if should_decay(r["w"], r["n_pass"], r["n_fail"]):
@@ -270,6 +302,8 @@ class Maintainer:
             if batch:
                 set_edges_many(self.g, rel, batch)
             total += len(batch)
+        self.state.full_decay_done = True
+        self.state.touched.clear()
         return total
 
 

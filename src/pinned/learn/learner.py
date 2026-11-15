@@ -29,7 +29,7 @@ from . import text
 from .code import CodeUse, analyse
 from .errors import Gap, find_gaps
 from .facts import ApiFacts, has_param, load_facts, usable
-from .maintain import Maintainer
+from .maintain import Maintainer, MaintainState
 from .movelog import MoveLog
 from .routes import api_id, episode_id, library_id, route, route_string, term_id, used_items
 from .split import SplitGuard
@@ -40,6 +40,28 @@ MAX_LEARN_TERMS = 24   # problem words that may get a new learned cue on a pass
 ERROR_KEEP = 300       # chars of error_text kept on the Episode node
 
 LIVE_PREFIX = "live-"
+
+
+class FairLock:
+    """FIFO mutex: callers get the lock in arrival order. record() and maintain() run one at a time (a weight update
+    is read-modify-write); plain threading.Lock has no order and starved some callers under load (measured)."""
+
+    def __init__(self) -> None:
+        self._cond = threading.Condition()
+        self._next = 0
+        self._serving = 0
+
+    def __enter__(self) -> None:
+        with self._cond:
+            ticket = self._next
+            self._next += 1
+            while ticket != self._serving:
+                self._cond.wait()
+
+    def __exit__(self, *exc: object) -> None:
+        with self._cond:
+            self._serving += 1
+            self._cond.notify_all()
 
 
 class GraphLearner:
@@ -60,10 +82,10 @@ class GraphLearner:
         self.run_id = run_id
         self.guard = SplitGuard(split_path)
         self.log = MoveLog(run_id, log_dir)
-        self._lock = threading.RLock()
+        self._lock = FairLock()
         self._roots: dict[str, set[str]] = {}
         self._gaps_done: set[tuple[str, str, str]] = set()
-        self._merge_sizes: dict[str, int] = {}
+        self.state = MaintainState()
 
     # ------------------------------------------------------------------ Learner
     def record(self, episode: Episode) -> LearnReport:
@@ -73,7 +95,7 @@ class GraphLearner:
 
     def maintain(self) -> LearnReport:
         with self._lock:
-            return Maintainer(self.graph, self.run_id, self.log, self._merge_sizes).run()
+            return Maintainer(self.graph, self.run_id, self.log, self.state).run()
 
     # ------------------------------------------------------------------ helpers shared with _Recorder
     def roots(self, library: str, extra: Iterable[str] = ()) -> set[str]:
@@ -176,6 +198,7 @@ class _Recorder:
             props = {"w": after, "n_pass": r.n_pass + int(passed), "n_fail": r.n_fail + int(not passed)}
             by_rel.setdefault(r.rel, []).append((r.src, r.dst, props))
             self.touched.add((r.rel, r.src, r.dst))
+            self.L.state.touched[r.rel].add((r.src, r.dst))
             self.L.log.write(move, {"src": r.src_key, "rel": r.rel, "dst": r.dst_key, **r.extra},
                              {"w": r.w, "n_pass": r.n_pass, "n_fail": r.n_fail}, props, why, [self.key])
         for rel, batch in by_rel.items():
@@ -276,6 +299,7 @@ class _Recorder:
                 self.report.notes.append(f"fill_gap failed for {gp.path}: {type(e).__name__}: {e}")
                 continue
             self.L._gaps_done.add(done_key)
+            self.L.state.dirty_libs.add(self.lib)  # new facts: entity merge must look at this library again
             self.report.gaps_ingested += 1
             self.L.log.write("gap_fill", keys, None, asdict(rep) if hasattr(rep, "__dataclass_fields__") else str(rep),
                              why, [self.key])

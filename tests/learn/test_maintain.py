@@ -121,3 +121,54 @@ def test_maintain_report_counts_and_log(world, tmp_path):
     assert rep.notes and "shortcuts=1" in rep.notes[0] and "merged=2" in rep.notes[0]
     moves = [m["move"] for m in L.log.read()]
     assert moves.count("shortcut") == 1 and moves.count("merge") == 2
+
+
+def test_decay_after_first_pass_checks_touched_edges(world, tmp_path):
+    L = _learner(world, tmp_path)
+    L.maintain()  # first pass: full scan done
+    assert L.state.full_decay_done
+    t, a = world.term("fit"), world.api("fit")
+    link_props_many(world.graph, CUES, [(t, a, {"w": 2.5})])
+    for i in range(3):
+        L.record(world.episode(f"f{i}", "2.0", _code(world, "fit(1)"), False, problem=world.words["fit"],
+                               error_type="AssertionError", error_text="no"))
+    assert (t, a) in L.state.touched[CUES]
+    assert L.maintain().edges_reweighted == 1
+    assert world.edge(CUES, t, a)["w"] == W_DECAYED and not L.state.touched
+
+
+def test_merge_reruns_only_after_new_facts(world, tmp_path):
+    from pinned.contract import ADDED_IN, API
+    from pinned.graph import upsert_nodes
+
+    from .conftest import FakeIngestor
+
+    ing = FakeIngestor()
+    L = GraphLearner(world.graph, ingestor=ing, run_id=world.run_id, log_dir=tmp_path)
+    _chain_pass(world, L, "p1", "2.0")
+    assert L.maintain().merged == 2
+    # ingestion adds a new re-export pair: merge sees it after the next gap fill marks the library dirty
+    upsert_nodes(world.graph, API, [{"key": f"{world.lib}|{world.p(s)}", "library": world.lib, "path": world.p(s),
+                                     "kind": "class"} for s in ("Model", "core.Model")])
+    link_props_many(world.graph, ADDED_IN, [(world.api(s), world.ver("1.0"), {"sig": "(alpha=1.0)", "evidence": "fx"})
+                                            for s in ("Model", "core.Model")])
+    assert L.maintain().merged == 0  # no new facts reported: no rescan
+    L.record(world.episode("g1", "2.0", _code(world, "nothing()"), False, error_type="AttributeError",
+                           error_text=f"module '{world.mod}' has no attribute 'nothing'"))
+    assert world.lib in L.state.dirty_libs
+    assert L.maintain().merged == 1
+    assert [r["dst"] for r in edges_from(world.graph, [world.api("Model")], ALIAS_OF)] == [world.api("core.Model")]
+    # a fresh learner (new process) does one full pass and finds nothing new
+    assert GraphLearner(world.graph, run_id=world.run_id, log_dir=tmp_path).maintain().merged == 0
+
+
+def test_concurrent_records_lose_no_updates(world, tmp_path):
+    from concurrent.futures import ThreadPoolExecutor
+
+    L = _learner(world, tmp_path)
+    eps = [world.episode(f"c{i}", "2.0", _code(world, "concat([1])"), True, problem=world.words["concat"])
+           for i in range(8)]
+    with ThreadPoolExecutor(8) as pool:
+        list(pool.map(L.record, eps))
+    e = world.edge(CUES, world.term("concat"), world.api("concat"))
+    assert e["n_pass"] == 8 and e["w"] == 1.0 + 8 * ALPHA

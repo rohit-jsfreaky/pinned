@@ -196,3 +196,15 @@ def test_shuffled_over_plain_store_universe(world):
     assert len(ctx.items) == len(base.items) == 2
     assert all(i.path in s.valid_paths(world.lib, "2.0") for i in ctx.items)
     assert {i.path for i in ctx.items}.isdisjoint({i.path for i in base.items})
+
+
+def test_from_graph_many_libraries_in_one_store(graph, run_key):
+    from .conftest import build_world
+
+    a = build_world(graph, run_key)
+    b = build_world(graph, run_key + "b")
+    s = PlainStore.from_graph(graph, [a.lib, b.lib])
+    assert set(s.libs) == {a.lib, b.lib}
+    single = PlainStore.from_graph(graph, a.lib)
+    assert s.libs[a.lib] == single.libs[a.lib]  # same data whether read alone or together
+    assert s.libs[b.lib].import_names == [b.mod]

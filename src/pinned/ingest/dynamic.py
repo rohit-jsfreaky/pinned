@@ -105,19 +105,14 @@ def _requirements(dep_sets: list[str]) -> list[str]:
 def install_attempts(library: str, pypi_version: str, released: str, dep_sets: list[str]) -> list[list[str]]:
     """uv pip install argument lists, most faithful first: the dataset's pins resolved as of the release date, the
     pins alone, everything as of the release date, then plain (newest compatible dependencies)."""
-    # setuptools<70 keeps `pkg_resources`, which many older releases import at module level (spacy 3.4, ...)
-    base = [f"{library}=={pypi_version}", "griffe", "setuptools<70"]
+    base = [f"{library}=={pypi_version}", "griffe"]
     index = ["--index", EXTRA_INDEX[library]] if library in EXTRA_INDEX else []
     deps = _requirements(dep_sets)
     cutoff = (date.fromisoformat(released) + timedelta(days=120)).isoformat()
     # resolve dependencies as of the release (avoids e.g. numpy 2 under an old scipy); griffe/setuptools are exempt
-    as_of = ["--exclude-newer", cutoff, "--exclude-newer-package", "griffe=false",
-             "--exclude-newer-package", "setuptools=false"]
+    as_of = ["--exclude-newer", cutoff, "--exclude-newer-package", "griffe=false"]
     attempts = []
-    if index:
-        # the extra index has no upload dates (no cutoff), and uv takes a package from the FIRST index that has it:
-        # that index carries its own setuptools, so the setuptools pin (only needed for pkg_resources) is left out
-        base = base[:2]
+    if index:  # the extra index has no upload dates, so no cutoff there
         attempts += [index + base + deps] if deps else []
         attempts.append(index + base)
         return attempts
@@ -173,6 +168,10 @@ class VenvInspector:
                 if r.returncode != 0:
                     failures.append(f"py{py} install {' '.join(args)}: {r.stderr.strip()[-300:]}")
                     continue
+                # many older releases import `pkg_resources` at module level (torch 1.10, spacy 3.4): setuptools<70
+                # still ships it. A separate step from PyPI, so an extra index (which carries its own setuptools and
+                # wins under uv's first-index rule) cannot block it. Best effort.
+                _run(["uv", "pip", "install", "-q", "--no-cache", "--python", str(vpy), "setuptools<70"], INSTALL_TIMEOUT)
                 try:
                     res = self.run_worker(str(vpy), modules, owners, tmp)
                 except DynamicError as e:

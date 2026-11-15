@@ -192,10 +192,10 @@ def test_python_candidates_and_install_attempts():
     assert python_candidates("3.9", files) == ["3.9"]
     assert python_candidates("3.10", [{"filename": "a-1-py3-none-any.whl"}]) == ["3.10", "3.9", "3.8", "3.7"]
     att = install_attempts("scipy", "1.7.3", "2021-11-24", ["", "numpy==1.21.6"])
-    base = ["scipy==1.7.3", "griffe", "setuptools<70"]
-    assert att[0][:2] == ["--exclude-newer", "2022-03-24"] and att[0][-4:] == base + ["numpy==1.21.6"]
+    base = ["scipy==1.7.3", "griffe"]
+    assert att[0][:2] == ["--exclude-newer", "2022-03-24"] and att[0][-3:] == base + ["numpy==1.21.6"]
     assert "numpy=false" in att[0]  # the dataset's pin is exempt from the release-date cutoff
-    assert att[1] == base + ["numpy==1.21.6"] and att[2][-3:] == base and att[3] == base
+    assert att[1] == base + ["numpy==1.21.6"] and att[2][-2:] == base and att[3] == base
     torch = install_attempts("torch", "1.9.0", "2021-06-15", [""])
     assert all(a[:2] == ["--index", "https://download.pytorch.org/whl/cpu"] for a in torch)
     assert torch[-1] == ["--index", "https://download.pytorch.org/whl/cpu", "torch==1.9.0", "griffe"]

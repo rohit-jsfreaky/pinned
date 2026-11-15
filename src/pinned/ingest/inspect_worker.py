@@ -196,55 +196,63 @@ def module_records(name, owners, records, errors, notes, seen):
         runtime_names = set()
     names = set(gmembers) | (exports or set()) | runtime_names
     for mname in sorted(names):
-        if mname.startswith("_") or (exports is not None and mname not in exports):
-            continue
         try:
-            obj = getattr(mod, mname)
-        except Exception:
-            continue
-        gobj = gmembers.get(mname)
-        if gobj is None:
-            omod = getattr(obj, "__name__", None) if inspect.ismodule(obj) else getattr(obj, "__module__", None)
-            is_alias = not (isinstance(omod, str) and omod == name) or inspect.ismodule(obj)
-        else:
-            is_alias = gobj is None or gobj.is_alias
-        target = ""
-        if is_alias:
-            target = gobj.target_path if gobj is not None else ""
-            if not target:
-                omod = getattr(obj, "__module__", None)
-                qual = getattr(obj, "__qualname__", None) or getattr(obj, "__name__", None)
-                if inspect.ismodule(obj):
-                    target = obj.__name__
-                elif isinstance(omod, str) and isinstance(qual, str):
-                    target = omod + "." + qual
-            if target and not own(target, owners):
-                continue
-            if exports is None and not hub:
-                continue
-        path = name + "." + mname
-        if path in seen:
-            continue
-        if inspect.ismodule(obj):
-            if not own(obj.__name__, owners):
-                continue
-            rec = {"path": path, "kind": "module", "doc": first_line(obj.__doc__ or "")}
-            if obj.__name__ != path:
-                rec["target"] = obj.__name__
-            seen.add(path)
-            records.append(rec)
-            continue
-        rec = describe(path, obj, "function", None if is_alias else gobj)
-        if target and target != path:
-            rec["target"] = target
+            member_records(name, mod, mname, gmod, gmembers, exports, hub, owners, records, seen)
+        except BaseException as e:  # noqa: BLE001 - lazy objects raise on any attribute access (nltk corpora)
+            notes[name + "." + mname] = ("skipped: %s: %s" % (type(e).__name__, e))[:200]
+
+
+def member_records(name, mod, mname, gmod, gmembers, exports, hub, owners, records, seen):
+    """Record one module member (and its class members)."""
+    if mname.startswith("_") or (exports is not None and mname not in exports):
+        return
+    try:
+        obj = getattr(mod, mname)
+    except Exception:
+        return
+    gobj = gmembers.get(mname)
+    if gobj is None:
+        omod = getattr(obj, "__name__", None) if inspect.ismodule(obj) else getattr(obj, "__module__", None)
+        is_alias = not (isinstance(omod, str) and omod == name) or inspect.ismodule(obj)
+    else:
+        is_alias = gobj is None or gobj.is_alias
+    target = ""
+    if is_alias:
+        target = gobj.target_path if gobj is not None else ""
+        if not target:
+            omod = getattr(obj, "__module__", None)
+            qual = getattr(obj, "__qualname__", None) or getattr(obj, "__name__", None)
+            if inspect.ismodule(obj):
+                target = obj.__name__
+            elif isinstance(omod, str) and isinstance(qual, str):
+                target = omod + "." + qual
+        if target and not own(target, owners):
+            return
+        if exports is None and not hub:
+            return
+    path = name + "." + mname
+    if path in seen:
+        return
+    if inspect.ismodule(obj):
+        if not own(obj.__name__, owners):
+            return
+        rec = {"path": path, "kind": "module", "doc": first_line(obj.__doc__ or "")}
+        if obj.__name__ != path:
+            rec["target"] = obj.__name__
         seen.add(path)
         records.append(rec)
-        if inspect.isclass(obj):
-            class_members(path, obj, owners, records, seen)
-        elif own(getattr(type(obj), "__module__", "") or "", owners) and not inspect.isroutine(obj):
-            # a module-level instance of the library's own class (scipy.stats.norm = norm_gen(...)): its methods are
-            # what users call (scipy.stats.norm.logcdf)
-            class_members(path, type(obj), owners, records, seen)
+        return
+    rec = describe(path, obj, "function", None if is_alias else gobj)
+    if target and target != path:
+        rec["target"] = target
+    seen.add(path)
+    records.append(rec)
+    if inspect.isclass(obj):
+        class_members(path, obj, owners, records, seen)
+    elif own(getattr(type(obj), "__module__", "") or "", owners) and not inspect.isroutine(obj):
+        # a module-level instance of the library's own class (scipy.stats.norm = norm_gen(...)): its methods are
+        # what users call (scipy.stats.norm.logcdf)
+        class_members(path, type(obj), owners, records, seen)
 
 
 def _prepare_django():

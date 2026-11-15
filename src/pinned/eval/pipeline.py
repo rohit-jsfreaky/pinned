@@ -8,6 +8,7 @@ Both skip work already in the run folder, so either can be re-run after a crash.
 from __future__ import annotations
 
 from collections.abc import Callable
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict
 from pathlib import Path
 from typing import Protocol
@@ -42,12 +43,18 @@ def solve_stage(store: RunStore, problems: list[Problem], arm: Arm, split: str, 
     have = store.completions()
     todo: list[tuple[Problem, SolveRequest, object]] = []
     out: dict[str, CompletionRow] = {}
+    need: list[Problem] = []
     for p in problems:
         k = row_key(arm.name, split, iteration, p.id)
         if k in have and not have[k].error:
             out[k] = have[k]
             continue
-        actx = arm.context(p)
+        need.append(p)
+    # Contexts are built in parallel: a graph arm spends ~1 s per problem in search, which done one by one
+    # dominated a whole stage. Order (and so the prompts) is unchanged.
+    with ThreadPoolExecutor(max_workers=max(1, concurrency)) as pool:
+        ctxs = list(pool.map(arm.context, need))
+    for p, actx in zip(need, ctxs):
         req = SolveRequest(arm.name, p.id, iteration, render_prompt(p, actx.text))
         todo.append((p, req, actx))
     if not todo:

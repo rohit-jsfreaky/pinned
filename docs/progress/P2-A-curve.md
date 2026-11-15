@@ -7,9 +7,9 @@ Graph: the saved full graph from `graph-snapshot` (sha256 `aced2bde…84f5`, che
 ## Status (honest)
 - **Iteration 0 (static graph) on TEST: done.** 113/169 = **0.669**.
 - **Iteration 1 learning on TRAIN: done** (159 train episodes recorded, `maintain()` once).
-- **Iteration 1 measure on TEST: running at the 35-minute cap.** It was NOT stopped (stopping it would leave no
-  post-learning point at all). This file and `evidence/curve.json` are updated when it lands.
-- **Iteration 2: not run yet** (same command resumes it; every finished stage is kept).
+- **Iteration 1 measure on TEST: done** (finished ~5 min after the 35-minute cap; not stopped, since stopping would
+  leave no post-learning point at all). **109/169 = 0.645 — DOWN 4 problems from iteration 0. No rise yet.**
+- **Iteration 2: running** (same command resumes it; every finished stage is kept).
 
 ## Curve so far (TEST, n=169, one sample per problem, `claude -p --model haiku`)
 | arm | pass@1 | passed | source |
@@ -17,10 +17,19 @@ Graph: the saved full graph from `graph-snapshot` (sha256 `aced2bde…84f5`, che
 | none (agent alone) | 0.627 | 106 | `evidence/runs/baselines-p1` |
 | docs (plain docs) | 0.675 | 114 | `evidence/runs/baselines-p1` |
 | **Pinned, iteration 0 (static graph)** | **0.669** | 113 | `evidence/runs/pinned-curve-1` |
-| Pinned, iteration 1 | pending | | |
+| Pinned, iteration 1 | **0.645** | 109 | `evidence/runs/pinned-curve-1` |
 | Pinned, iteration 2 | not run | | |
 
 Train split, iteration 1 (graph before learning, the episodes the learner saw): 102/159 = 0.642.
+
+### Iteration 0 → 1 on TEST (from `completions.jsonl` / `results.jsonl`)
+- Learning changed the context text of **134/169** test problems (35 identical).
+- fail→pass: 6 (scipy 3, torch 2, falcon 1), all with changed context.
+- pass→fail: 10 (librosa 2, one each scipy, jinja2, flask, sympy, falcon, lightgbm, nltk, django); 7 with changed
+  context, **3 with identical context (pure solver sampling noise)**.
+- Net −4 on one sample per problem: not distinguishable from noise, and certainly not a rise. Not investigated further
+  (time cap). First suspects for the main session: the 1,831 learned cues (problem words → APIs in passing code) push
+  generic train-API items into unrelated test contexts; the 12,196 ALIAS_OF merges add alias chains to items.
 
 Static graph vs none: +7 problems (+4.2 pts). vs docs: −1 problem (within single-sample noise; see E's notes).
 

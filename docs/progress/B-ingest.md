@@ -141,7 +141,7 @@ sha256 `aced2bde35f64d22a8b50856b7ee196ab56da5a53f071cd07951642259ac84f5`. It ho
 (1,012,306 Api nodes, 76k Term nodes, 282 Versions, 26 Libraries; edges per type as in the table).
 Over GitHub's 2 GB per-asset limit, so it is uploaded as parts (see the last line of this section).
 Load: `cat pinned-graph.tgz.part-* > pinned-graph.tgz && infra/hydradb-snapshot.sh load pinned-graph.tgz <node> <http> <bolt> <admin>`.
-UPLOAD_LINE
+**Upload: GitHub release creation is blocked for this session type (`HTTP 403: Creating, editing, or deleting releases is not permitted for this session type`), so the fallback was used:** 38 parts of 90 MB (`pinned-graph.tgz.part-aa` ... `-bl`) + `SHA256SUMS` on the orphan branch `graph-snapshot` (pushed in 4 batches; GitHub caps one push at 2 GB). Get it: `git fetch origin graph-snapshot && git worktree add /tmp/g origin/graph-snapshot && cat /tmp/g/pinned-graph.tgz.part-* > pinned-graph.tgz && sha256sum pinned-graph.tgz`.
 
 ## HydraDB findings (exact query, exact error, workaround; all reproduced in this session on `ghcr.io/hydra-db/hydradb:0.4.0`)
 

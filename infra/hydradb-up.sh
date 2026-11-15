@@ -4,6 +4,7 @@
 set -euo pipefail
 NAME=${1:-hydradb}; HTTP=${2:-8443}; BOLT=${3:-7687}; ADMIN=${4:-9090}
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"; S="$ROOT/.hydradb/$NAME"
+"$ROOT/infra/ensure-docker.sh"
 mkdir -p "$S/store" "$S/cache"
 printf '%s\n' 'local-development-token-32-bytes' > "$S/auth-token"
 chmod -R 777 "$S"   # the container user must write the cache dir

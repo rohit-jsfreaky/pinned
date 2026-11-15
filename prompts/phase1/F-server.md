@@ -13,7 +13,8 @@ Your folders: `src/pinned/server/`, `src/pinned/cli.py` (the `pinned` script ent
 1. Read, in this order: `CLAUDE.md`, `PLAN.md`, `src/pinned/contract.py` (frozen; the schema, weights, validity rule and
    the class names every part exports), `docs/facts/hydradb.md`, `docs/hydradb-findings.md`, `docs/facts/gitchameleon.md`,
    and the graph layer you must use: `src/pinned/graph/` (+ `tests/graph/test_ops.py` shows every helper in use).
-2. `uv sync`. Make sure the HydraDB image is local: `docker pull ghcr.io/hydra-db/hydradb:0.4.0`.
+2. `uv sync`. Start Docker if it is not running (cloud VMs do not start it): `infra/ensure-docker.sh`. Make sure the
+   HydraDB image is local: `docker pull ghcr.io/hydra-db/hydradb:0.4.0`.
 3. Run `uv run pytest tests/graph -q` once: it starts a throwaway HydraDB node (fixture `graph` in `tests/conftest.py`)
    and must pass. Your tests use the same `graph` + `run_key` fixtures. For manual runs start a node with
    `infra/hydradb-up.sh <name> <http> <bolt> <admin>` and set `HYDRA_URL`.

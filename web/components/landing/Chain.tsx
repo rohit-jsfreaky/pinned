@@ -6,7 +6,7 @@ import { Badge, Eyebrow } from "./ui";
 
 const CARDS = [
   { path: "pandas.DataFrame.append", sub: "what your agent wrote", badge: <Badge tone="bad"><Warning weight="fill" /> Removed in 2.0.0</Badge> },
-  { path: "pandas.concat", sub: "replaced by · from pandas' own deprecation warning", badge: <Badge tone="ok"><CheckCircle weight="fill" /> Valid in 2.0.3</Badge> },
+  { path: "pandas.concat", sub: "replaced by · the pandas 2.0 path", badge: <Badge tone="ok"><CheckCircle weight="fill" /> Valid in 2.0.3</Badge> },
   { path: "pandas.concat", sub: "signature in 2.0.3", badge: <Badge tone="neutral">ready to use</Badge>, detail: true },
 ];
 

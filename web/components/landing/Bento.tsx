@@ -43,8 +43,9 @@ function AskBox() {
   );
 }
 
+// pandas.DataFrame.append across the ingested pandas releases, as the live graph reports it
 const TIMELINE = [
-  ["1.3", "ok"], ["1.4", "warn"], ["1.5", "warn"], ["2.0", "bad"], ["2.1", "bad"], ["2.2", "bad"],
+  ["1.3.5", "ok"], ["1.4.0", "warn"], ["1.5.3", "warn"], ["2.0", "bad"], ["2.0.3", "bad"], ["2.1.4", "bad"],
 ] as const;
 
 export function Bento() {
@@ -71,9 +72,9 @@ export function Bento() {
         <Tile title="Check code before it runs" className="min-h-[300px]">
           <div className="flex w-full flex-col gap-2">
             {[
-              ["np.float", "bad", "Removed in 1.24"],
-              ["np.asarray", "ok", "Valid"],
-              ["np.round_", "warn", "Deprecated"],
+              ["df.iteritems", "bad", "Renamed → items"],
+              ["pd.concat", "ok", "Valid"],
+              ["df.applymap", "warn", "Deprecated → map"],
             ].map(([c, t, l], n) => (
               <motion.div
                 key={c}

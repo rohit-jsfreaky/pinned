@@ -33,7 +33,9 @@ random-valid-API control matches it, so what helps today is the graph's version-
 ranking. We stopped here for the deadline. Next: repeated samples per task, a check-then-fix loop (the agent runs
 `check_code` and fixes flagged calls before running), and learned cues scoped per library/version.
 
-## HydraDB findings (v0.4.0, `ghcr.io/hydra-db/hydradb:0.4.0`) — exact queries in the git history of `docs/`
+## HydraDB findings
+HydraDB v0.4.0 (`ghcr.io/hydra-db/hydradb:0.4.0`); exact queries and errors are in this repo's git history (`docs/`).
+
 1. **The guide says batched `UNWIND … MATCH … SET` is rejected; it works for relationship properties** and is the only
    fast path: 2,466 edges/s vs 44.8/s for one `MERGE` per edge.
 2. **Batch-CREATE idempotency keys clash after a node restarts from a saved store:** the key is built from a

@@ -1,0 +1,31 @@
+[project]
+name = "pinned"
+version = "0.1.0"
+description = "Version-aware API facts for coding agents, on a self-improving HydraDB graph"
+readme = "README.md"
+authors = [
+    { name = "rohit-jsfreaky", email = "rohitkashyapmrt@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.163.1",
+    "griffe>=2.4.1",
+    "httpx>=0.28.1",
+    "huggingface-hub>=2.4.0",
+    "matplotlib>=3.11.2",
+    "mcp>=2.3.0",
+    "packaging>=26.3",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[project.scripts]
+pinned = "pinned.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.13.8,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]

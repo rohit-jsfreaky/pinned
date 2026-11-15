@@ -1,0 +1,52 @@
+{
+ "report": {
+  "library": "nltk",
+  "version": "3.4.5",
+  "apis": 23133,
+  "added": 23133,
+  "removed": 0,
+  "changed": 27,
+  "replaced": 4,
+  "seconds": 52.379
+ },
+ "kind": "version",
+ "pypi": "3.4.5",
+ "needed": false,
+ "source_file": "nltk-3.4.5.zip",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 1,
+ "dynamic_errors": [
+  "nltk: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.ccg.chart: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.ccg.logic: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.api: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.bracket_parse: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.categorized_sents: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.chasen: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.chunked: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.cmudict: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.comparative_sents: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.conll: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.dependency: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.ieer: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.indian: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.nombank: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.nps_chat: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.opinion_lexicon: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.panlex_swadesh: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.pl196x: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)",
+  "nltk.corpus.reader.plaintext: ImportError: cannot import name 'Sequence' from 'collections' (/root/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/collections/__init__.py)"
+ ],
+ "edges_written": {
+  "ADDED_IN": 23133,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 27,
+  "REPLACED_BY": 4,
+  "ALIAS_OF": 18027,
+  "MEMBER_OF": 23132,
+  "CUES": 54173
+ },
+ "nodes_written": 28511,
+ "load_seconds": 0.172,
+ "write_seconds": 52.206
+}

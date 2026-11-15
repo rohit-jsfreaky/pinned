@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "numpy",
+  "version": "1.24.4",
+  "apis": 30413,
+  "added": 332,
+  "removed": 1475,
+  "changed": 108,
+  "replaced": 2,
+  "seconds": 1.709
+ },
+ "kind": "version",
+ "pypi": "1.24.4",
+ "needed": false,
+ "source_file": "numpy-1.24.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 65,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 332,
+  "REMOVED_IN": 1475,
+  "CHANGED_IN": 108,
+  "REPLACED_BY": 2,
+  "ALIAS_OF": 309,
+  "MEMBER_OF": 332,
+  "CUES": 211
+ },
+ "nodes_written": 2323,
+ "load_seconds": 0.318,
+ "write_seconds": 1.391
+}

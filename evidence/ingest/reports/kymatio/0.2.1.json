@@ -1,0 +1,33 @@
+{
+ "report": {
+  "library": "kymatio",
+  "version": "0.2.1",
+  "apis": 771,
+  "added": 771,
+  "removed": 0,
+  "changed": 9,
+  "replaced": 0,
+  "seconds": 0.822
+ },
+ "kind": "version",
+ "pypi": "0.2.1",
+ "needed": false,
+ "source_file": "kymatio-0.2.1-py3-none-any.whl",
+ "dynamic_python": "",
+ "dynamic_modules": 0,
+ "dynamic_errors": [
+  "kymatio 0.2.1: dynamic inspection failed: py3.7 --index https://download.pytorch.org/whl/cpu kymatio==0.2.1 griffe: every module failed to import, e.g. ModuleNotFoundError: No module named 'tensorflow' | py3.7 --index https://download.pytorch.org/whl/cpu kymatio==0.2.1 griffe: every module failed to import, e.g. ModuleNotFoundError: No module named 'tensorflow'"
+ ],
+ "edges_written": {
+  "ADDED_IN": 771,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 9,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 422,
+  "MEMBER_OF": 770,
+  "CUES": 2867
+ },
+ "nodes_written": 1131,
+ "load_seconds": 0.005,
+ "write_seconds": 0.817
+}

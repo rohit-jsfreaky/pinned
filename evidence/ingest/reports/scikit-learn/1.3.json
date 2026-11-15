@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "scikit-learn",
+  "version": "1.3",
+  "apis": 5149,
+  "added": 394,
+  "removed": 42,
+  "changed": 78,
+  "replaced": 2,
+  "seconds": 1.503
+ },
+ "kind": "version",
+ "pypi": "1.3.0",
+ "needed": true,
+ "source_file": "scikit_learn-1.3.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 16,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 394,
+  "REMOVED_IN": 42,
+  "CHANGED_IN": 78,
+  "REPLACED_BY": 2,
+  "ALIAS_OF": 237,
+  "MEMBER_OF": 394,
+  "CUES": 1490
+ },
+ "nodes_written": 1015,
+ "load_seconds": 0.04,
+ "write_seconds": 1.463
+}

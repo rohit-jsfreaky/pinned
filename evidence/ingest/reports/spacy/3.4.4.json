@@ -1,0 +1,34 @@
+{
+ "report": {
+  "library": "spacy",
+  "version": "3.4.4",
+  "apis": 22849,
+  "added": 22849,
+  "removed": 0,
+  "changed": 148,
+  "replaced": 0,
+  "seconds": 32.229
+ },
+ "kind": "version",
+ "pypi": "3.4.4",
+ "needed": false,
+ "source_file": "spacy-3.4.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 201,
+ "dynamic_errors": [
+  "spacy.attrs: note: griffe inspection failed, runtime walk used: ValueError: Empty strings are not supported",
+  "spacy.symbols: note: griffe inspection failed, runtime walk used: ValueError: Empty strings are not supported"
+ ],
+ "edges_written": {
+  "ADDED_IN": 22849,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 148,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 18186,
+  "MEMBER_OF": 22723,
+  "CUES": 33458
+ },
+ "nodes_written": 26229,
+ "load_seconds": 0.184,
+ "write_seconds": 32.045
+}

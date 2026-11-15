@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "jinja2",
+  "version": "2.11",
+  "apis": 2524,
+  "added": 77,
+  "removed": 85,
+  "changed": 38,
+  "replaced": 7,
+  "seconds": 0.446
+ },
+ "kind": "version",
+ "pypi": "2.11.0",
+ "needed": true,
+ "source_file": "Jinja2-2.11.0-py2.py3-none-any.whl",
+ "dynamic_python": "",
+ "dynamic_modules": 0,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 77,
+  "REMOVED_IN": 85,
+  "CHANGED_IN": 38,
+  "REPLACED_BY": 7,
+  "ALIAS_OF": 29,
+  "MEMBER_OF": 77,
+  "CUES": 296
+ },
+ "nodes_written": 394,
+ "load_seconds": 0.044,
+ "write_seconds": 0.402
+}

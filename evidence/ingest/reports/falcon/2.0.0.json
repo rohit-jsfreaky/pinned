@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "falcon",
+  "version": "2.0.0",
+  "apis": 2178,
+  "added": 156,
+  "removed": 68,
+  "changed": 138,
+  "replaced": 1,
+  "seconds": 0.538
+ },
+ "kind": "version",
+ "pypi": "2.0.0",
+ "needed": true,
+ "source_file": "falcon-2.0.0-py2.py3-none-any.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 4,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 156,
+  "REMOVED_IN": 68,
+  "CHANGED_IN": 138,
+  "REPLACED_BY": 1,
+  "ALIAS_OF": 95,
+  "MEMBER_OF": 156,
+  "CUES": 556
+ },
+ "nodes_written": 568,
+ "load_seconds": 0.019,
+ "write_seconds": 0.52
+}

@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "scipy",
+  "version": "1.6.3",
+  "apis": 8991,
+  "added": 8991,
+  "removed": 0,
+  "changed": 56,
+  "replaced": 7,
+  "seconds": 30.361
+ },
+ "kind": "version",
+ "pypi": "1.6.3",
+ "needed": false,
+ "source_file": "scipy-1.6.3-cp39-cp39-manylinux1_x86_64.whl",
+ "dynamic_python": "3.9.25",
+ "dynamic_modules": 94,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 8991,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 56,
+  "REPLACED_BY": 7,
+  "ALIAS_OF": 5638,
+  "MEMBER_OF": 8942,
+  "CUES": 31446
+ },
+ "nodes_written": 13062,
+ "load_seconds": 0.08,
+ "write_seconds": 30.281
+}

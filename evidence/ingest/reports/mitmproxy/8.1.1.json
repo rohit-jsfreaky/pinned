@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "mitmproxy",
+  "version": "8.1.1",
+  "apis": 6354,
+  "added": 413,
+  "removed": 55,
+  "changed": 15,
+  "replaced": 27,
+  "seconds": 1.693
+ },
+ "kind": "version",
+ "pypi": "8.1.1",
+ "needed": false,
+ "source_file": "mitmproxy-8.1.1-py3-none-any.whl",
+ "dynamic_python": "",
+ "dynamic_modules": 0,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 413,
+  "REMOVED_IN": 55,
+  "CHANGED_IN": 15,
+  "REPLACED_BY": 27,
+  "ALIAS_OF": 104,
+  "MEMBER_OF": 413,
+  "CUES": 2220
+ },
+ "nodes_written": 1139,
+ "load_seconds": 0.08,
+ "write_seconds": 1.613
+}

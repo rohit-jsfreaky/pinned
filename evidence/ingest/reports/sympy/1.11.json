@@ -1,0 +1,33 @@
+{
+ "report": {
+  "library": "sympy",
+  "version": "1.11",
+  "apis": 300187,
+  "added": 6254,
+  "removed": 4484,
+  "changed": 1759,
+  "replaced": 105,
+  "seconds": 19.366
+ },
+ "kind": "version",
+ "pypi": "1.11",
+ "needed": true,
+ "source_file": "sympy-1.11-py3-none-any.whl",
+ "dynamic_python": "3.9.25",
+ "dynamic_modules": 8,
+ "dynamic_errors": [
+  "sympy.utilities.benchmarking: ModuleNotFoundError: No module named 'py'"
+ ],
+ "edges_written": {
+  "ADDED_IN": 6254,
+  "REMOVED_IN": 4484,
+  "CHANGED_IN": 1759,
+  "REPLACED_BY": 105,
+  "ALIAS_OF": 7743,
+  "MEMBER_OF": 6254,
+  "CUES": 1461
+ },
+ "nodes_written": 16460,
+ "load_seconds": 4.152,
+ "write_seconds": 15.214
+}

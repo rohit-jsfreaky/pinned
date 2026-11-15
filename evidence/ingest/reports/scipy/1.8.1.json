@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "scipy",
+  "version": "1.8.1",
+  "apis": 11649,
+  "added": 2799,
+  "removed": 388,
+  "changed": 271,
+  "replaced": 58,
+  "seconds": 9.778
+ },
+ "kind": "version",
+ "pypi": "1.8.1",
+ "needed": true,
+ "source_file": "scipy-1.8.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 140,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 2799,
+  "REMOVED_IN": 388,
+  "CHANGED_IN": 271,
+  "REPLACED_BY": 58,
+  "ALIAS_OF": 2630,
+  "MEMBER_OF": 2799,
+  "CUES": 6648
+ },
+ "nodes_written": 5747,
+ "load_seconds": 0.124,
+ "write_seconds": 9.653
+}

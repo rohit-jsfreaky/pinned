@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "sympy",
+  "version": "1.12",
+  "apis": 291792,
+  "added": 5885,
+  "removed": 14280,
+  "changed": 1352,
+  "replaced": 18,
+  "seconds": 25.519
+ },
+ "kind": "version",
+ "pypi": "1.12",
+ "needed": true,
+ "source_file": "sympy-1.12-py3-none-any.whl",
+ "dynamic_python": "3.9.25",
+ "dynamic_modules": 8,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 5885,
+  "REMOVED_IN": 14280,
+  "CHANGED_IN": 1352,
+  "REPLACED_BY": 16,
+  "ALIAS_OF": 5965,
+  "MEMBER_OF": 5885,
+  "CUES": 3562
+ },
+ "nodes_written": 24949,
+ "load_seconds": 4.186,
+ "write_seconds": 21.332
+}

@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "pytest",
+  "version": "7.0.0",
+  "apis": 920,
+  "added": 226,
+  "removed": 87,
+  "changed": 20,
+  "replaced": 0,
+  "seconds": 1.254
+ },
+ "kind": "version",
+ "pypi": "7.0.0",
+ "needed": true,
+ "source_file": "pytest-7.0.0-py3-none-any.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 1,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 226,
+  "REMOVED_IN": 87,
+  "CHANGED_IN": 20,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 34,
+  "MEMBER_OF": 226,
+  "CUES": 1080
+ },
+ "nodes_written": 717,
+ "load_seconds": 0.009,
+ "write_seconds": 1.245
+}

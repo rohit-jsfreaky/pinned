@@ -1,0 +1,35 @@
+{
+ "report": {
+  "library": "nltk",
+  "version": "3.7",
+  "apis": 25056,
+  "added": 0,
+  "removed": 0,
+  "changed": 0,
+  "replaced": 0,
+  "seconds": 0.248
+ },
+ "kind": "version",
+ "pypi": "3.7",
+ "needed": true,
+ "source_file": "nltk-3.7-py3-none-any.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 37,
+ "dynamic_errors": [
+  "nltk.corpus.reader.plaintext: note: griffe inspection failed, runtime walk used: LookupError: \n**********************************************************************\n  Resource \u001b[93mpunkt\u001b[0m not found.\n  Please use the NLTK Downloader to obtain the resource:\n\n  \u001b[31m>>> import nltk\n  >>> nltk.download('punkt')\n  \u001b[0m\n  For more infor",
+  "nltk.corpus.reader.plaintext.EuroparlCorpusReader: note: skipped: LookupError: \n**********************************************************************\n  Resource \u001b[93mpunkt\u001b[0m not found.\n  Please use the NLTK Downloader to obtain the resource:\n\n  \u001b[31m>>> ",
+  "nltk.corpus.reader.plaintext.PlaintextCorpusReader: note: skipped: LookupError: \n**********************************************************************\n  Resource \u001b[93mpunkt\u001b[0m not found.\n  Please use the NLTK Downloader to obtain the resource:\n\n  \u001b[31m>>> "
+ ],
+ "edges_written": {
+  "ADDED_IN": 0,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 0,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 0,
+  "MEMBER_OF": 0,
+  "CUES": 0
+ },
+ "nodes_written": 1,
+ "load_seconds": 0.229,
+ "write_seconds": 0.02
+}

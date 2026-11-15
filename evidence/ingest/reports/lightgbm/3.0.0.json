@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "lightgbm",
+  "version": "3.0.0",
+  "apis": 540,
+  "added": 42,
+  "removed": 6,
+  "changed": 32,
+  "replaced": 0,
+  "seconds": 0.287
+ },
+ "kind": "version",
+ "pypi": "3.0.0",
+ "needed": true,
+ "source_file": "lightgbm-3.0.0-py2.py3-none-manylinux1_x86_64.whl",
+ "dynamic_python": "",
+ "dynamic_modules": 0,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 42,
+  "REMOVED_IN": 6,
+  "CHANGED_IN": 32,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 24,
+  "MEMBER_OF": 42,
+  "CUES": 196
+ },
+ "nodes_written": 166,
+ "load_seconds": 0.004,
+ "write_seconds": 0.283
+}

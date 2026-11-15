@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "tornado",
+  "version": "6.2",
+  "apis": 1678,
+  "added": 12,
+  "removed": 2,
+  "changed": 31,
+  "replaced": 1,
+  "seconds": 0.22
+ },
+ "kind": "version",
+ "pypi": "6.2",
+ "needed": false,
+ "source_file": "tornado-6.2-cp37-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 2,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 12,
+  "REMOVED_IN": 2,
+  "CHANGED_IN": 31,
+  "REPLACED_BY": 1,
+  "ALIAS_OF": 6,
+  "MEMBER_OF": 12,
+  "CUES": 45
+ },
+ "nodes_written": 84,
+ "load_seconds": 0.013,
+ "write_seconds": 0.207
+}

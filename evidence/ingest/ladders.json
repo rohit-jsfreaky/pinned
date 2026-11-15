@@ -1,0 +1,3137 @@
+{
+ "rule": "every dataset version + latest patch of each minor from one minor below the oldest needed to one minor above the newest needed; final releases only",
+ "libraries": 26,
+ "versions": 282,
+ "ladders": [
+  {
+   "library": "django",
+   "rungs": [
+    {
+     "version": "3.2.25",
+     "pypi": "3.2.25",
+     "ord": 3002025999,
+     "released": "2024-03-04",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.0.0",
+     "pypi": "4.0",
+     "ord": 4000000999,
+     "released": "2021-12-07",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "4.0.10",
+     "pypi": "4.0.10",
+     "ord": 4000010999,
+     "released": "2023-02-14",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.1.13",
+     "pypi": "4.1.13",
+     "ord": 4001013999,
+     "released": "2023-11-01",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.2.30",
+     "pypi": "4.2.30",
+     "ord": 4002030999,
+     "released": "2026-04-07",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.0.0",
+     "pypi": "5.0",
+     "ord": 5000000999,
+     "released": "2023-12-04",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "5.0.14",
+     "pypi": "5.0.14",
+     "ord": 5000014999,
+     "released": "2025-04-02",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.1.15",
+     "pypi": "5.1.15",
+     "ord": 5001015999,
+     "released": "2025-12-02",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "falcon",
+   "rungs": [
+    {
+     "version": "1.4.1",
+     "pypi": "1.4.1",
+     "ord": 1004001999,
+     "released": "2018-01-16",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.0.0",
+     "pypi": "2.0.0",
+     "ord": 2000000999,
+     "released": "2019-04-26",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.0.0",
+     "pypi": "3.0.0",
+     "ord": 3000000999,
+     "released": "2021-04-05",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.0.1",
+     "pypi": "3.0.1",
+     "ord": 3000001999,
+     "released": "2021-05-10",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.1.3",
+     "pypi": "3.1.3",
+     "ord": 3001003999,
+     "released": "2023-12-05",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "flask",
+   "rungs": [
+    {
+     "version": "1.1.4",
+     "pypi": "1.1.4",
+     "ord": 1001004999,
+     "released": "2021-05-14",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.0.0",
+     "pypi": "2.0.0",
+     "ord": 2000000999,
+     "released": "2021-05-11",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "numpy==1.21.6 werkzeug==2.0.0",
+      "scipy==1.8.1 Werkzeug==2.0.0",
+      "werkzeug==2.0.0"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "2.0.1",
+     "pypi": "2.0.1",
+     "ord": 2000001999,
+     "released": "2021-05-21",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "werkzeug==2.0.0"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "2.0.3",
+     "pypi": "2.0.3",
+     "ord": 2000003999,
+     "released": "2022-02-14",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.1.3",
+     "pypi": "2.1.3",
+     "ord": 2001003999,
+     "released": "2022-07-13",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.2.5",
+     "pypi": "2.2.5",
+     "ord": 2002005999,
+     "released": "2023-05-02",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.3.3",
+     "pypi": "2.3.3",
+     "ord": 2003003999,
+     "released": "2023-08-21",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.0.0",
+     "pypi": "3.0.0",
+     "ord": 3000000999,
+     "released": "2023-09-30",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "",
+      "numpy==1.25.1",
+      "scipy==1.11.1"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.0.3",
+     "pypi": "3.0.3",
+     "ord": 3000003999,
+     "released": "2024-04-07",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.1.3",
+     "pypi": "3.1.3",
+     "ord": 3001003999,
+     "released": "2026-02-19",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "geopandas",
+   "rungs": [
+    {
+     "version": "0.8.2",
+     "pypi": "0.8.2",
+     "ord": 8002999,
+     "released": "2021-01-25",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "0.9.0",
+     "pypi": "0.9.0",
+     "ord": 9000999,
+     "released": "2021-02-28",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "rtree==0.9.3 shapely==1.8.5",
+      "shapely==1.8.5"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "0.10.0",
+     "pypi": "0.10.0",
+     "ord": 10000999,
+     "released": "2021-10-03",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "",
+      "rtree==0.9.3"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "0.10.2",
+     "pypi": "0.10.2",
+     "ord": 10002999,
+     "released": "2021-10-16",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "0.11.1",
+     "pypi": "0.11.1",
+     "ord": 11001999,
+     "released": "2022-07-24",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "0.12.2",
+     "pypi": "0.12.2",
+     "ord": 12002999,
+     "released": "2022-12-10",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "0.13.0",
+     "pypi": "0.13.0",
+     "ord": 13000999,
+     "released": "2023-05-06",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "rtree==1.0.1"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "0.13.2",
+     "pypi": "0.13.2",
+     "ord": 13002999,
+     "released": "2023-06-06",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "0.14.4",
+     "pypi": "0.14.4",
+     "ord": 14004999,
+     "released": "2024-04-28",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "gradio",
+   "rungs": [
+    {
+     "version": "2.8.14",
+     "pypi": "2.8.14",
+     "ord": 2008014999,
+     "released": "2022-03-25",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.9.2",
+     "pypi": "2.9.2",
+     "ord": 2009002999,
+     "released": "2022-04-14",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "black==22.1.0"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "2.9.4",
+     "pypi": "2.9.4",
+     "ord": 2009004999,
+     "released": "2022-04-15",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.0.0",
+     "pypi": "3.0",
+     "ord": 3000000999,
+     "released": "2022-05-16",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.0.26",
+     "pypi": "3.0.26",
+     "ord": 3000026999,
+     "released": "2022-07-16",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.1.7",
+     "pypi": "3.1.7",
+     "ord": 3001007999,
+     "released": "2022-08-22",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.2",
+     "pypi": "3.2",
+     "ord": 3002000999,
+     "released": "2022-08-31",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.3.1",
+     "pypi": "3.3.1",
+     "ord": 3003001999,
+     "released": "2022-09-15",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.4.1",
+     "pypi": "3.4.1",
+     "ord": 3004001999,
+     "released": "2022-10-06",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.5",
+     "pypi": "3.5",
+     "ord": 3005000999,
+     "released": "2022-10-14",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.6",
+     "pypi": "3.6",
+     "ord": 3006000999,
+     "released": "2022-10-18",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.7",
+     "pypi": "3.7",
+     "ord": 3007000999,
+     "released": "2022-10-27",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.8.2",
+     "pypi": "3.8.2",
+     "ord": 3008002999,
+     "released": "2022-10-31",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.9.1",
+     "pypi": "3.9.1",
+     "ord": 3009001999,
+     "released": "2022-11-10",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.10.1",
+     "pypi": "3.10.1",
+     "ord": 3010001999,
+     "released": "2022-11-18",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.11.0",
+     "pypi": "3.11.0",
+     "ord": 3011000999,
+     "released": "2022-11-23",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.12.0",
+     "pypi": "3.12.0",
+     "ord": 3012000999,
+     "released": "2022-11-29",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.13.2",
+     "pypi": "3.13.2",
+     "ord": 3013002999,
+     "released": "2022-12-15",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.14.0",
+     "pypi": "3.14.0",
+     "ord": 3014000999,
+     "released": "2022-12-15",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.15.0",
+     "pypi": "3.15.0",
+     "ord": 3015000999,
+     "released": "2022-12-21",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.16.2",
+     "pypi": "3.16.2",
+     "ord": 3016002999,
+     "released": "2023-01-16",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.17.0",
+     "pypi": "3.17.0",
+     "ord": 3017000999,
+     "released": "2023-01-30",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.17.1",
+     "pypi": "3.17.1",
+     "ord": 3017001999,
+     "released": "2023-02-02",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.18.0",
+     "pypi": "3.18.0",
+     "ord": 3018000999,
+     "released": "2023-02-07",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.19.1",
+     "pypi": "3.19.1",
+     "ord": 3019001999,
+     "released": "2023-02-20",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.20.1",
+     "pypi": "3.20.1",
+     "ord": 3020001999,
+     "released": "2023-03-06",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.21.0",
+     "pypi": "3.21.0",
+     "ord": 3021000999,
+     "released": "2023-03-14",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.22.1",
+     "pypi": "3.22.1",
+     "ord": 3022001999,
+     "released": "2023-03-19",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.23.0",
+     "pypi": "3.23.0",
+     "ord": 3023000999,
+     "released": "2023-03-21",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.24.0",
+     "pypi": "3.24.0",
+     "ord": 3024000999,
+     "released": "2023-03-30",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.24.1",
+     "pypi": "3.24.1",
+     "ord": 3024001999,
+     "released": "2023-03-31",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.25.0",
+     "pypi": "3.25.0",
+     "ord": 3025000999,
+     "released": "2023-04-10",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.26.0",
+     "pypi": "3.26.0",
+     "ord": 3026000999,
+     "released": "2023-04-13",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.27.0",
+     "pypi": "3.27.0",
+     "ord": 3027000999,
+     "released": "2023-04-15",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.28.3",
+     "pypi": "3.28.3",
+     "ord": 3028003999,
+     "released": "2023-05-04",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.29.0",
+     "pypi": "3.29.0",
+     "ord": 3029000999,
+     "released": "2023-05-09",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.30.0",
+     "pypi": "3.30.0",
+     "ord": 3030000999,
+     "released": "2023-05-11",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.31.0",
+     "pypi": "3.31.0",
+     "ord": 3031000999,
+     "released": "2023-05-16",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.32.0",
+     "pypi": "3.32.0",
+     "ord": 3032000999,
+     "released": "2023-05-21",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.33.1",
+     "pypi": "3.33.1",
+     "ord": 3033001999,
+     "released": "2023-06-02",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.34.0",
+     "pypi": "3.34.0",
+     "ord": 3034000999,
+     "released": "2023-06-07",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.35.2",
+     "pypi": "3.35.2",
+     "ord": 3035002999,
+     "released": "2023-06-15",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.36.0",
+     "pypi": "3.36.0",
+     "ord": 3036000999,
+     "released": "2023-07-07",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.36.1",
+     "pypi": "3.36.1",
+     "ord": 3036001999,
+     "released": "2023-07-07",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.37.0",
+     "pypi": "3.37.0",
+     "ord": 3037000999,
+     "released": "2023-07-17",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "jinja2",
+   "rungs": [
+    {
+     "version": "2.10.3",
+     "pypi": "2.10.3",
+     "ord": 2010003999,
+     "released": "2019-10-04",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.11",
+     "pypi": "2.11.0",
+     "ord": 2011000999,
+     "released": "2020-01-27",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "markupsafe==2.0.1"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "2.11.3",
+     "pypi": "2.11.3",
+     "ord": 2011003999,
+     "released": "2021-01-31",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.0.3",
+     "pypi": "3.0.3",
+     "ord": 3000003999,
+     "released": "2021-11-09",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.1",
+     "pypi": "3.1.0",
+     "ord": 3001000999,
+     "released": "2022-03-24",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.1.6",
+     "pypi": "3.1.6",
+     "ord": 3001006999,
+     "released": "2025-03-05",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "kymatio",
+   "rungs": [
+    {
+     "version": "0.2.1",
+     "pypi": "0.2.1",
+     "ord": 2001999,
+     "released": "2021-06-08",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "0.3.0",
+     "pypi": "0.3.0",
+     "ord": 3000999,
+     "released": "2022-09-05",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      "torch==1.4.0"
+     ],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "librosa",
+   "rungs": [
+    {
+     "version": "0.5.1",
+     "pypi": "0.5.1",
+     "ord": 5001999,
+     "released": "2017-05-08",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "0.6.0",
+     "pypi": "0.6.0",
+     "ord": 6000999,
+     "released": "2018-02-17",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      "numpy==1.16.0 scipy==1.1.0",
+      "numpy==1.16.0 scipy==1.1.0 soundfile==0.10.2",
+      "scikit-learn==0.21.0 numpy==1.16.0 scipy==1.1.0 soundfile==0.10.2"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "0.6.3",
+     "pypi": "0.6.3",
+     "ord": 6003999,
+     "released": "2019-02-13",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "0.7.0",
+     "pypi": "0.7.0",
+     "ord": 7000999,
+     "released": "2019-07-08",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      "numpy==1.16.0 scipy==1.1.0",
+      "numpy==1.16.0 scipy==1.1.0 soundfile==0.10.2",
+      "scikit-learn==0.21.0 numpy==1.16.0 scipy==1.1.0"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "0.7.1",
+     "pypi": "0.7.1",
+     "ord": 7001999,
+     "released": "2019-10-09",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      "numpy==1.16.0 scipy==1.1.0 soundfile==0.10.2"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "0.7.2",
+     "pypi": "0.7.2",
+     "ord": 7002999,
+     "released": "2020-01-13",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "0.8.0",
+     "pypi": "0.8.0",
+     "ord": 8000999,
+     "released": "2020-07-22",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      "numpy==1.16.0 scipy==1.1.0 soundfile==0.10.2"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "0.8.1",
+     "pypi": "0.8.1",
+     "ord": 8001999,
+     "released": "2021-05-26",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "0.9.2",
+     "pypi": "0.9.2",
+     "ord": 9002999,
+     "released": "2022-06-27",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "lightgbm",
+   "rungs": [
+    {
+     "version": "2.3.1",
+     "pypi": "2.3.1",
+     "ord": 2003001999,
+     "released": "2019-11-29",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.0.0",
+     "pypi": "3.0.0",
+     "ord": 3000000999,
+     "released": "2020-09-01",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "",
+      "numpy==1.26.4",
+      "numpy==1.26.4 scikit-learn==1.3.2"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.1.1",
+     "pypi": "3.1.1",
+     "ord": 3001001999,
+     "released": "2020-12-08",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.2.1",
+     "pypi": "3.2.1",
+     "ord": 3002001999,
+     "released": "2021-04-13",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.3.5",
+     "pypi": "3.3.5",
+     "ord": 3003005999,
+     "released": "2023-01-24",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.0.0",
+     "pypi": "4.0.0",
+     "ord": 4000000999,
+     "released": "2023-07-13",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.1.0",
+     "pypi": "4.1.0",
+     "ord": 4001000999,
+     "released": "2023-09-12",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.2.0",
+     "pypi": "4.2.0",
+     "ord": 4002000999,
+     "released": "2023-12-22",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.3.0",
+     "pypi": "4.3.0",
+     "ord": 4003000999,
+     "released": "2024-01-26",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "",
+      "numpy==1.26.4"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "4.4.0",
+     "pypi": "4.4.0",
+     "ord": 4004000999,
+     "released": "2024-06-15",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "matplotlib",
+   "rungs": [
+    {
+     "version": "3.1.3",
+     "pypi": "3.1.3",
+     "ord": 3001003999,
+     "released": "2020-02-03",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.2.0",
+     "pypi": "3.2.0",
+     "ord": 3002000999,
+     "released": "2020-03-04",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      "numpy==1.18.1 pyparsing==2.3.1 packaging==19.0"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.2.2",
+     "pypi": "3.2.2",
+     "ord": 3002002999,
+     "released": "2020-06-17",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.3.4",
+     "pypi": "3.3.4",
+     "ord": 3003004999,
+     "released": "2021-01-28",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.4.0",
+     "pypi": "3.4.0",
+     "ord": 3004000999,
+     "released": "2021-03-26",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "",
+      "numpy==1.18.1 pyparsing==2.3.1 packaging==19.0"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.4.3",
+     "pypi": "3.4.3",
+     "ord": 3004003999,
+     "released": "2021-08-13",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.5.0",
+     "pypi": "3.5.0",
+     "ord": 3005000999,
+     "released": "2021-11-16",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      "numpy==1.18.1 pyparsing==2.3.1"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.5.3",
+     "pypi": "3.5.3",
+     "ord": 3005003999,
+     "released": "2022-08-11",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.6.3",
+     "pypi": "3.6.3",
+     "ord": 3006003999,
+     "released": "2023-01-12",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.7.5",
+     "pypi": "3.7.5",
+     "ord": 3007005999,
+     "released": "2024-02-16",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.8.0",
+     "pypi": "3.8.0",
+     "ord": 3008000999,
+     "released": "2023-09-15",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "pyparsing==2.3.1"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.8.4",
+     "pypi": "3.8.4",
+     "ord": 3008004999,
+     "released": "2024-04-04",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.9.4",
+     "pypi": "3.9.4",
+     "ord": 3009004999,
+     "released": "2024-12-13",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "mitmproxy",
+   "rungs": [
+    {
+     "version": "6.0.2",
+     "pypi": "6.0.2",
+     "ord": 6000002999,
+     "released": "2020-12-15",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "7.0.0",
+     "pypi": "7.0.0",
+     "ord": 7000000999,
+     "released": "2021-07-16",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "7.0.4",
+     "pypi": "7.0.4",
+     "ord": 7000004999,
+     "released": "2021-09-28",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "8.0.0",
+     "pypi": "8.0.0",
+     "ord": 8000000999,
+     "released": "2022-03-19",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "8.1.1",
+     "pypi": "8.1.1",
+     "ord": 8001001999,
+     "released": "2022-06-28",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "9.0.1",
+     "pypi": "9.0.1",
+     "ord": 9000001999,
+     "released": "2022-11-02",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "10.0.0",
+     "pypi": "10.0.0",
+     "ord": 10000000999,
+     "released": "2023-08-04",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "networkx",
+   "rungs": [
+    {
+     "version": "2.3",
+     "pypi": "2.3",
+     "ord": 2003000999,
+     "released": "2019-04-11",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.4",
+     "pypi": "2.4",
+     "ord": 2004000999,
+     "released": "2019-10-17",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "2.5",
+     "pypi": "2.5",
+     "ord": 2005000999,
+     "released": "2020-08-22",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "2.5.1",
+     "pypi": "2.5.1",
+     "ord": 2005001999,
+     "released": "2021-04-03",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.6",
+     "pypi": "2.6",
+     "ord": 2006000999,
+     "released": "2021-07-08",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": true
+    },
+    {
+     "version": "2.6.3",
+     "pypi": "2.6.3",
+     "ord": 2006003999,
+     "released": "2021-09-09",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.7",
+     "pypi": "2.7",
+     "ord": 2007000999,
+     "released": "2022-02-28",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "numpy==1.21.2"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "2.7.1",
+     "pypi": "2.7.1",
+     "ord": 2007001999,
+     "released": "2022-03-05",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.8",
+     "pypi": "2.8",
+     "ord": 2008000999,
+     "released": "2022-04-09",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "2.8.8",
+     "pypi": "2.8.8",
+     "ord": 2008008999,
+     "released": "2022-11-01",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.0",
+     "pypi": "3.0",
+     "ord": 3000000999,
+     "released": "2023-01-08",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "nltk",
+   "rungs": [
+    {
+     "version": "3.4.5",
+     "pypi": "3.4.5",
+     "ord": 3004005999,
+     "released": "2019-08-20",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.5",
+     "pypi": "3.5",
+     "ord": 3005000999,
+     "released": "2020-04-12",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.6.3",
+     "pypi": "3.6.3",
+     "ord": 3006003999,
+     "released": "2021-09-20",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.6.7",
+     "pypi": "3.6.7",
+     "ord": 3006007999,
+     "released": "2021-12-28",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.7",
+     "pypi": "3.7",
+     "ord": 3007000999,
+     "released": "2022-02-09",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.8.1",
+     "pypi": "3.8.1",
+     "ord": 3008001999,
+     "released": "2023-01-02",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "numpy",
+   "rungs": [
+    {
+     "version": "1.20.3",
+     "pypi": "1.20.3",
+     "ord": 1020003999,
+     "released": "2021-05-10",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.21.0",
+     "pypi": "1.21.0",
+     "ord": 1021000999,
+     "released": "2021-06-22",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.21.6",
+     "pypi": "1.21.6",
+     "ord": 1021006999,
+     "released": "2022-04-12",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.22.4",
+     "pypi": "1.22.4",
+     "ord": 1022004999,
+     "released": "2022-05-20",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.23.5",
+     "pypi": "1.23.5",
+     "ord": 1023005999,
+     "released": "2022-11-20",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.24.4",
+     "pypi": "1.24.4",
+     "ord": 1024004999,
+     "released": "2023-06-26",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.25.0",
+     "pypi": "1.25.0",
+     "ord": 1025000999,
+     "released": "2023-06-17",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.25.2",
+     "pypi": "1.25.2",
+     "ord": 1025002999,
+     "released": "2023-07-31",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.26.4",
+     "pypi": "1.26.4",
+     "ord": 1026004999,
+     "released": "2024-02-05",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "pandas",
+   "rungs": [
+    {
+     "version": "1.3.5",
+     "pypi": "1.3.5",
+     "ord": 1003005999,
+     "released": "2021-12-12",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.4.0",
+     "pypi": "1.4.0",
+     "ord": 1004000999,
+     "released": "2022-01-22",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "numpy==1.21.6"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.4.4",
+     "pypi": "1.4.4",
+     "ord": 1004004999,
+     "released": "2022-08-31",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.5.0",
+     "pypi": "1.5.0",
+     "ord": 1005000999,
+     "released": "2022-09-19",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "numpy==1.21.6"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.5.1",
+     "pypi": "1.5.1",
+     "ord": 1005001999,
+     "released": "2022-10-19",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "numpy==1.21.6"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.5.3",
+     "pypi": "1.5.3",
+     "ord": 1005003999,
+     "released": "2023-01-19",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2",
+     "pypi": "2.0.0",
+     "ord": 2000000999,
+     "released": "2023-04-03",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "numpy==1.21.6"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "2.0.3",
+     "pypi": "2.0.3",
+     "ord": 2000003999,
+     "released": "2023-06-28",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.1.4",
+     "pypi": "2.1.4",
+     "ord": 2001004999,
+     "released": "2023-12-08",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "pillow",
+   "rungs": [
+    {
+     "version": "6.2.2",
+     "pypi": "6.2.2",
+     "ord": 6002002999,
+     "released": "2020-01-02",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "7.0.0",
+     "pypi": "7.0.0",
+     "ord": 7000000999,
+     "released": "2020-01-02",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      "numpy==1.16"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "7.1.0",
+     "pypi": "7.1.0",
+     "ord": 7001000999,
+     "released": "2020-04-01",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      "numpy==1.16"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "7.1.2",
+     "pypi": "7.1.2",
+     "ord": 7001002999,
+     "released": "2020-04-25",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "7.2.0",
+     "pypi": "7.2.0",
+     "ord": 7002000999,
+     "released": "2020-06-30",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "plotly",
+   "rungs": [
+    {
+     "version": "2.7.0",
+     "pypi": "2.7.0",
+     "ord": 2007000999,
+     "released": "2018-05-23",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.0.0",
+     "pypi": "3.0.0",
+     "ord": 3000000999,
+     "released": "2018-07-05",
+     "needed": true,
+     "python": "3.9",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.0.2",
+     "pypi": "3.0.2",
+     "ord": 3000002999,
+     "released": "2018-07-17",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.1.1",
+     "pypi": "3.1.1",
+     "ord": 3001001999,
+     "released": "2018-08-10",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.2.1",
+     "pypi": "3.2.1",
+     "ord": 3002001999,
+     "released": "2018-09-14",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.3.0",
+     "pypi": "3.3.0",
+     "ord": 3003000999,
+     "released": "2018-09-28",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.4.2",
+     "pypi": "3.4.2",
+     "ord": 3004002999,
+     "released": "2018-11-23",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.5.0",
+     "pypi": "3.5.0",
+     "ord": 3005000999,
+     "released": "2019-01-04",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.6.1",
+     "pypi": "3.6.1",
+     "ord": 3006001999,
+     "released": "2019-02-08",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.7.1",
+     "pypi": "3.7.1",
+     "ord": 3007001999,
+     "released": "2019-03-19",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.8.1",
+     "pypi": "3.8.1",
+     "ord": 3008001999,
+     "released": "2019-04-19",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.9.0",
+     "pypi": "3.9.0",
+     "ord": 3009000999,
+     "released": "2019-05-06",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.10.0",
+     "pypi": "3.10.0",
+     "ord": 3010000999,
+     "released": "2019-05-31",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.0.0",
+     "pypi": "4.0.0",
+     "ord": 4000000999,
+     "released": "2019-07-16",
+     "needed": true,
+     "python": "3.9",
+     "deps": [
+      "",
+      "chart-studio==1.0.0"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "4.1.1",
+     "pypi": "4.1.1",
+     "ord": 4001001999,
+     "released": "2019-09-03",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.2.1",
+     "pypi": "4.2.1",
+     "ord": 4002001999,
+     "released": "2019-10-18",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.3.0",
+     "pypi": "4.3.0",
+     "ord": 4003000999,
+     "released": "2019-11-12",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.4.1",
+     "pypi": "4.4.1",
+     "ord": 4004001999,
+     "released": "2019-12-10",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.5.4",
+     "pypi": "4.5.4",
+     "ord": 4005004999,
+     "released": "2020-03-11",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.6.0",
+     "pypi": "4.6.0",
+     "ord": 4006000999,
+     "released": "2020-04-01",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.7.1",
+     "pypi": "4.7.1",
+     "ord": 4007001999,
+     "released": "2020-05-08",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.8.0",
+     "pypi": "4.8.0",
+     "ord": 4008000999,
+     "released": "2020-05-26",
+     "needed": true,
+     "python": "3.9",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "4.8.2",
+     "pypi": "4.8.2",
+     "ord": 4008002999,
+     "released": "2020-06-26",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.9.0",
+     "pypi": "4.9.0",
+     "ord": 4009000999,
+     "released": "2020-07-16",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.10.0",
+     "pypi": "4.10.0",
+     "ord": 4010000999,
+     "released": "2020-09-10",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.11.0",
+     "pypi": "4.11.0",
+     "ord": 4011000999,
+     "released": "2020-10-01",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.12.0",
+     "pypi": "4.12.0",
+     "ord": 4012000999,
+     "released": "2020-10-23",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.13.0",
+     "pypi": "4.13.0",
+     "ord": 4013000999,
+     "released": "2020-11-23",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.14.3",
+     "pypi": "4.14.3",
+     "ord": 4014003999,
+     "released": "2021-01-12",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.0.0",
+     "pypi": "5.0.0",
+     "ord": 5000000999,
+     "released": "2021-06-21",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.1.0",
+     "pypi": "5.1.0",
+     "ord": 5001000999,
+     "released": "2021-06-28",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.2.2",
+     "pypi": "5.2.2",
+     "ord": 5002002999,
+     "released": "2021-08-23",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.3.1",
+     "pypi": "5.3.1",
+     "ord": 5003001999,
+     "released": "2021-09-01",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.4.0",
+     "pypi": "5.4.0",
+     "ord": 5004000999,
+     "released": "2021-11-15",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.5.0",
+     "pypi": "5.5.0",
+     "ord": 5005000999,
+     "released": "2021-12-21",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.6.0",
+     "pypi": "5.6.0",
+     "ord": 5006000999,
+     "released": "2022-02-09",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.7.0",
+     "pypi": "5.7.0",
+     "ord": 5007000999,
+     "released": "2022-04-05",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.8.0",
+     "pypi": "5.8.0",
+     "ord": 5008000999,
+     "released": "2022-05-11",
+     "needed": true,
+     "python": "3.9",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "5.8.2",
+     "pypi": "5.8.2",
+     "ord": 5008002999,
+     "released": "2022-06-10",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.9.0",
+     "pypi": "5.9.0",
+     "ord": 5009000999,
+     "released": "2022-06-24",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.10.0",
+     "pypi": "5.10.0",
+     "ord": 5010000999,
+     "released": "2022-08-11",
+     "needed": true,
+     "python": "3.9",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "5.11.0",
+     "pypi": "5.11.0",
+     "ord": 5011000999,
+     "released": "2022-10-27",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "pytest",
+   "rungs": [
+    {
+     "version": "6.2.5",
+     "pypi": "6.2.5",
+     "ord": 6002005999,
+     "released": "2021-08-30",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "7.0.0",
+     "pypi": "7.0.0",
+     "ord": 7000000999,
+     "released": "2022-02-04",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "7.0.1",
+     "pypi": "7.0.1",
+     "ord": 7000001999,
+     "released": "2022-02-11",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "7.1.3",
+     "pypi": "7.1.3",
+     "ord": 7001003999,
+     "released": "2022-09-02",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "7.2.0",
+     "pypi": "7.2.0",
+     "ord": 7002000999,
+     "released": "2022-10-25",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "7.2.2",
+     "pypi": "7.2.2",
+     "ord": 7002002999,
+     "released": "2023-03-03",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "7.3.2",
+     "pypi": "7.3.2",
+     "ord": 7003002999,
+     "released": "2023-06-10",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "scikit-learn",
+   "rungs": [
+    {
+     "version": "1.0.2",
+     "pypi": "1.0.2",
+     "ord": 1000002999,
+     "released": "2021-12-25",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.1",
+     "pypi": "1.1.0",
+     "ord": 1001000999,
+     "released": "2022-05-12",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "numpy==1.23.5"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.1.3",
+     "pypi": "1.1.3",
+     "ord": 1001003999,
+     "released": "2022-10-26",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.2",
+     "pypi": "1.2.0",
+     "ord": 1002000999,
+     "released": "2022-12-08",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "numpy==1.23.5"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.2.2",
+     "pypi": "1.2.2",
+     "ord": 1002002999,
+     "released": "2023-03-09",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.3",
+     "pypi": "1.3.0",
+     "ord": 1003000999,
+     "released": "2023-06-30",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "numpy==1.23.5"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.3.2",
+     "pypi": "1.3.2",
+     "ord": 1003002999,
+     "released": "2023-10-23",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.4.2",
+     "pypi": "1.4.2",
+     "ord": 1004002999,
+     "released": "2024-04-09",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "scipy",
+   "rungs": [
+    {
+     "version": "1.6.3",
+     "pypi": "1.6.3",
+     "ord": 1006003999,
+     "released": "2021-04-26",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.7.3",
+     "pypi": "1.7.3",
+     "ord": 1007003999,
+     "released": "2021-11-24",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.8.1",
+     "pypi": "1.8.1",
+     "ord": 1008001999,
+     "released": "2022-05-18",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "",
+      "numpy==1.21.6"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.9.1",
+     "pypi": "1.9.1",
+     "ord": 1009001999,
+     "released": "2022-08-27",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "numpy==1.21.6"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.9.2",
+     "pypi": "1.9.2",
+     "ord": 1009002999,
+     "released": "2022-10-08",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.9.3",
+     "pypi": "1.9.3",
+     "ord": 1009003999,
+     "released": "2022-10-20",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.10.1",
+     "pypi": "1.10.1",
+     "ord": 1010001999,
+     "released": "2023-02-19",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.11.1",
+     "pypi": "1.11.1",
+     "ord": 1011001999,
+     "released": "2023-06-28",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "numpy==1.25.1"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.11.2",
+     "pypi": "1.11.2",
+     "ord": 1011002999,
+     "released": "2023-08-17",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.11.4",
+     "pypi": "1.11.4",
+     "ord": 1011004999,
+     "released": "2023-11-18",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.12.0",
+     "pypi": "1.12.0",
+     "ord": 1012000999,
+     "released": "2024-01-20",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "seaborn",
+   "rungs": [
+    {
+     "version": "0.11.2",
+     "pypi": "0.11.2",
+     "ord": 11002999,
+     "released": "2021-08-16",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "0.12.0",
+     "pypi": "0.12.0",
+     "ord": 12000999,
+     "released": "2022-09-06",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "pandas==1.4.0 numpy==1.26.4",
+      "scipy==1.8.0"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "0.12.2",
+     "pypi": "0.12.2",
+     "ord": 12002999,
+     "released": "2022-12-30",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "0.13.0",
+     "pypi": "0.13.0",
+     "ord": 13000999,
+     "released": "2023-09-29",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "pandas==2.0.0 numpy==1.26.4"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "0.13.2",
+     "pypi": "0.13.2",
+     "ord": 13002999,
+     "released": "2024-01-25",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "spacy",
+   "rungs": [
+    {
+     "version": "3.4.4",
+     "pypi": "3.4.4",
+     "ord": 3004004999,
+     "released": "2022-12-14",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.5.0",
+     "pypi": "3.5.0",
+     "ord": 3005000999,
+     "released": "2023-01-20",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      "numpy==1.26.4"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "3.5.4",
+     "pypi": "3.5.4",
+     "ord": 3005004999,
+     "released": "2023-06-28",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "3.6.1",
+     "pypi": "3.6.1",
+     "ord": 3006001999,
+     "released": "2023-08-08",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "sympy",
+   "rungs": [
+    {
+     "version": "1.8",
+     "pypi": "1.8",
+     "ord": 1008000999,
+     "released": "2021-04-09",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.9",
+     "pypi": "1.9",
+     "ord": 1009000999,
+     "released": "2021-10-08",
+     "needed": true,
+     "python": "3.9",
+     "deps": [
+      "",
+      "scipy==1.8.0"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.10",
+     "pypi": "1.10",
+     "ord": 1010000999,
+     "released": "2022-03-06",
+     "needed": true,
+     "python": "3.9",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.10.1",
+     "pypi": "1.10.1",
+     "ord": 1010001999,
+     "released": "2022-03-20",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.11",
+     "pypi": "1.11",
+     "ord": 1011000999,
+     "released": "2022-08-23",
+     "needed": true,
+     "python": "3.9",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.11.1",
+     "pypi": "1.11.1",
+     "ord": 1011001999,
+     "released": "2022-08-30",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.12",
+     "pypi": "1.12",
+     "ord": 1012000999,
+     "released": "2023-05-10",
+     "needed": true,
+     "python": "3.9",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.12.1",
+     "pypi": "1.12.1",
+     "ord": 1012001999,
+     "released": "2024-05-29",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.13",
+     "pypi": "1.13.0",
+     "ord": 1013000999,
+     "released": "2024-07-08",
+     "needed": true,
+     "python": "3.9",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.13.3",
+     "pypi": "1.13.3",
+     "ord": 1013003999,
+     "released": "2024-09-18",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.14.0",
+     "pypi": "1.14.0",
+     "ord": 1014000999,
+     "released": "2025-04-27",
+     "needed": false,
+     "python": "3.9",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "torch",
+   "rungs": [
+    {
+     "version": "1.8.1",
+     "pypi": "1.8.1",
+     "ord": 1008001999,
+     "released": "2021-03-25",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.9.0",
+     "pypi": "1.9.0",
+     "ord": 1009000999,
+     "released": "2021-06-15",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      "scipy==1.7.3 numpy==1.21.6"
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.9.1",
+     "pypi": "1.9.1",
+     "ord": 1009001999,
+     "released": "2021-09-20",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.10.0",
+     "pypi": "1.10.0",
+     "ord": 1010000999,
+     "released": "2021-10-21",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.10.2",
+     "pypi": "1.10.2",
+     "ord": 1010002999,
+     "released": "2022-01-27",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.11.0",
+     "pypi": "1.11.0",
+     "ord": 1011000999,
+     "released": "2022-03-10",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.12.0",
+     "pypi": "1.12.0",
+     "ord": 1012000999,
+     "released": "2022-06-28",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.12.1",
+     "pypi": "1.12.1",
+     "ord": 1012001999,
+     "released": "2022-08-05",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "1.13",
+     "pypi": "1.13.0",
+     "ord": 1013000999,
+     "released": "2022-10-28",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "1.13.1",
+     "pypi": "1.13.1",
+     "ord": 1013001999,
+     "released": "2022-12-15",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2",
+     "pypi": "2.0.0",
+     "ord": 2000000999,
+     "released": "2023-03-15",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "2.0.1",
+     "pypi": "2.0.1",
+     "ord": 2000001999,
+     "released": "2023-05-08",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "2.1.2",
+     "pypi": "2.1.2",
+     "ord": 2001002999,
+     "released": "2023-12-14",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "tornado",
+   "rungs": [
+    {
+     "version": "4.5.3",
+     "pypi": "4.5.3",
+     "ord": 4005003999,
+     "released": "2018-01-06",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.0.0",
+     "pypi": "5.0",
+     "ord": 5000000999,
+     "released": "2018-03-05",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "5.0.2",
+     "pypi": "5.0.2",
+     "ord": 5000002999,
+     "released": "2018-04-08",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "5.1.1",
+     "pypi": "5.1.1",
+     "ord": 5001001999,
+     "released": "2018-09-16",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "6.0.0",
+     "pypi": "6.0",
+     "ord": 6000000999,
+     "released": "2019-03-01",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "6.0.4",
+     "pypi": "6.0.4",
+     "ord": 6000004999,
+     "released": "2020-03-04",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "6.1",
+     "pypi": "6.1",
+     "ord": 6001000999,
+     "released": "2020-10-30",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "6.2",
+     "pypi": "6.2",
+     "ord": 6002000999,
+     "released": "2022-07-03",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "6.3.0",
+     "pypi": "6.3",
+     "ord": 6003000999,
+     "released": "2023-04-18",
+     "needed": true,
+     "python": "3.10",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "6.3.3",
+     "pypi": "6.3.3",
+     "ord": 6003003999,
+     "released": "2023-08-11",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "6.4.2",
+     "pypi": "6.4.2",
+     "ord": 6004002999,
+     "released": "2024-11-22",
+     "needed": false,
+     "python": "3.10",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  },
+  {
+   "library": "tqdm",
+   "rungs": [
+    {
+     "version": "4.27.0",
+     "pypi": "4.27.0",
+     "ord": 4027000999,
+     "released": "2018-10-15",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.28",
+     "pypi": "4.28.0",
+     "ord": 4028000999,
+     "released": "2018-10-20",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "4.28.1",
+     "pypi": "4.28.1",
+     "ord": 4028001999,
+     "released": "2018-10-21",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.29",
+     "pypi": "4.29.0",
+     "ord": 4029000999,
+     "released": "2019-01-06",
+     "needed": true,
+     "python": "3.7",
+     "deps": [
+      ""
+     ],
+     "yanked": false
+    },
+    {
+     "version": "4.29.1",
+     "pypi": "4.29.1",
+     "ord": 4029001999,
+     "released": "2019-01-11",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    },
+    {
+     "version": "4.30.0",
+     "pypi": "4.30.0",
+     "ord": 4030000999,
+     "released": "2019-01-26",
+     "needed": false,
+     "python": "3.7",
+     "deps": [],
+     "yanked": false
+    }
+   ]
+  }
+ ]
+}

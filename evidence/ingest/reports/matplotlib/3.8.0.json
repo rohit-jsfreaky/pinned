@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "matplotlib",
+  "version": "3.8.0",
+  "apis": 43351,
+  "added": 8938,
+  "removed": 1132,
+  "changed": 1447,
+  "replaced": 295,
+  "seconds": 30.669
+ },
+ "kind": "version",
+ "pypi": "3.8.0",
+ "needed": true,
+ "source_file": "matplotlib-3.8.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 25,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 8938,
+  "REMOVED_IN": 1132,
+  "CHANGED_IN": 1447,
+  "REPLACED_BY": 295,
+  "ALIAS_OF": 8824,
+  "MEMBER_OF": 8938,
+  "CUES": 4963
+ },
+ "nodes_written": 14270,
+ "load_seconds": 0.713,
+ "write_seconds": 29.956
+}

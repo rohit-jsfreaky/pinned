@@ -1,6 +1,6 @@
 {
   "what": "SYNTHETIC fixture-scale cost run of pinned.learn (not real data, not accuracy)",
-  "utc": "2026-11-15T11:27:35+00:00",
+  "utc": "2026-11-15T11:35:38+00:00",
   "hydradb_url": "http://127.0.0.1:28443",
   "seed": 13,
   "graph": {
@@ -11,27 +11,27 @@
     "cues": 60000,
     "versions": 20
   },
-  "build_seconds": 42.6,
+  "build_seconds": 42.3,
   "episodes": 450,
   "record_c1": {
     "concurrency": 1,
     "calls": 300,
     "errors": 0,
-    "qps": 5.5,
-    "p50_ms": 177.23,
-    "p95_ms": 277.93,
-    "p99_ms": 299.55,
-    "mean_ms": 180.77
+    "qps": 13.9,
+    "p50_ms": 76.88,
+    "p95_ms": 80.31,
+    "p99_ms": 90.53,
+    "mean_ms": 71.67
   },
   "record_c8": {
     "concurrency": 8,
     "calls": 150,
     "errors": 0,
-    "qps": 3.5,
-    "p50_ms": 2224.69,
-    "p95_ms": 2678.28,
-    "p99_ms": 2760.54,
-    "mean_ms": 2237.13
+    "qps": 14.4,
+    "p50_ms": 548.7,
+    "p95_ms": 588.32,
+    "p99_ms": 600.25,
+    "mean_ms": 542.72
   },
   "record_graph_requests_per_call": 13.53,
   "record_totals": {
@@ -40,9 +40,9 @@
     "fill_gap_calls": 65
   },
   "maintain_seconds": {
-    "first_full_pass": 27.266,
-    "after_150_more_episodes": 12.873,
-    "nothing_new": 0.261
+    "first_full_pass": 24.993,
+    "after_150_more_episodes": 12.909,
+    "nothing_new": 0.613
   },
   "maintain_reports": [
     {
@@ -86,18 +86,18 @@
     "split": 18
   },
   "plainstore": {
-    "export_seconds": 26.72,
+    "export_seconds": 34.6,
     "paths": 20400,
     "words": 2001,
     "context_for_c1": {
       "concurrency": 1,
       "calls": 200,
       "errors": 0,
-      "qps": 2884.8,
+      "qps": 2644.0,
       "p50_ms": 0.27,
-      "p95_ms": 0.62,
-      "p99_ms": 1.27,
-      "mean_ms": 0.33
+      "p95_ms": 0.79,
+      "p99_ms": 2.3,
+      "mean_ms": 0.36
     }
   },
   "alias_edges_total_on_node": 360

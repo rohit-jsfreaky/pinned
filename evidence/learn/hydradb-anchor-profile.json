@@ -1,0 +1,59 @@
+{
+  "utc": "2026-11-15T11:32:16+00:00",
+  "url": "http://127.0.0.1:28443",
+  "library": "scaleb14e5ea5",
+  "queries": [
+    {
+      "name": "ADDED_IN of one library, filtered on a.library",
+      "seconds": 5.715,
+      "rows": 20400
+    },
+    {
+      "name": "ADDED_IN of every library, unfiltered",
+      "seconds": 5.486,
+      "rows": 20400
+    },
+    {
+      "name": "Api ids of one library",
+      "seconds": 2.181,
+      "rows": 20400
+    },
+    {
+      "name": "ADDED_IN of the same Api ids, id-anchored chunks of 1000",
+      "seconds": 7.909,
+      "rows": 20400
+    },
+    {
+      "name": "CUES into one library (destination label + library filter)",
+      "seconds": 9.292,
+      "rows": 60729
+    },
+    {
+      "name": "decay scan: CUES with n_fail >= 3 (whole node)",
+      "seconds": 6.985,
+      "rows": 0
+    },
+    {
+      "name": "SHORTCUT edges (small type)",
+      "seconds": 0.221,
+      "rows": 162
+    }
+  ],
+  "anchor_shapes_median_ms_of_7": {
+    "edge read, a.id IN $list (10 ids)": 70.53,
+    "edge read, a.id IN and b.id IN": 56.92,
+    "edge read, (b {id: $x}) map anchor + a.id IN": 3.06,
+    "edge read, (a {id: $x}) map anchor + b.id IN": 2.45,
+    "node read, (a:Api) WHERE a.id IN $list": 1.69
+  },
+  "unwind_read": "rejected: invalid_request: ClientProtocol query is not supported yet: composite parameter $rows is only supported as an UNWIND input",
+  "server_plan_warnings_access_path_counts_whole_container_life": {
+    "FullEdgeScan:CUES": 1272,
+    "FullEdgeScan:SHORTCUT": 452,
+    "FullEdgeScan:REPLACED_BY": 451,
+    "FullEdgeScan:ADDED_IN": 126,
+    "FullEdgeScan:REMOVED_IN": 62,
+    "FullEdgeScan:CHANGED_IN": 62,
+    "FullEdgeScan:ALIAS_OF": 2
+  }
+}

@@ -1,6 +1,6 @@
 """What the graph says about APIs at a version: the contract.py validity rule, signature rule and deprecation rule.
 
-Pure functions over an `ApiFacts` record, plus one batched loader (three requests for any number of APIs). Used by
+Pure functions over an `ApiFacts` record, plus a loader for the few APIs an episode names. Used by
 the learner (gap checks, entity split) and by PlainStore (which keeps the same events in plain dicts).
 """
 
@@ -11,8 +11,6 @@ from dataclasses import dataclass, field
 
 from pinned.contract import ADDED_IN, CHANGED_IN, REMOVED_IN, Status
 from pinned.contract import Graph as GraphProto
-
-CHUNK = 1000
 
 
 @dataclass
@@ -60,30 +58,25 @@ def has_param(signature: str, name: str) -> bool:
 
 
 def load_facts(g: GraphProto, ids: list[int]) -> dict[int, ApiFacts]:
-    """ADDED_IN / REMOVED_IN / CHANGED_IN of many Api nodes in three requests. APIs with no edges get an empty record."""
+    """ADDED_IN / REMOVED_IN / CHANGED_IN of the given Api nodes (three small index-anchored requests per API; the
+    learner only asks about the handful an episode names). APIs with no edges get an empty record."""
     out: dict[int, ApiFacts] = {i: ApiFacts() for i in ids}
     if not ids:
         return out
-    unique = list(dict.fromkeys(ids))
-    for i in range(0, len(unique), CHUNK):
-        _load_chunk(g, unique[i : i + CHUNK], out)
+    for aid in dict.fromkeys(ids):
+        _load_one(g, aid, out[aid])
     return {i: f.sort() for i, f in out.items()}
 
 
-def _load_chunk(g: GraphProto, ids: list[int], out: dict[int, ApiFacts]) -> None:
-    rows = g.query(f"MATCH (a)-[r:{ADDED_IN}]->(v) WHERE a.id IN $ids RETURN a.id AS id, v.ord AS ord, r.sig AS sig",
-                   {"ids": ids})
-    for row in rows:
+def _load_one(g: GraphProto, aid: int, f: ApiFacts) -> None:
+    """Three map-anchored reads (an `a.id IN $list` edge read is a full edge scan on HydraDB 0.4.0; see reads.py)."""
+    for row in g.query(f"MATCH (a {{id: $id}})-[r:{ADDED_IN}]->(v) RETURN v.ord AS ord, r.sig AS sig", {"id": aid}):
         if row["ord"] is not None:
-            out[row["id"]].events.append((int(row["ord"]), ADDED_IN, row["sig"] or ""))
-    rows = g.query(f"MATCH (a)-[r:{REMOVED_IN}]->(v) WHERE a.id IN $ids RETURN a.id AS id, v.ord AS ord", {"ids": ids})
-    for row in rows:
+            f.events.append((int(row["ord"]), ADDED_IN, row["sig"] or ""))
+    for row in g.query(f"MATCH (a {{id: $id}})-[r:{REMOVED_IN}]->(v) RETURN v.ord AS ord", {"id": aid}):
         if row["ord"] is not None:
-            out[row["id"]].events.append((int(row["ord"]), REMOVED_IN, ""))
-    rows = g.query(
-        f"MATCH (a)-[r:{CHANGED_IN}]->(v) WHERE a.id IN $ids RETURN a.id AS id, v.ord AS ord, r.kind AS kind, r.after AS after",
-        {"ids": ids},
-    )
-    for row in rows:
+            f.events.append((int(row["ord"]), REMOVED_IN, ""))
+    for row in g.query(f"MATCH (a {{id: $id}})-[r:{CHANGED_IN}]->(v) RETURN v.ord AS ord, r.kind AS kind, "
+                       "r.after AS after", {"id": aid}):
         if row["ord"] is not None:
-            out[row["id"]].changes.append((int(row["ord"]), row["kind"] or "", row["after"] or ""))
+            f.changes.append((int(row["ord"]), row["kind"] or "", row["after"] or ""))

@@ -26,6 +26,7 @@ from pinned.graph import link_props_many, set_edges_many
 
 from .facts import load_facts
 from .movelog import MoveLog
+from .reads import edges_of_pairs
 from .routes import api_id, term_id, version_id
 from .weights import COMPRESS_MIN_PASSES, DECAY_MIN_FAILS, W_DECAYED, should_decay, shortcut_weight
 
@@ -129,11 +130,9 @@ class Maintainer:
                        "_eps": sorted(set(row["_eps"]) | set(prev["_eps"])), "_why": f"{prev['_why']} | {via}"}
             want[(src, dst)] = row
         have = {
-            (e["src"], e["dst"]): e for e in self.g.query(
-                f"MATCH (a)-[r:{SHORTCUT}]->(b) WHERE a.id IN $s AND b.id IN $d RETURN a.id AS src, b.id AS dst, "
-                "r.w AS w, r.lo_ord AS lo_ord, r.hi_ord AS hi_ord, r.hops AS hops",
-                {"s": list({s for s, _ in want}), "d": list({d for _, d in want})},
-            )
+            (e["src"], e["dst"]): e for e in edges_of_pairs(
+                self.g, SHORTCUT, list(want),
+                "a.id AS src, b.id AS dst, r.w AS w, r.lo_ord AS lo_ord, r.hi_ord AS hi_ord, r.hops AS hops")
         }
         rows: list[tuple[int, int, dict]] = []
         added = 0
@@ -254,12 +253,8 @@ class Maintainer:
                         candidates.append((x, y, why))
         rows: list[tuple[int, int, dict]] = []
         if candidates:
-            ids = list({i for x, y, _ in candidates for i in (x, y)})
-            linked: set[tuple[int, int]] = set()
-            for i in range(0, len(ids), 1000):
-                linked |= {(r["s"], r["d"]) for r in self.g.query(
-                    f"MATCH (a)-[r:{ALIAS_OF}]->(b) WHERE a.id IN $ids RETURN a.id AS s, b.id AS d",
-                    {"ids": ids[i : i + 1000]})}
+            both = [(x, y) for x, y, _ in candidates] + [(y, x) for x, y, _ in candidates]
+            linked = {(r["src"], r["dst"]) for r in edges_of_pairs(self.g, ALIAS_OF, both, "a.id AS src, b.id AS dst")}
             for x, y, why in candidates:
                 if (x, y) in linked or (y, x) in linked:
                     continue
@@ -279,20 +274,14 @@ class Maintainer:
         """Edges that keep leading to failures (weights.should_decay) drop to W_DECAYED < W_FLOOR. The first call in a
         process scans every reweighted edge; later calls check only the edges record() touched since."""
         total = 0
-        cols = ("RETURN a.id AS src, b.id AS dst, a.key AS src_key, b.key AS dst_key, r.w AS w, "
+        cols = ("a.id AS src, b.id AS dst, a.key AS src_key, b.key AS dst_key, r.w AS w, "
                 "r.n_pass AS n_pass, r.n_fail AS n_fail")
         for rel, label in ((CUES, TERM), (SHORTCUT, TERM), (REPLACED_BY, API)):
             if not self.state.full_decay_done:
-                rows = self.g.query(f"MATCH (a:{label})-[r:{rel}]->(b) WHERE r.n_fail >= $n {cols}", {"n": DECAY_MIN_FAILS})
+                rows = self.g.query(f"MATCH (a:{label})-[r:{rel}]->(b) WHERE r.n_fail >= $n RETURN {cols}",
+                                    {"n": DECAY_MIN_FAILS})
             else:
-                pairs = self.state.touched.get(rel, set())
-                rows = []
-                plist = sorted(pairs)
-                for i in range(0, len(plist), 1000):
-                    chunk = plist[i : i + 1000]
-                    got = self.g.query(f"MATCH (a)-[r:{rel}]->(b) WHERE a.id IN $s AND b.id IN $d {cols}",
-                                       {"s": list({p[0] for p in chunk}), "d": list({p[1] for p in chunk})})
-                    rows += [r for r in got if (r["src"], r["dst"]) in pairs]
+                rows = edges_of_pairs(self.g, rel, sorted(self.state.touched.get(rel, set())), cols)
             batch = []
             for r in rows:
                 if should_decay(r["w"], r["n_pass"], r["n_fail"]):

@@ -31,6 +31,7 @@ from .errors import Gap, find_gaps
 from .facts import ApiFacts, has_param, load_facts, usable
 from .maintain import Maintainer, MaintainState
 from .movelog import MoveLog
+from .reads import edges_between
 from .routes import api_id, episode_id, library_id, route, route_string, term_id, used_items
 from .split import SplitGuard
 from .weights import W_LEARNED, bump
@@ -180,8 +181,7 @@ class _Recorder:
             return []
         cols = ", ".join(["a.id AS src", "b.id AS dst", "a.key AS src_key", "b.key AS dst_key", "r.w AS w",
                           "r.n_pass AS n_pass", "r.n_fail AS n_fail"] + [f"r.{p} AS {p}" for p in extra])
-        q = f"MATCH (a)-[r:{rel}]->(b) WHERE a.id IN $s AND b.id IN $d RETURN {cols}"
-        return self.g.query(q, {"s": list(dict.fromkeys(src_ids)), "d": list(dict.fromkeys(dst_ids))})
+        return edges_between(self.g, rel, src_ids, dst_ids, cols)
 
     # ---------------------------------------------------------------- moves
     def _why(self, what: str) -> str:

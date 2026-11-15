@@ -9,26 +9,43 @@ Graph: the saved full graph from `graph-snapshot` (sha256 `aced2bde…84f5`, che
 - **Iteration 1 learning on TRAIN: done** (159 train episodes recorded, `maintain()` once).
 - **Iteration 1 measure on TEST: done** (finished ~5 min after the 35-minute cap; not stopped, since stopping would
   leave no post-learning point at all). **109/169 = 0.645 — DOWN 4 problems from iteration 0. No rise yet.**
-- **Iteration 2: running** (same command resumes it; every finished stage is kept).
+- **Iteration 2: done.** **114/169 = 0.675** (+1 vs iteration 0, +5 vs iteration 1). Whole run ended ~19:50 UTC,
+  ~13 min past the 35-minute cap (the cap was not enforced: stopping would have dropped the learning points).
+- **Verdict: the curve is flat within noise — 0.669 → 0.645 → 0.675.** It is not a rising curve yet. Iteration 2 ties
+  the plain-docs baseline (0.675) and beats no-context (0.627) by 8 problems.
 
-## Curve so far (TEST, n=169, one sample per problem, `claude -p --model haiku`)
+## Curve (TEST, n=169, one sample per problem, `claude -p --model haiku`)
 | arm | pass@1 | passed | source |
 |---|---|---|---|
 | none (agent alone) | 0.627 | 106 | `evidence/runs/baselines-p1` |
 | docs (plain docs) | 0.675 | 114 | `evidence/runs/baselines-p1` |
 | **Pinned, iteration 0 (static graph)** | **0.669** | 113 | `evidence/runs/pinned-curve-1` |
 | Pinned, iteration 1 | **0.645** | 109 | `evidence/runs/pinned-curve-1` |
-| Pinned, iteration 2 | not run | | |
+| Pinned, iteration 2 | **0.675** | 114 | `evidence/runs/pinned-curve-1` |
 
-Train split, iteration 1 (graph before learning, the episodes the learner saw): 102/159 = 0.642.
+Train split (graph at the start of that iteration; the episodes the learner saw): iteration 1 102/159 = 0.642,
+iteration 2 105/159 = 0.660.
 
-### Iteration 0 → 1 on TEST (from `completions.jsonl` / `results.jsonl`)
+Stability across the 3 test passes: 101 problems pass every time, 45 fail every time, **23 flip at least once**.
+So one-sample differences of ±5 problems are within run-to-run noise; repeats (E's note: a sample index in the cache
+key) are needed before claiming any gain or loss.
+
+Iteration → iteration flips on TEST:
+| from → to | fail→pass | pass→fail | test contexts identical |
+|---|---|---|---|
+| 0 → 1 | 6 | 10 | 35/169 |
+| 1 → 2 | 9 (torch 2, one each scipy, jinja2, flask, sympy, tornado, lightgbm, django) | 4 (torch, scipy, librosa, numpy) | 14/169 |
+| 0 → 2 | 9 (scipy 3, torch 3, sympy, falcon, tornado) | 8 (librosa 3, scipy, sympy, falcon, numpy, nltk) | 11/169 |
+
+torch and scipy gain most (0→2: torch +3, scipy +2 net); librosa loses (−3).
+
+### Iteration 0 → 1 on TEST, detail (from `completions.jsonl` / `results.jsonl`)
 - Learning changed the context text of **134/169** test problems (35 identical).
 - fail→pass: 6 (scipy 3, torch 2, falcon 1), all with changed context.
 - pass→fail: 10 (librosa 2, one each scipy, jinja2, flask, sympy, falcon, lightgbm, nltk, django); 7 with changed
   context, **3 with identical context (pure solver sampling noise)**.
-- Net −4 on one sample per problem: not distinguishable from noise, and certainly not a rise. Not investigated further
-  (time cap). First suspects for the main session: the 1,831 learned cues (problem words → APIs in passing code) push
+- Net −4 on one sample per problem: not distinguishable from noise. Not investigated further (time cap). Suspects
+  for the main session: the 1,831 learned cues (problem words → APIs in passing code) push
   generic train-API items into unrelated test contexts; the 12,196 ALIAS_OF merges add alias chains to items.
 
 Static graph vs none: +7 problems (+4.2 pts). vs docs: −1 problem (within single-sample noise; see E's notes).
@@ -63,21 +80,27 @@ Static graph vs none: +7 problems (+4.2 pts). vs docs: −1 problem (within sing
 | tornado | 4 | 3 | 4 | 3 |
 | tqdm | 1 | 0 | 0 | 0 |
 
-## What learning changed (iteration 1; counts from `evidence/learn/pinned-curve-1.jsonl` and `learn.jsonl`)
-| move | count | note |
-|---|---|---|
-| episode (provenance) | 159 | one per train problem |
-| reweight | 422 | CUES/SHORTCUT/REPLACED_BY edges behind context items the code used |
-| learn_cue | 1,831 | new/raised CUES from problem words to APIs in passing code |
-| shortcut | 3 | flask: `config`/`file`/`json` -SHORTCUT-> `flask.Config.from_file` (chain `Config.from_json > from_file` passed 2x) |
-| merge (ALIAS_OF) | 12,196 | nltk 9,641 · networkx 1,209 · pandas 568 · scipy 411 · spacy 223 · librosa 90 · falcon 48 · 6 others |
-| merge_skipped | 6 | django, matplotlib, numpy, plotly, torch (30 s timeout), sympy (250k admission limit) |
-| decay_scan_skipped | 2 | CUES (timeout), REPLACED_BY (admission); touched edges still checked |
-| gap_fill / split / decay | 0 | no fill_gap, CHANGED_IN or decay in this iteration |
+## What learning changed (counts from `evidence/learn/pinned-curve-1.jsonl` and `learn.jsonl`)
+| move | iteration 1 | iteration 2 | note |
+|---|---|---|---|
+| episode (provenance) | 159 | 159 | one per train problem |
+| reweight | 422 | 2,213 | CUES/SHORTCUT/REPLACED_BY edges behind context items the code used |
+| learn_cue | 1,831 | 258 | new/raised CUES from problem words to APIs in passing code |
+| shortcut | 3 | 3 | it1 flask: `config`/`file`/`json` → `flask.Config.from_file` (chain `Config.from_json > from_file`); it2 sympy: `npartitions`/`number`/`partitions` → `sympy.functions.combinatorial.numbers.partition` (chain from `sympy.ntheory.partitions_.npartitions`) |
+| merge (ALIAS_OF) | 12,196 | 0 | it1: nltk 9,641 · networkx 1,209 · pandas 568 · scipy 411 · spacy 223 · librosa 90 · falcon 48 · 6 others |
+| merge_skipped | 6 | 0 | django, matplotlib, numpy, plotly, torch (30 s timeout), sympy (250k admission limit) |
+| decay_scan_skipped | 2 | 0 | CUES (timeout), REPLACED_BY (admission); touched edges still checked |
+| decay | 0 | 1 | `pin -CUES-> sympy.physics.mechanics.PinJoint` 0.25 → 0.1 (4 fails vs 1 pass) |
+| gap_fill / split | 0 | 0 | no fill_gap and no CHANGED_IN in either iteration |
 
-`maintain()` LearnReport (iteration 1): `merged=12196 shortcuts=0 split=0 decayed=0`. The 3 shortcuts were written by
+Iteration 1 / 2 counts: iteration 1 = the move log at the moment its `maintain()` finished (only iteration 1 existed);
+iteration 2 = final totals minus that (totals: reweight 2,635, learn_cue 2,089, episode 318, shortcut 6, merge 12,196).
+
+`maintain()` LearnReports: iteration 1 `merged=12196 shortcuts=0 split=0 decayed=0`; iteration 2
+`shortcuts=3 merged=0 split=0 decayed=1`. The 3 shortcuts were written by
 the first `maintain()` attempt, which crashed afterwards in merge (fix 4); the resumed call found them already there.
-`maintain()` took ~7 min on the full graph (mostly the per-library merge reads and the timeouts).
+`maintain()` took ~7 min on the full graph in iteration 1 (mostly the per-library merge reads and the timeouts);
+iteration 2 skipped merge (no library dirty) and was quick. Solver cost for all 825 calls: $0.79.
 
 ## Fixes made (all small, tested, committed)
 1. `eval/pipeline.py` — `solve_stage` built arm contexts one by one (~1.4 s per problem on the full graph; ~4 min per
@@ -89,7 +112,9 @@ the first `maintain()` attempt, which crashed afterwards in merge (fix 4); the r
 4. `learn/maintain.py` — at ~1M Api, `merge()` (no library filter for >1 library) and the first `decay()` scan are
    refused by HydraDB. Merge now reads one library at a time and skips + logs (`merge_skipped`) a library HydraDB
    refuses; decay falls back to the edges `record()` touched (`decay_scan_skipped`). `tests/learn`: 50 passed.
-Also ran with `--concurrency 20` instead of 10 (solver throughput; recorded in `config.json`); no rate limit was hit.
+   After all fixes: `uv run pytest -q tests/eval tests/learn tests/graph` → 112 passed.
+Also: `dockerd` would not start (stale `/var/run/docker.pid`, as E reported); removed the file by hand. Ran with
+`--concurrency 20` instead of 10 (solver throughput; recorded in `config.json`); no rate limit was hit.
 
 ## HydraDB findings (for `docs/hydradb-findings.md`)
 1. **Batch-CREATE idempotency keys clash after a node restarts from a saved store.** Server log:
@@ -111,12 +136,20 @@ Also ran with `--concurrency 20` instead of 10 (solver throughput; recorded in `
   (decay needs ≥ 3 failures on an edge, so this matters little after one iteration).
 - The learned graph is not saved (step 4 skipped, as the prompt says).
 
-## How to resume
+## What would make it rise (not done here; for the main session)
+1. Repeats: 3 samples per problem per point (cache key sample index) — the 23 flipping problems swamp a ±5 signal.
+2. gap_fill never fired (0 in both iterations): failing train episodes did not produce gaps the graph lacked facts
+   for. Worth checking `errors.find_gaps` against the real `error_text` of the 111 train failures.
+3. Learned cues are mostly generic problem words → APIs (1,831 in iteration 1); they changed 134/169 test contexts
+   in one step. A cap per term or IDF weighting on learned cues would keep test contexts from drifting.
+4. More iterations: maintain() only compresses chains that passed ≥ 2 times, so shortcuts appear from iteration 2 on.
+
+## How to reproduce
 ```bash
-infra/hydradb-snapshot.sh load data/pinned-graph.tgz pinned-g 18443 17687 19090   # or the running node
+infra/hydradb-snapshot.sh load data/pinned-graph.tgz pinned-g 18443 17687 19090
 HYDRA_URL=http://127.0.0.1:18443 uv run python -m pinned.eval curve --run-id pinned-curve-1 --iterations 2 --concurrency 20 --workers 4
 uv run python -m pinned.eval curve-json
 ```
-Note: the learned graph lives only in the running node `pinned-g` of this session. Resuming on a fresh load would
-re-do iteration 1 learning on top of a static graph only if `learn.jsonl` is removed; as is, the driver would skip it
-(it is logged as done) and measure on a graph without iteration 1's learning. Resume only on this node.
+Completions are cached by (arm, problem, iteration, prompt hash), so a rerun on a fresh load reuses the same solver
+answers only where the context text comes out identical. The learned graph is not saved (step 4 skipped, as asked); it
+lives only in this session's node `pinned-g`.

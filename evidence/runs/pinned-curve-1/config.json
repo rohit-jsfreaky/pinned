@@ -52,5 +52,8 @@
  "run_id": "pinned-curve-1",
  "created": "2026-11-15T19:10:56+00:00",
  "git_commit": "63c3cd733fc1a21843978c3ffe0d072edb4301da",
- "updated": "2026-11-15T19:30:00+00:00"
+ "updated": "2026-11-15T19:49:44+00:00",
+ "solver_model_ids": [
+  "claude-haiku-5-5"
+ ]
 }

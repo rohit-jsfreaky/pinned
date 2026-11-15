@@ -100,12 +100,13 @@ def run_all(args: argparse.Namespace) -> None:
 
 def summarize(g: HydraGraph, args: argparse.Namespace) -> None:
     ladders = json.loads((EVIDENCE / "ladders.json").read_text())["ladders"]
+    ing = PyPIIngestor(g, cache_dir=args.cache, report_dir=EVIDENCE / "reports")
     out: dict = {"libraries": {}, "total": {"versions": 0, "api_nodes": 0, "edges": {}, "seconds": 0.0,
                                             "rows_written": 0}}
     import_names: dict[str, list[str]] = {}
     for lad in ladders:
         lib = lad["library"]
-        counts = library_counts(g, lib)
+        counts = library_counts(g, lib, ing.known_api_ids(lib))
         reports = sorted((EVIDENCE / "reports" / lib).glob("*.json")) if (EVIDENCE / "reports" / lib).exists() else []
         rows_written, write_s, load_s = 0, 0.0, 0.0
         for f in reports:

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from pinned.contract import (
@@ -22,17 +23,36 @@ from .validity import validity
 API_EDGES = (ADDED_IN, REMOVED_IN, CHANGED_IN, REPLACED_BY, ALIAS_OF, MEMBER_OF)
 
 
-def library_counts(g: HydraGraph, library: str) -> dict:
-    out = {"versions": g.query(f"MATCH (v:{VERSION}) WHERE v.library = $l RETURN count(*) AS n", {"l": library})[0]["n"],
-           "api_nodes": g.query(f"MATCH (a:{API}) WHERE a.library = $l RETURN count(*) AS n", {"l": library})[0]["n"],
+CHUNK = 1000
+
+
+def _count_in(g: HydraGraph, q: str, ids: list[int], workers: int = 8) -> int:
+    chunks = [ids[i: i + CHUNK] for i in range(0, len(ids), CHUNK)]
+    with ThreadPoolExecutor(workers) as pool:
+        return sum(pool.map(lambda c: g.query(q, {"ids": c})[0]["n"], chunks))
+
+
+def library_counts(g: HydraGraph, library: str, api_ids: list[int]) -> dict:
+    """Node and edge counts of one library, read from the graph.
+
+    HydraDB rejects a read that walks more than 250,000 edges (admission control `cypher_edge_rows`) and only the
+    indexed equality on `library` narrows a scan (an id range does not), so a whole-library edge count fails for
+    sympy / plotly. Edges are therefore counted per chunk of 1,000 Api ids (`WHERE a.id IN $ids`, an index lookup).
+    `api_ids` = ids of every path the ladder's snapshots contain; `api_nodes` is the graph's own count, so a
+    difference shows up as `api_nodes_not_enumerated`."""
+    p = {"l": library}
+    out = {"versions": g.query(f"MATCH (v:{VERSION}) WHERE v.library = $l RETURN count(*) AS n", p)[0]["n"],
+           "api_nodes": g.query(f"MATCH (a:{API}) WHERE a.library = $l RETURN count(*) AS n", p)[0]["n"],
            "edges": {}}
+    # no label in id-anchored reads: `MATCH (a:Api) WHERE a.id IN $ids` scans the label (~11 s per 1,000 ids on a
+    # 136k-node graph) while `MATCH (a) WHERE a.id IN $ids` uses the id lookup (~0.1 s); ids already encode the label
+    present = _count_in(g, "MATCH (a) WHERE a.id IN $ids RETURN count(*) AS n", api_ids)
+    out["api_nodes_not_enumerated"] = out["api_nodes"] - present
     for rel in API_EDGES:
-        out["edges"][rel] = g.query(f"MATCH (a:{API})-[:{rel}]->(b) WHERE a.library = $l RETURN count(*) AS n",
-                                    {"l": library})[0]["n"]
-    out["edges"][CUES] = g.query(f"MATCH (t)-[:{CUES}]->(a:{API}) WHERE a.library = $l RETURN count(*) AS n",
-                                 {"l": library})[0]["n"]
+        out["edges"][rel] = _count_in(g, f"MATCH (a)-[:{rel}]->(b) WHERE a.id IN $ids RETURN count(*) AS n", api_ids)
+    out["edges"][CUES] = _count_in(g, f"MATCH (t)-[:{CUES}]->(a) WHERE a.id IN $ids RETURN count(*) AS n", api_ids)
     out["edges"][NEXT] = g.query(f"MATCH (v:{VERSION})-[:{NEXT}]->(w) WHERE v.library = $l RETURN count(*) AS n",
-                                 {"l": library})[0]["n"]
+                                 p)[0]["n"]
     out["edges"][HAS_VERSION] = out["versions"]
     return out
 

@@ -123,13 +123,13 @@ def test_compiled_member_filled_by_dynamic_inspection(graph, fake, ingestor):
 def test_rerun_is_idempotent_and_keeps_learned_weights(graph, fake, ingestor):
     pkg, _ = fake
     _ingest_all(ingestor, pkg)
-    before = library_counts(graph, pkg)
+    before = library_counts(graph, pkg, ingestor.known_api_ids(pkg))
     old, new = api_id(pkg, f"{pkg}.rename_me"), api_id(pkg, f"{pkg}.new_name")
     set_edge(graph, old, REPLACED_BY, new, {"w": 0.35})  # pretend the learner moved it
     cue_src = node_id(TERM, "grow")
     set_edge(graph, cue_src, CUES, api_id(pkg, f"{pkg}.Thing.grow"), {"w": 1.7})
     again = _ingest_all(ingestor, pkg)
-    assert library_counts(graph, pkg) == before
+    assert library_counts(graph, pkg, ingestor.known_api_ids(pkg)) == before
     assert [r.apis for r in again] == [r.apis for r in again]  # same snapshots
     w = edges_from(graph, [old], REPLACED_BY, props=("w",), dst_props=())
     assert [e["w"] for e in w] == [0.35]
@@ -149,10 +149,10 @@ def test_fill_gap_adds_runtime_attribute_and_is_repeatable(graph, fake, ingestor
     assert sig and sig[0]["sig"] == "(n, scale=2.0)"
     # the module is remembered: later loads of other versions see it too, and a repeat adds nothing
     assert ingestor.snapshots.gap_modules(pkg) == [f"{pkg}.lazy"]
-    counts = library_counts(graph, pkg)
+    counts = library_counts(graph, pkg, ingestor.known_api_ids(pkg))
     rep2 = ingestor.fill_gap(pkg, "1.1.0", path)
     assert (rep2.added, rep2.removed, rep2.changed, rep2.replaced) == (0, 0, 0, 0)
-    assert library_counts(graph, pkg) == counts
+    assert library_counts(graph, pkg, ingestor.known_api_ids(pkg)) == counts
 
 
 def test_fill_gap_records_removal_message_and_replacement(graph, fake, ingestor):

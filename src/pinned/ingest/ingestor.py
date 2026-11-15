@@ -118,6 +118,18 @@ class PyPIIngestor:
     def snapshot(self, library: str, rung: Rung, refresh: bool = False) -> Snapshot:
         return self.snapshots.build(library, rung, self.release(library, rung.pypi), refresh=refresh)
 
+    def known_api_ids(self, library: str) -> list[int]:
+        """Ids of every Api path in this library's cached snapshots (+ paths named only by gap reports)."""
+        paths: set[str] = set()
+        for rung in self.ladder(library).rungs:
+            snap = self.snapshots.cached(library, rung.pypi)
+            if snap is not None:
+                paths |= set(snap.apis)
+        if self.report_dir is not None and (self.report_dir / library).exists():
+            for f in (self.report_dir / library).glob("*.gap-*.json"):
+                paths.add(json.loads(f.read_text()).get("resolved_path", ""))
+        return sorted(api_node_id(library, p) for p in paths if p)
+
     def _ingested(self, library: str) -> set[str]:
         rows = self.g.query(f"MATCH (v:{VERSION}) WHERE v.library = $lib AND v.ingested = true RETURN v.version AS v",
                             {"lib": library})

@@ -64,11 +64,19 @@ def write_ladder(g: HydraGraph, ladder: Ladder, import_names: list[str]) -> dict
     return {r.version: i for r, i in zip(ladder.rungs, ids)}
 
 
+EXIST_CHUNK = 500  # target ids per lookup: keeps every read far below HydraDB's 100k result-row admission limit
+
+
 def _existing(g: HydraGraph, rel: str, pairs: list[tuple[int, int]]) -> set[tuple[int, int]]:
-    srcs = sorted({s for s, _ in pairs})
-    if not srcs:
-        return set()
-    return {(e["src"], e["dst"]) for e in edges_from(g, srcs, rel, dst_props=())}
+    """Which of these edges already exist. Anchored on the TARGET ids: a Term like "get" has 100k+ CUES out-edges,
+    so reading out-edges of sources trips HydraDB's admission control (query_result_rows > 100000), while each new
+    Api has only a handful of in-edges of one type."""
+    dsts = sorted({d for _, d in pairs})
+    found: set[tuple[int, int]] = set()
+    q = f"MATCH (a)-[r:{rel}]->(b) WHERE b.id IN $ids RETURN a.id AS src, b.id AS dst"
+    for i in range(0, len(dsts), EXIST_CHUNK):
+        found |= {(r["src"], r["dst"]) for r in g.query(q, {"ids": dsts[i: i + EXIST_CHUNK]})}
+    return found
 
 
 def write_facts(g: HydraGraph, facts: VersionFacts, cur: Snapshot, kinds: dict[str, str], docs: dict[str, str],

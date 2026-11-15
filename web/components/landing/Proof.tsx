@@ -78,7 +78,7 @@ export function Proof() {
                 initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.8, ease: "easeInOut" }} />
             )}
             {pts.map((p) => (
-              <circle key={p.iteration} cx={x(p.iteration)} cy={y(p.pass_at_1)} r="5" fill="white" stroke="var(--color-hp-accent)" strokeWidth="2.5" />
+              <circle key={p.iteration} cx={x(p.iteration)} cy={y(p.pass_at_1)} r="5" fill="var(--color-hp-page)" stroke="var(--color-hp-accent)" strokeWidth="2.5" />
             ))}
             {!pts.length && (
               <text x={W / 2} y={y(0.9)} textAnchor="middle" fontSize="14" fill="var(--color-hp-muted)">Pinned learning rounds are being measured</text>

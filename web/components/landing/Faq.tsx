@@ -23,7 +23,7 @@ export function Faq() {
           questions.
         </h2>
         <p className="mt-5 max-w-xs text-lg text-hp-muted">The short ones are here. For anything else, open an issue.</p>
-        <a href="https://github.com/rohit-jsfreaky/pinned/issues" className="mt-6 inline-flex h-9 items-center rounded-lg bg-hp-ink px-4 text-sm font-medium text-hp-on-ink hover:bg-black">Ask on GitHub</a>
+        <a href="https://github.com/rohit-jsfreaky/pinned/issues" className="mt-6 inline-flex h-9 items-center rounded-lg bg-hp-ink px-4 text-sm font-medium text-hp-on-ink hover:bg-white">Ask on GitHub</a>
       </div>
       <div className="flex flex-col gap-2">
         {QA.map(([q, a], n) => (

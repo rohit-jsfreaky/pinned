@@ -9,38 +9,38 @@
   --font-display: "Hanken Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
-  /* cal.com light tokens; accent swapped to Klein blue (no warm accents) */
-  --color-hp-page: #ffffff;
-  --color-hp-ink: #242424;
-  --color-hp-body: #374151;
-  --color-hp-muted: #6a6e78;
-  --color-hp-line: #e5e7eb;
-  --color-hp-hairline: #0f234b12;
-  --color-hp-field: #f3f4f6;
-  --color-hp-chip: #f3f4f6;
-  --color-hp-plate: #f3f4f6;
-  --color-hp-plate-line: #0f234b0f;
-  --color-hp-raised: #ffffff;
-  --color-hp-on-ink: #ffffff;
-  --color-hp-accent: #002fa7;
-  --color-hp-accent-soft: #e8edfb;
+  /* cal.com dark tokens; accent = a light cold blue so it reads on black (no warm accents) */
+  --color-hp-page: #0e0e0e;
+  --color-hp-ink: #fafafa;
+  --color-hp-body: #d4d4d4;
+  --color-hp-muted: #9c9c9c;
+  --color-hp-line: #282828;
+  --color-hp-hairline: #ffffff14;
+  --color-hp-field: #1c1c1c;
+  --color-hp-chip: #272727;
+  --color-hp-plate: #151515;
+  --color-hp-plate-line: #ffffff0f;
+  --color-hp-raised: #1a1a1a;
+  --color-hp-on-ink: #111111;
+  --color-hp-accent: #7c9cff;
+  --color-hp-accent-soft: #16214a;
   --color-hp-mac-close: #ff5f57;
   --color-hp-mac-minimize: #febc2e;
   --color-hp-mac-zoom: #28c840;
 
-  /* verdicts: blue = valid, amber = broken */
-  --color-ok: #002fa7;
-  --color-ok-soft: #e8edfb;
-  --color-bad: #b45309;
-  --color-bad-soft: #fef3c7;
-  --color-warn: #6a6e78;
-  --color-warn-soft: #eef0f3;
+  /* verdicts: blue = valid, amber = broken, grey = deprecated */
+  --color-ok: #8ea8ff;
+  --color-ok-soft: #16214a;
+  --color-bad: #fbbf24;
+  --color-bad-soft: #3a2c0b;
+  --color-warn: #a3a3a3;
+  --color-warn-soft: #262626;
 
-  --shadow-hp-float: 0 0 0 1px #0f234b0f, 0 2px 6px -2px #0f234b14;
-  --shadow-hp-lift: 0 0 0 1px #0f234b0f, 0 1px 2px #0f234b0a;
-  --shadow-hp-plate: inset 0 0 0 1px #0f234b0d;
-  --shadow-hp-raised: inset 0 1px 0 #fff, 0 0 0 1px #0f234b12, 0 1px 2px #0f234b0a;
-  --shadow-hp-window: 0 0 0 1px #0f234b14, 0 24px 48px -16px #0f234b29, 0 8px 16px -8px #0f234b14;
+  --shadow-hp-float: 0 0 0 1px #ffffff0f, 0 2px 6px -2px #0006;
+  --shadow-hp-lift: 0 0 0 1px #ffffff14, 0 1px 2px #0000004d;
+  --shadow-hp-plate: inset 0 0 0 1px #ffffff0d;
+  --shadow-hp-raised: inset 0 1px 0 #ffffff0f, 0 0 0 1px #ffffff12, 0 1px 2px #0000004d;
+  --shadow-hp-window: 0 0 0 1px #ffffff14, 0 24px 48px -16px #000c, 0 8px 16px -8px #0009;
 
   --animate-caret: caret 1s steps(1) infinite;
   @keyframes caret {
@@ -67,7 +67,7 @@
   :root { --page-margin: 16px; }
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; color-scheme: dark; }
 body {
   background: var(--color-hp-page);
   color: var(--color-hp-ink);

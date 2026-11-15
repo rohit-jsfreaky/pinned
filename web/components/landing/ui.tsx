@@ -36,17 +36,17 @@ export function Eyebrow({ children }: { children: ReactNode }) {
 export function PinMark({ className = "size-6" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden>
-      <rect width="24" height="24" rx="6" fill="#242424" />
-      <path d="M12 5.5a4 4 0 0 1 4 4c0 2.6-2.4 5.3-3.4 6.3a.85.85 0 0 1-1.2 0C10.4 14.8 8 12.1 8 9.5a4 4 0 0 1 4-4Z" fill="#fff" />
-      <circle cx="12" cy="9.5" r="1.4" fill="#242424" />
-      <path d="M8.5 18.5h7" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" />
+      <rect width="24" height="24" rx="6" fill="#fafafa" />
+      <path d="M12 5.5a4 4 0 0 1 4 4c0 2.6-2.4 5.3-3.4 6.3a.85.85 0 0 1-1.2 0C10.4 14.8 8 12.1 8 9.5a4 4 0 0 1 4-4Z" fill="#0e0e0e" />
+      <circle cx="12" cy="9.5" r="1.4" fill="#fafafa" />
+      <path d="M8.5 18.5h7" stroke="#0e0e0e" strokeWidth="1.4" strokeLinecap="round" />
     </svg>
   );
 }
 
 export function ButtonDark({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <a href={href} className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-hp-ink px-5 text-[15px] font-medium text-hp-on-ink shadow-[inset_0_1px_0_#ffffff26,0_1px_2px_#0f234b29] transition-colors hover:bg-black">
+    <a href={href} className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-hp-ink px-5 text-[15px] font-medium text-hp-on-ink shadow-[inset_0_1px_0_#ffffff80,0_1px_2px_#0006] transition-colors hover:bg-white">
       {children}
     </a>
   );

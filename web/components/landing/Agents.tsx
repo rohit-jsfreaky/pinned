@@ -59,7 +59,7 @@ export function Agents() {
           </div>
         </div>
         <div className="mt-6 flex gap-3">
-          <a href="https://github.com/rohit-jsfreaky/pinned" className="inline-flex h-10 items-center rounded-lg bg-hp-ink px-4 text-sm font-medium text-hp-on-ink hover:bg-black">Self-host it</a>
+          <a href="https://github.com/rohit-jsfreaky/pinned" className="inline-flex h-10 items-center rounded-lg bg-hp-ink px-4 text-sm font-medium text-hp-on-ink hover:bg-white">Self-host it</a>
           <a href="/try" className="inline-flex h-10 items-center rounded-lg bg-hp-raised px-4 text-sm font-medium text-hp-ink shadow-hp-raised hover:bg-hp-field">Try in the browser</a>
         </div>
       </div>

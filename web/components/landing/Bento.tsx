@@ -59,7 +59,7 @@ export function Bento() {
             <span className="text-hp-muted">One question your agent can ask.</span>
           </h2>
         </div>
-        <a href="/try" className="inline-flex h-10 items-center gap-2 rounded-lg bg-hp-ink px-4 text-sm font-medium text-hp-on-ink hover:bg-black">
+        <a href="/try" className="inline-flex h-10 items-center gap-2 rounded-lg bg-hp-ink px-4 text-sm font-medium text-hp-on-ink hover:bg-white">
           Try it now <ArrowRight weight="bold" />
         </a>
       </div>
@@ -131,7 +131,7 @@ export function Bento() {
               transition={{ duration: 1.6, ease: "easeInOut" }}
             />
             {[100, 160, 236].map((x, n) => (
-              <motion.circle key={x} cx={x} cy={[70, 40, 14][n]} r="4" fill="white" stroke="var(--color-hp-accent)" strokeWidth="2"
+              <motion.circle key={x} cx={x} cy={[70, 40, 14][n]} r="4" fill="var(--color-hp-page)" stroke="var(--color-hp-accent)" strokeWidth="2"
                 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.6 + n * 0.4 }} />
             ))}
           </svg>

@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "gradio",
+  "version": "3.1.7",
+  "apis": 5771,
+  "added": 497,
+  "removed": 140,
+  "changed": 37,
+  "replaced": 0,
+  "seconds": 7.646
+ },
+ "kind": "version",
+ "pypi": "3.1.7",
+ "needed": false,
+ "source_file": "gradio-3.1.7-py3-none-any.whl",
+ "dynamic_python": "",
+ "dynamic_modules": 0,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 497,
+  "REMOVED_IN": 140,
+  "CHANGED_IN": 37,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 419,
+  "MEMBER_OF": 497,
+  "CUES": 618
+ },
+ "nodes_written": 1069,
+ "load_seconds": 0.048,
+ "write_seconds": 7.597
+}

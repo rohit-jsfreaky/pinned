@@ -1,0 +1,41 @@
+{
+ "report": {
+  "library": "torch",
+  "version": "1.10.0",
+  "apis": 79321,
+  "added": 8017,
+  "removed": 2136,
+  "changed": 471,
+  "replaced": 1606,
+  "seconds": 47.698
+ },
+ "kind": "version",
+ "pypi": "1.10.0",
+ "needed": true,
+ "source_file": "torch-1.10.0-cp37-cp37m-manylinux1_x86_64.whl",
+ "dynamic_python": "3.7.9",
+ "dynamic_modules": 51,
+ "dynamic_errors": [
+  "caffe2.proto: ModuleNotFoundError: No module named 'google'",
+  "caffe2.python.brew: ModuleNotFoundError: No module named 'google'",
+  "caffe2.python.caffe2_pybind11_state: ModuleNotFoundError: No module named 'google'",
+  "caffe2.python.caffe2_pybind11_state_gpu: ModuleNotFoundError: No module named 'google'",
+  "torch.fx.experimental.fx2trt: ModuleNotFoundError: No module named 'numpy'",
+  "torch.fx.experimental.fx2trt.converters: ModuleNotFoundError: No module named 'numpy'",
+  "torch.fx.experimental.fx2trt.tools: ModuleNotFoundError: No module named 'numpy'",
+  "torch.utils.benchmark: ModuleNotFoundError: No module named 'numpy'",
+  "torch: note: griffe inspection failed, runtime walk used: TypeError: '_ClassNamespace' object is not iterable"
+ ],
+ "edges_written": {
+  "ADDED_IN": 8017,
+  "REMOVED_IN": 2136,
+  "CHANGED_IN": 471,
+  "REPLACED_BY": 1606,
+  "ALIAS_OF": 6135,
+  "MEMBER_OF": 8017,
+  "CUES": 22680
+ },
+ "nodes_written": 15313,
+ "load_seconds": 1.092,
+ "write_seconds": 46.606
+}

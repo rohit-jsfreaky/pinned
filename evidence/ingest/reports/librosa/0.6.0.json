@@ -1,0 +1,33 @@
+{
+ "report": {
+  "library": "librosa",
+  "version": "0.6.0",
+  "apis": 326,
+  "added": 11,
+  "removed": 5,
+  "changed": 14,
+  "replaced": 0,
+  "seconds": 0.752
+ },
+ "kind": "version",
+ "pypi": "0.6.0",
+ "needed": true,
+ "source_file": "librosa-0.6.0.tar.gz",
+ "dynamic_python": "",
+ "dynamic_modules": 0,
+ "dynamic_errors": [
+  "librosa 0.6.0: dynamic inspection failed: ) | py3.7 install --exclude-newer 2018-06-17 --exclude-newer-package griffe=false --exclude-newer-package setuptools=false --exclude-newer-package scikit-learn=false --exclude-newer-package numpy=false --exclude-newer-package scipy=false --exclude-newer-package soundfile=false librosa==0.6.0 griffe setuptools<70 scikit-learn==0.21.0 numpy==1.16.0 scipy==1.1.0 soundfile==0.10.2: BZ2O0Q/bin/python' failed\n      with exit code 1\n\n\nhint: `llvmlite` (v0.23.2) was included because `librosa` (v0.6.0) depends on `resampy` (v0.2.1) which depends on `numba` (v0.38.1) which depends on `llvmlite`\nhint: Build failures usually indicate a problem with the package or the build environment | py3.7 librosa==0.6.0 griffe setuptools<70 scikit-learn==0.21.0 numpy==1.16.0 scipy==1.1.0 soundfile==0.10.2: every module failed to import, e.g. AttributeError: 'CacheManager' object has no attribute 'cachedir' | py3.7 install --exclude-newer 2018-06-17 --exclude-newer-package griffe=false --exclude-newer-package setuptools=false librosa==0.6.0 griffe setuptools<70: no lapack/blas resources found')\n      numpy.distutils.system_info.NotFoundError: no lapack/blas resources\n      found\n\n\nhint: `scipy` (v1.1.0) was included because `librosa` (v0.6.0) depends on `scipy>=0.14.0`\nhint: Build failures usually indicate a problem with the package or the build environment | py3.7 librosa==0.6.0 griffe setuptools<70: every module failed to import, e.g. AttributeError: 'CacheManager' object has no attribute 'cachedir'"
+ ],
+ "edges_written": {
+  "ADDED_IN": 11,
+  "REMOVED_IN": 5,
+  "CHANGED_IN": 14,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 5,
+  "MEMBER_OF": 11,
+  "CUES": 65
+ },
+ "nodes_written": 80,
+ "load_seconds": 0.014,
+ "write_seconds": 0.738
+}

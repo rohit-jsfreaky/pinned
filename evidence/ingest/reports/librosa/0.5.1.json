@@ -1,0 +1,33 @@
+{
+ "report": {
+  "library": "librosa",
+  "version": "0.5.1",
+  "apis": 320,
+  "added": 320,
+  "removed": 0,
+  "changed": 4,
+  "replaced": 0,
+  "seconds": 3.323
+ },
+ "kind": "version",
+ "pypi": "0.5.1",
+ "needed": false,
+ "source_file": "librosa-0.5.1.tar.gz",
+ "dynamic_python": "",
+ "dynamic_modules": 0,
+ "dynamic_errors": [
+  "librosa 0.5.1: dynamic inspection failed: py3.7 install --exclude-newer 2017-09-05 --exclude-newer-package griffe=false --exclude-newer-package setuptools=false librosa==0.5.1 griffe setuptools<70: resolving dependencies:\n  \u2570\u2500\u25b6 Because librosa==0.5.1 has no usable wheels and you require\n      librosa==0.5.1, we can conclude that your requirements are\n      unsatisfiable.\n\nhint: Wheels are required for `librosa` because building from source is disabled for all packages (i.e., with `--no-build`) | py3.7 install librosa==0.5.1 griffe setuptools<70: resolving dependencies:\n  \u2570\u2500\u25b6 Because librosa==0.5.1 has no usable wheels and you require\n      librosa==0.5.1, we can conclude that your requirements are\n      unsatisfiable.\n\nhint: Wheels are required for `librosa` because building from source is disabled for all packages (i.e., with `--no-build`) | py3.7 install --exclude-newer 2017-09-05 --exclude-newer-package griffe=false --exclude-newer-package setuptools=false librosa==0.5.1 griffe setuptools<70: ncy. If `resampy` is a first-party package, consider adding `numpy` to its `build-system.requires`. Otherwise, either add it to your `pyproject.toml` under:\n\n[tool.uv.extra-build-dependencies]\nresampy = [\"numpy\"]\n\nor `uv pip install numpy` into the environment and re-run with `--no-build-isolation`. | py3.7 librosa==0.5.1 griffe setuptools<70: every module failed to import, e.g. AttributeError: 'CacheManager' object has no attribute 'cachedir'"
+ ],
+ "edges_written": {
+  "ADDED_IN": 320,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 4,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 142,
+  "MEMBER_OF": 319,
+  "CUES": 1753
+ },
+ "nodes_written": 835,
+ "load_seconds": 0.002,
+ "write_seconds": 3.321
+}

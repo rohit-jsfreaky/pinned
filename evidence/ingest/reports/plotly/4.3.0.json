@@ -1,0 +1,33 @@
+{
+ "report": {
+  "library": "plotly",
+  "version": "4.3.0",
+  "apis": 135331,
+  "added": 988,
+  "removed": 0,
+  "changed": 35,
+  "replaced": 0,
+  "seconds": 8.985
+ },
+ "kind": "version",
+ "pypi": "4.3.0",
+ "needed": false,
+ "source_file": "plotly-4.3.0-py2.py3-none-any.whl",
+ "dynamic_python": "3.9.25",
+ "dynamic_modules": 3,
+ "dynamic_errors": [
+  "plotly.express.colors: ImportError: Plotly express requires pandas to be installed."
+ ],
+ "edges_written": {
+  "ADDED_IN": 988,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 35,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 1851,
+  "MEMBER_OF": 988,
+  "CUES": 1293
+ },
+ "nodes_written": 2375,
+ "load_seconds": 1.825,
+ "write_seconds": 7.16
+}

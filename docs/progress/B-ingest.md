@@ -92,10 +92,56 @@ uv run pytest tests/ingest -q
 Disk: sources ~4 GB and snapshots ~2.5 GB under `data/pypi-cache/` (git-ignored); venvs are deleted after use and
 installed with `--no-cache` (uv's cache reached 23 GB and filled the disk before that).
 
-## Numbers
-The final run (all 282 versions on a fresh node) is still in progress; summary.json, coverage.json and the
-per-library table land here when it finishes. Evidence committed so far is partial (pairs, ladders, per-version
-reports of the libraries already written, signature-address-check.json).
+## Numbers (final run: all 282 versions on one fresh node `pinned-b`; evidence/ingest/summary.json)
+`summary.json` adds up the per-version IngestReports in `evidence/ingest/reports/` (no graph scan): edge counts are
+rows written per type (CUES / REPLACED_BY: only new edges), Api paths = distinct paths in each library's snapshots.
+gradio, librosa and torch were written by three `--ladder` processes in parallel with plotly (same node, idempotent).
+Totals: 282 versions, 1,012,306 Api nodes, 4,642,283 edges written,
+1,530,895 node rows, 3735 s of graph writes = 1,653 rows/s.
+Snapshot building (downloads, griffe, venvs) mostly came from the cache in this run; a cold build of all snapshots
+with 3 processes took about 1 h (sympy alone ~15 min). Removed spurious signature changes from repr() addresses:
+995 (`evidence/ingest/signature-address-check.json`).
+
+| library | versions | Api paths | ADDED_IN | REMOVED_IN | CHANGED_IN | REPLACED_BY | ALIAS_OF | MEMBER_OF | CUES | write s | rows/s |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| django | 8 | 81,282 | 81,528 | 2,085 | 2,233 | 246 | 66,800 | 81,527 | 168,717 | 225 | 2,254 |
+| falcon | 5 | 3,886 | 3,891 | 282 | 286 | 58 | 2,609 | 3,883 | 12,462 | 8 | 3,591 |
+| flask | 10 | 1,161 | 1,163 | 165 | 87 | 53 | 772 | 1,162 | 6,465 | 6 | 2,242 |
+| geopandas | 9 | 735 | 735 | 29 | 186 | 2 | 357 | 734 | 3,632 | 4 | 1,884 |
+| gradio | 45 | 16,740 | 16,787 | 3,875 | 5,759 | 237 | 19,544 | 16,786 | 21,181 | 137 | 903 |
+| jinja2 | 6 | 2,980 | 2,990 | 223 | 103 | 48 | 1,698 | 2,989 | 9,378 | 7 | 3,250 |
+| kymatio | 2 | 1,190 | 1,190 | 98 | 31 | 5 | 713 | 1,189 | 4,552 | 1 | 6,703 |
+| librosa | 9 | 566 | 566 | 59 | 556 | 33 | 308 | 565 | 3,106 | 9 | 852 |
+| lightgbm | 10 | 860 | 863 | 95 | 158 | 2 | 588 | 862 | 2,657 | 3 | 2,072 |
+| matplotlib | 13 | 58,291 | 58,385 | 21,062 | 11,045 | 8,706 | 50,523 | 58,342 | 84,932 | 229 | 1,771 |
+| mitmproxy | 7 | 10,338 | 10,338 | 3,770 | 146 | 339 | 3,428 | 10,336 | 61,570 | 43 | 2,625 |
+| networkx | 11 | 5,359 | 5,361 | 867 | 793 | 63 | 3,651 | 5,360 | 21,307 | 20 | 2,329 |
+| nltk | 6 | 25,600 | 25,600 | 235 | 285 | 118 | 20,979 | 25,595 | 58,488 | 57 | 2,891 |
+| numpy | 9 | 40,703 | 40,711 | 9,706 | 1,345 | 5,549 | 35,639 | 40,650 | 40,765 | 95 | 2,510 |
+| pandas | 9 | 28,484 | 28,500 | 8,611 | 7,287 | 3,141 | 22,462 | 28,499 | 63,222 | 89 | 2,436 |
+| pillow | 5 | 4,891 | 4,892 | 32 | 159 | 1 | 3,356 | 4,891 | 10,855 | 10 | 2,966 |
+| plotly | 42 | 173,356 | 173,747 | 12,033 | 11,470 | 261 | 203,149 | 173,743 | 215,598 | 789 | 1,354 |
+| pytest | 7 | 1,055 | 1,055 | 309 | 25 | 218 | 542 | 1,053 | 2,686 | 4 | 2,038 |
+| scikit-learn | 8 | 7,531 | 7,531 | 234 | 848 | 12 | 4,544 | 7,514 | 25,167 | 27 | 2,175 |
+| scipy | 11 | 12,774 | 12,805 | 1,033 | 1,625 | 218 | 8,941 | 12,756 | 40,824 | 46 | 2,230 |
+| seaborn | 5 | 619 | 619 | 216 | 145 | 133 | 294 | 618 | 2,531 | 2 | 2,724 |
+| spacy | 4 | 24,735 | 24,735 | 684 | 320 | 90 | 19,875 | 24,609 | 35,833 | 36 | 3,829 |
+| sympy | 11 | 372,146 | 372,343 | 31,727 | 17,238 | 4,359 | 365,741 | 372,341 | 246,336 | 1162 | 1,631 |
+| torch | 13 | 134,625 | 135,537 | 27,296 | 14,661 | 6,860 | 107,529 | 135,532 | 282,261 | 714 | 1,305 |
+| tornado | 11 | 2,150 | 2,153 | 440 | 435 | 8 | 918 | 2,151 | 10,818 | 11 | 1,916 |
+| tqdm | 6 | 249 | 249 | 0 | 9 | 0 | 146 | 248 | 464 | 1 | 2,462 |
+| **total** | 282 | 1,012,306 | 1,014,274 | 125,166 | 77,235 | 30,760 | 945,106 | 1,013,935 | 1,435,807 | 3735 | 1,653 |
+
+**Coverage diagnostic was skipped for time in this final run** (no graph scan). An earlier full run (same loader
+except the last two fixes) measured 191 of 210 scorable dataset `api_calls` valid at the problem's version.
+
+## Saved graph
+`infra/hydradb-snapshot.sh save pinned-b data/pinned-graph.tgz`: 3,437,492,110 bytes (3.3 GB),
+sha256 `aced2bde35f64d22a8b50856b7ee196ab56da5a53f071cd07951642259ac84f5`. It holds the numbers above
+(1,012,306 Api nodes, 76k Term nodes, 282 Versions, 26 Libraries; edges per type as in the table).
+Over GitHub's 2 GB per-asset limit, so it is uploaded as parts (see the last line of this section).
+Load: `cat pinned-graph.tgz.part-* > pinned-graph.tgz && infra/hydradb-snapshot.sh load pinned-graph.tgz <node> <http> <bolt> <admin>`.
+UPLOAD_LINE
 
 ## HydraDB findings (exact query, exact error, workaround; all reproduced in this session on `ghcr.io/hydra-db/hydradb:0.4.0`)
 

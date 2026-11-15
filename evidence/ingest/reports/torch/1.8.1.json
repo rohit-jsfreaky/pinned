@@ -1,0 +1,38 @@
+{
+ "report": {
+  "library": "torch",
+  "version": "1.8.1",
+  "apis": 65281,
+  "added": 65281,
+  "removed": 0,
+  "changed": 17,
+  "replaced": 5,
+  "seconds": 363.182
+ },
+ "kind": "version",
+ "pypi": "1.8.1",
+ "needed": false,
+ "source_file": "torch-1.8.1-cp37-cp37m-manylinux1_x86_64.whl",
+ "dynamic_python": "3.7.9",
+ "dynamic_modules": 52,
+ "dynamic_errors": [
+  "caffe2.proto: ModuleNotFoundError: No module named 'google'",
+  "caffe2.python.brew: ModuleNotFoundError: No module named 'google'",
+  "caffe2.python.caffe2_pybind11_state: ModuleNotFoundError: No module named 'google'",
+  "caffe2.python.caffe2_pybind11_state_gpu: ModuleNotFoundError: No module named 'google'",
+  "torch.utils.benchmark: ModuleNotFoundError: No module named 'setuptools'",
+  "torch: note: griffe inspection failed, runtime walk used: TypeError: '_ClassNamespace' object is not iterable"
+ ],
+ "edges_written": {
+  "ADDED_IN": 65281,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 17,
+  "REPLACED_BY": 5,
+  "ALIAS_OF": 45418,
+  "MEMBER_OF": 65279,
+  "CUES": 166727
+ },
+ "nodes_written": 76427,
+ "load_seconds": 0.73,
+ "write_seconds": 362.451
+}

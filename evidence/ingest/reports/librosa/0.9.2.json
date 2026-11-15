@@ -1,0 +1,31 @@
+{
+ "report": {
+  "library": "librosa",
+  "version": "0.9.2",
+  "apis": 507,
+  "added": 11,
+  "removed": 3,
+  "changed": 379,
+  "replaced": 0,
+  "seconds": 1.888
+ },
+ "kind": "version",
+ "pypi": "0.9.2",
+ "needed": false,
+ "source_file": "librosa-0.9.2-py3-none-any.whl",
+ "dynamic_python": "3.7.9",
+ "dynamic_modules": 1,
+ "dynamic_errors": [],
+ "edges_written": {
+  "ADDED_IN": 11,
+  "REMOVED_IN": 3,
+  "CHANGED_IN": 379,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 3,
+  "MEMBER_OF": 11,
+  "CUES": 70
+ },
+ "nodes_written": 431,
+ "load_seconds": 0.005,
+ "write_seconds": 1.883
+}

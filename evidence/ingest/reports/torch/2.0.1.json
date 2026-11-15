@@ -1,0 +1,38 @@
+{
+ "report": {
+  "library": "torch",
+  "version": "2.0.1",
+  "apis": 105032,
+  "added": 0,
+  "removed": 0,
+  "changed": 0,
+  "replaced": 0,
+  "seconds": 1.558
+ },
+ "kind": "version",
+ "pypi": "2.0.1",
+ "needed": false,
+ "source_file": "torch-2.0.1-cp310-cp310-manylinux1_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 91,
+ "dynamic_errors": [
+  "functorch.dim.batch_tensor: ImportError: cannot import name '_vmap_add_layers' from 'torch._C._functorch' (unknown location)",
+  "functorch.dim.reference: ImportError: cannot import name '_vmap_add_layers' from 'torch._C._functorch' (unknown location)",
+  "torch.onnx.verification: ModuleNotFoundError: No module named 'numpy'",
+  "torch.utils.benchmark: ModuleNotFoundError: No module named 'setuptools'",
+  "torchgen.api.types: ModuleNotFoundError: No module named 'yaml'",
+  "torchgen.executorch.api.types: ModuleNotFoundError: No module named 'yaml'"
+ ],
+ "edges_written": {
+  "ADDED_IN": 0,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 0,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 0,
+  "MEMBER_OF": 0,
+  "CUES": 0
+ },
+ "nodes_written": 1,
+ "load_seconds": 1.427,
+ "write_seconds": 0.13
+}

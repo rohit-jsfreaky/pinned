@@ -1,0 +1,33 @@
+{
+ "report": {
+  "library": "plotly",
+  "version": "4.4.1",
+  "apis": 135351,
+  "added": 20,
+  "removed": 0,
+  "changed": 6,
+  "replaced": 0,
+  "seconds": 87.399
+ },
+ "kind": "version",
+ "pypi": "4.4.1",
+ "needed": false,
+ "source_file": "plotly-4.4.1-py2.py3-none-any.whl",
+ "dynamic_python": "3.9.25",
+ "dynamic_modules": 3,
+ "dynamic_errors": [
+  "plotly.express.colors: ModuleNotFoundError: No module named 'pandas'"
+ ],
+ "edges_written": {
+  "ADDED_IN": 20,
+  "REMOVED_IN": 0,
+  "CHANGED_IN": 6,
+  "REPLACED_BY": 0,
+  "ALIAS_OF": 50717,
+  "MEMBER_OF": 20,
+  "CUES": 151
+ },
+ "nodes_written": 50815,
+ "load_seconds": 2.178,
+ "write_seconds": 85.221
+}

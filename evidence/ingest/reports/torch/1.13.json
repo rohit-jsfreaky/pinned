@@ -1,0 +1,38 @@
+{
+ "report": {
+  "library": "torch",
+  "version": "1.13",
+  "apis": 96047,
+  "added": 21451,
+  "removed": 15704,
+  "changed": 496,
+  "replaced": 905,
+  "seconds": 108.012
+ },
+ "kind": "version",
+ "pypi": "1.13.0",
+ "needed": true,
+ "source_file": "torch-1.13.0-cp310-cp310-manylinux1_x86_64.whl",
+ "dynamic_python": "3.10.20",
+ "dynamic_modules": 89,
+ "dynamic_errors": [
+  "functorch.dim.batch_tensor: ImportError: cannot import name '_vmap_add_layers' from 'torch._C._functorch' (unknown location)",
+  "functorch.dim.reference: ImportError: cannot import name '_vmap_add_layers' from 'torch._C._functorch' (unknown location)",
+  "torch.distributed.algorithms.ddp_comm_hooks.optimizer_overlap_hooks: ModuleNotFoundError: No module named 'numpy'",
+  "torch.onnx.verification: ModuleNotFoundError: No module named 'numpy'",
+  "torch.utils.benchmark: ModuleNotFoundError: No module named 'setuptools'",
+  "static: load caffe2: ModuleNotFoundError: caffe2"
+ ],
+ "edges_written": {
+  "ADDED_IN": 21451,
+  "REMOVED_IN": 15704,
+  "CHANGED_IN": 496,
+  "REPLACED_BY": 905,
+  "ALIAS_OF": 20855,
+  "MEMBER_OF": 21450,
+  "CUES": 23155
+ },
+ "nodes_written": 44163,
+ "load_seconds": 1.578,
+ "write_seconds": 106.434
+}

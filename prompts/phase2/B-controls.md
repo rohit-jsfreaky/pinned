@@ -3,8 +3,9 @@
 You are session B of Phase 2 of Pinned (HydraDB hackathon, Track 1). Judges ask: "would it fall apart on a plain
 store?" and want a control that attacks our own claim. Read CLAUDE.md, PLAN.md (section 5), docs/progress/E-eval.md,
 docs/progress/D-learn.md and docs/progress/C-search.md first. A parallel session runs the main Pinned curve; you run the
-comparisons with the SAME solver, model, template, concurrency and split. HARD DEADLINE: everything pushed within 2
-hours of starting; if a run is still going at 1h45m, stop it, keep finished rounds, report honestly.
+comparisons with the SAME solver, model, template, concurrency and split. HARD DEADLINE: everything pushed within 35
+MINUTES of starting. If a run is still going at 30 minutes, stop it, keep finished rounds, report honestly. Speed
+over polish.
 
 ## Load the real graph (do this first; do NOT re-ingest)
 The full graph (26 libraries, 282 versions, ~1.01M Api nodes, ~4.64M edges) is saved on branch `graph-snapshot` as 37
@@ -25,12 +26,12 @@ Then `uv run python -m pinned.eval download` and build the venvs (see docs/progr
    - plain: `PlainStore.from_graph(g, library)` for every library in the dataset, used as BOTH search and learner in the
      same CurveDriver (it learns from its own TRAIN episodes exactly like the graph arm). Arm name `plain`.
    - shuffled: `ShuffledSearch(GraphSearch(g), seed=13)` with a GraphLearner, arm name `shuffled`.
-2. Run both: `curve --arm-kind plain --arm-name plain --run-id plain-curve-1 --iterations 3 --concurrency 4` and
-   `curve --arm-kind shuffled --arm-name shuffled --run-id shuffled-curve-1 --iterations 1 --concurrency 4`.
-   Each needs its OWN graph node (learning writes to it): load the snapshot a second time as `pinned-g2` on ports
-   28443/27687/29090 and point the shuffled run at it. Run them at the same time.
+2. Run both AT THE SAME TIME on the one loaded node: `curve --arm-kind plain --arm-name plain --run-id plain-curve-1
+   --iterations 1 --concurrency 8` and `curve --arm-kind shuffled --arm-name shuffled --run-id shuffled-curve-1
+   --iterations 0 --concurrency 8` (shuffled = iteration 0 only, measures TEST, writes nothing; plain learns into its
+   own dicts, so one graph node is enough).
 3. Real-graph latency (cheap, do it while the curves run): measure `context_for` and `check_calls` on the loaded real
-   graph at concurrency 1/8/32 with `bench.load.run.measure`, using 200 real TEST problems' (problem, starting_code,
+   graph at concurrency 1/8/32 with `bench.load.run.measure`, using 100 real TEST problems' (problem, starting_code,
    library, version) as inputs. Save evidence/search/latency-real.json (p50/p95/p99, qps, errors, graph_queries).
 4. `uv run python -m pinned.eval curve-json` at the end is NOT yours (session A rebuilds curve.json); just make sure your
    runs are under evidence/runs/ with summary.json.

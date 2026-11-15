@@ -2,8 +2,8 @@
 
 You are session A of Phase 2 of Pinned (HydraDB hackathon, Track 1; the bar: an accuracy curve rising over learning
 iterations, measured on held-out problems). Read CLAUDE.md, PLAN.md (sections 4-5), docs/progress/E-eval.md and
-docs/progress/D-learn.md first. HARD DEADLINE: everything pushed within 2 hours of starting; if a step is still
-running at 1h45m, stop it, keep every finished round, and report honestly.
+docs/progress/D-learn.md first. HARD DEADLINE: everything pushed within 35 MINUTES of starting. If a step is still running at 30 minutes, stop it,
+keep every finished round, and report honestly. Speed over polish; no extra investigations.
 
 ## Load the real graph (do this first; do NOT re-ingest)
 The full graph (26 libraries, 282 versions, ~1.01M Api nodes, ~4.64M edges) is saved on branch `graph-snapshot` as 37
@@ -19,15 +19,15 @@ Check it loaded: `uv run python -m pinned.search explain pandas pandas.DataFrame
 Then `uv run python -m pinned.eval download` and build the venvs (see docs/progress/E-eval.md, "How to run").
 
 ## Do
-1. Smoke test first (5 minutes max): `uv run python -m pinned.eval curve --run-id smoke --iterations 1` restricted to
+1. Smoke test first (3 minutes max): `uv run python -m pinned.eval curve --run-id smoke --iterations 1` restricted to
    a handful of problems if the CLI allows it, else run `solve`/`test` for 3 TEST problems with `--arm pinned`. Fix only
    real bugs that block the run (in src/pinned/eval, search, learn — keep fixes small, tested, and listed).
-2. The real run: `uv run python -m pinned.eval curve --run-id pinned-curve-1 --iterations 3 --concurrency 5 --workers 4`
-   (iteration 0 = static graph on TEST, then learn on TRAIN → measure TEST, 3 times). It is resumable: if it crashes,
+2. The real run: `uv run python -m pinned.eval curve --run-id pinned-curve-1 --iterations 2 --concurrency 10 --workers 4`
+   (iteration 0 = static graph on TEST, then learn on TRAIN → measure TEST, 2 times). If Claude rate-limits, the
+   harness backs off by itself; do not lower the iteration count. It is resumable: if it crashes,
    rerun the same command.
 3. `uv run python -m pinned.eval curve-json` → evidence/curve.json (keeps the existing none/docs baselines).
-4. Save the learned graph too: `infra/hydradb-snapshot.sh save pinned-g data/pinned-graph-learned.tgz`, split it into
-   90 MB parts and push them on a NEW orphan branch `graph-learned` (only the parts + SHA256SUMS), like graph-snapshot.
+4. (Skipped for time: do not save the learned graph.)
 5. Write docs/progress/P2-A-curve.md: the curve numbers per iteration (pass@1, n), per library, what learning changed
    (counts from evidence/learn/*.jsonl and LearnReports), every fix you made, limits. Commit evidence/runs/pinned-curve-1,
    evidence/curve.json, evidence/learn and the progress file on your branch and push. Never push to main.

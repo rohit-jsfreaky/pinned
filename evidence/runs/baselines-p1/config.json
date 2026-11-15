@@ -1,0 +1,62 @@
+{
+ "kind": "baseline",
+ "dataset": "cabbage972/GitChameleon-2.0",
+ "dataset_sha": "799a6a33e572a07a8985914e7251f5dea54b0ac4",
+ "split": {
+  "path": "evidence/split.json",
+  "seed": 13,
+  "train": 159,
+  "test": 169
+ },
+ "template_hash": "941c42962e2a",
+ "runner": {
+  "timeout_s": 240,
+  "venv_dir": "data/venvs",
+  "network": "offline (proxy env -> closed local port)",
+  "venvs_evidence": "evidence/harness/venvs.json",
+  "selfcheck_evidence": "evidence/harness/selfcheck.json",
+  "tested_at_commit": "3d2d792106c384dda4d907773bcde694e412a1ae"
+ },
+ "arms": {
+  "none": {
+   "name": "none",
+   "kind": "no context"
+  },
+  "docs": {
+   "name": "docs",
+   "kind": "plain docs baseline (official docs URLs from the dataset)",
+   "budget_chars": 8000,
+   "cache_dir": "data/docs_cache"
+  }
+ },
+ "solver": {
+  "backend": "claude-cli",
+  "cli_version": "2.1.325 (Claude Code)",
+  "model_alias": "haiku",
+  "flags": [
+   "-p",
+   "--model",
+   "haiku",
+   "--output-format",
+   "json",
+   "--tools",
+   "",
+   "--system-prompt",
+   "<SYSTEM_PROMPT>",
+   "--no-session-persistence",
+   "--setting-sources",
+   "",
+   "--strict-mcp-config",
+   "--disable-slash-commands"
+  ],
+  "temperature": "CLI default (claude -p has no temperature flag)"
+ },
+ "solver_model_alias": "haiku",
+ "run_id": "baselines-p1",
+ "created": "2026-11-15T11:28:06+00:00",
+ "git_commit": "d9a2eaec39fa5bdfea590b237d1c53c7beb6ba38",
+ "updated": "2026-11-15T11:52:21+00:00",
+ "solver_model_ids": [
+  "claude-haiku-5-5"
+ ]
+}

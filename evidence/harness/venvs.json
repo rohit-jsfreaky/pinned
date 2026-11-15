@@ -1,0 +1,2342 @@
+{
+ "created": "2026-11-15T11:45:18+00:00",
+ "n_venvs": 99,
+ "ok": 99,
+ "failed": 0,
+ "method": {
+  "reference": "mrcabbage972/GitChameleonBenchmark gitchameleon/create_venvs.py @ 3a1b604",
+  "installer": "uv pip (hard-linked from one cache)",
+  "pythons": {
+   "3.7": "3.7.17",
+   "3.9": "3.9.19",
+   "3.10": "3.10.14"
+  },
+  "torch": "CPU-only wheels from download.pytorch.org/whl/cpu",
+  "era_constraints": {
+   "flask==3.0.0": [
+    "werkzeug<3.1"
+   ],
+   "gradio==3.24.0": [
+    "gradio_client<0.1"
+   ],
+   "gradio==3.36.0": [
+    "gradio_client<0.3",
+    "fastapi<0.101",
+    "pydantic<2.1"
+   ],
+   "librosa==0.6.0": [
+    "joblib<0.12",
+    "numba<0.49"
+   ],
+   "librosa==0.7.0": [
+    "numba<0.49"
+   ],
+   "librosa==0.7.1": [
+    "numba<0.49"
+   ]
+  }
+ },
+ "wall_seconds_this_invocation": 116.6,
+ "build_seconds_sum": 457.7,
+ "apparent_bytes_sum": 27898246831,
+ "disk_bytes_total": 10056567516,
+ "venvs": [
+  {
+   "key": "01ebe4426194",
+   "python_version": "3.10",
+   "library": "mitmproxy",
+   "version": "9.0.1",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.2,
+   "bytes": 245107767,
+   "reused": false,
+   "problems": [
+    "216",
+    "217"
+   ],
+   "error": "",
+   "key_packages": {
+    "mitmproxy": "9.0.1",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "03e13459486d",
+   "python_version": "3.10",
+   "library": "jinja2",
+   "version": "2.11",
+   "additional_dependencies": "markupsafe==2.0.1",
+   "ok": true,
+   "seconds": 4.5,
+   "bytes": 189133841,
+   "reused": false,
+   "problems": [
+    "153",
+    "155"
+   ],
+   "error": "",
+   "key_packages": {
+    "jinja2": "2.11.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "04b1093d0ce3",
+   "python_version": "3.10",
+   "library": "lightgbm",
+   "version": "3.0.0",
+   "additional_dependencies": "numpy==1.26.4 scikit-learn==1.3.2",
+   "ok": true,
+   "seconds": 4.5,
+   "bytes": 235159236,
+   "reused": false,
+   "problems": [
+    "82",
+    "84"
+   ],
+   "error": "",
+   "key_packages": {
+    "lightgbm": "3.0.0",
+    "numpy": "1.26.4",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "0ac655f4ae99",
+   "python_version": "3.7",
+   "library": "librosa",
+   "version": "0.6.0",
+   "additional_dependencies": "numpy==1.16.0 scipy==1.1.0 soundfile==0.10.2",
+   "ok": true,
+   "seconds": 4.1,
+   "bytes": 361947074,
+   "reused": false,
+   "problems": [
+    "287",
+    "313",
+    "315"
+   ],
+   "error": "",
+   "key_packages": {
+    "librosa": "0.6.0",
+    "numpy": "1.16.0",
+    "pytest": "6.2.5",
+    "scipy": "1.1.0"
+   }
+  },
+  {
+   "key": "0b80a3739823",
+   "python_version": "3.7",
+   "library": "librosa",
+   "version": "0.6.0",
+   "additional_dependencies": "scikit-learn==0.21.0 numpy==1.16.0 scipy==1.1.0 soundfile==0.10.2",
+   "ok": true,
+   "seconds": 3.8,
+   "bytes": 294864821,
+   "reused": false,
+   "problems": [
+    "283",
+    "285",
+    "289",
+    "291",
+    "293",
+    "295",
+    "297",
+    "299"
+   ],
+   "error": "",
+   "key_packages": {
+    "librosa": "0.6.0",
+    "numpy": "1.16.0",
+    "pytest": "6.2.5",
+    "scipy": "1.1.0"
+   }
+  },
+  {
+   "key": "1302c2e2d493",
+   "python_version": "3.7",
+   "library": "kymatio",
+   "version": "0.3.0",
+   "additional_dependencies": "torch==1.4.0",
+   "ok": true,
+   "seconds": 5.4,
+   "bytes": 560372082,
+   "reused": false,
+   "problems": [
+    "325"
+   ],
+   "error": "",
+   "key_packages": {
+    "kymatio": "0.3.0",
+    "numpy": "1.21.6",
+    "pytest": "6.2.5",
+    "scipy": "1.7.1",
+    "torch": "1.4.0+cpu"
+   }
+  },
+  {
+   "key": "149fa937b5c4",
+   "python_version": "3.10",
+   "library": "pandas",
+   "version": "1.5.0",
+   "additional_dependencies": "numpy==1.21.6",
+   "ok": true,
+   "seconds": 4.6,
+   "bytes": 226927354,
+   "reused": false,
+   "problems": [
+    "56",
+    "58",
+    "60"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pandas": "1.5.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "153ecef60bb6",
+   "python_version": "3.7",
+   "library": "librosa",
+   "version": "0.7.1",
+   "additional_dependencies": "numpy==1.16.0 scipy==1.1.0 soundfile==0.10.2",
+   "ok": true,
+   "seconds": 4.1,
+   "bytes": 362635248,
+   "reused": false,
+   "problems": [
+    "302"
+   ],
+   "error": "",
+   "key_packages": {
+    "librosa": "0.7.1",
+    "numpy": "1.16.0",
+    "pytest": "6.2.5",
+    "scipy": "1.1.0"
+   }
+  },
+  {
+   "key": "165964b73500",
+   "python_version": "3.10",
+   "library": "pandas",
+   "version": "1.4.0",
+   "additional_dependencies": "numpy==1.21.6",
+   "ok": true,
+   "seconds": 4.6,
+   "bytes": 225189126,
+   "reused": false,
+   "problems": [
+    "62",
+    "63"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pandas": "1.4.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "1829a9a6965f",
+   "python_version": "3.10",
+   "library": "flask",
+   "version": "3.0.0",
+   "additional_dependencies": "scipy==1.11.1",
+   "ok": true,
+   "seconds": 4.6,
+   "bytes": 194127719,
+   "reused": false,
+   "problems": [
+    "169",
+    "171",
+    "173"
+   ],
+   "error": "",
+   "key_packages": {
+    "flask": "3.0.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.11.1"
+   }
+  },
+  {
+   "key": "22d4bdbbac30",
+   "python_version": "3.10",
+   "library": "geopandas",
+   "version": "0.13.0",
+   "additional_dependencies": "rtree==1.0.1",
+   "ok": true,
+   "seconds": 5.1,
+   "bytes": 335164921,
+   "reused": false,
+   "problems": [
+    "24"
+   ],
+   "error": "",
+   "key_packages": {
+    "geopandas": "0.13.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "2748ba333908",
+   "python_version": "3.10",
+   "library": "numpy",
+   "version": "1.25.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.4,
+   "bytes": 190730013,
+   "reused": false,
+   "problems": [
+    "69",
+    "71",
+    "72",
+    "73",
+    "74",
+    "75"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.25.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "28972317557c",
+   "python_version": "3.10",
+   "library": "django",
+   "version": "5.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 5.0,
+   "bytes": 211627346,
+   "reused": false,
+   "problems": [
+    "99",
+    "102",
+    "103",
+    "106",
+    "107"
+   ],
+   "error": "",
+   "key_packages": {
+    "django": "5.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "2ba59a004bb1",
+   "python_version": "3.9",
+   "library": "plotly",
+   "version": "4.8.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 5.2,
+   "bytes": 248519260,
+   "reused": false,
+   "problems": [
+    "266"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "plotly": "4.8.0",
+    "pytest": "7.1.2",
+    "scipy": "1.9.1"
+   }
+  },
+  {
+   "key": "2d9b00531aff",
+   "python_version": "3.10",
+   "library": "scikit-learn",
+   "version": "1.3",
+   "additional_dependencies": "numpy==1.23.5",
+   "ok": true,
+   "seconds": 4.4,
+   "bytes": 225211022,
+   "reused": false,
+   "problems": [
+    "46",
+    "49",
+    "51"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.5",
+    "pytest": "7.2.0",
+    "scikit-learn": "1.3.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "31bb383ab4e9",
+   "python_version": "3.10",
+   "library": "flask",
+   "version": "2.0.0",
+   "additional_dependencies": "numpy==1.21.6 werkzeug==2.0.0",
+   "ok": true,
+   "seconds": 4.3,
+   "bytes": 186492862,
+   "reused": false,
+   "problems": [
+    "163",
+    "165",
+    "167"
+   ],
+   "error": "",
+   "key_packages": {
+    "flask": "2.0.0",
+    "numpy": "1.21.6",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "31cfb7090021",
+   "python_version": "3.10",
+   "library": "flask",
+   "version": "2.0.0",
+   "additional_dependencies": "werkzeug==2.0.0",
+   "ok": true,
+   "seconds": 5.0,
+   "bytes": 190883685,
+   "reused": false,
+   "problems": [
+    "143",
+    "145"
+   ],
+   "error": "",
+   "key_packages": {
+    "flask": "2.0.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "330cfc49d22f",
+   "python_version": "3.10",
+   "library": "networkx",
+   "version": "2.8",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.8,
+   "bytes": 195688668,
+   "reused": false,
+   "problems": [
+    "27",
+    "29"
+   ],
+   "error": "",
+   "key_packages": {
+    "networkx": "2.8",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "368e61afd41a",
+   "python_version": "3.10",
+   "library": "flask",
+   "version": "2.0.1",
+   "additional_dependencies": "werkzeug==2.0.0",
+   "ok": true,
+   "seconds": 4.5,
+   "bytes": 190891149,
+   "reused": false,
+   "problems": [
+    "147",
+    "149",
+    "151"
+   ],
+   "error": "",
+   "key_packages": {
+    "flask": "2.0.1",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "36d58648c428",
+   "python_version": "3.10",
+   "library": "numpy",
+   "version": "1.21.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 3.9,
+   "bytes": 181433596,
+   "reused": false,
+   "problems": [
+    "66",
+    "67",
+    "68",
+    "70",
+    "76",
+    "77",
+    "78",
+    "79",
+    "80"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "36e30e9e8373",
+   "python_version": "3.10",
+   "library": "gradio",
+   "version": "3.24.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.5,
+   "bytes": 428546701,
+   "reused": false,
+   "problems": [
+    "36",
+    "41"
+   ],
+   "error": "",
+   "key_packages": {
+    "gradio": "3.24.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "3792afbc5138",
+   "python_version": "3.7",
+   "library": "tqdm",
+   "version": "4.29",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 3.6,
+   "bytes": 157865890,
+   "reused": false,
+   "problems": [
+    "324"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pytest": "6.2.5",
+    "scipy": "1.7.1",
+    "tqdm": "4.29.0"
+   }
+  },
+  {
+   "key": "3999ea4922e6",
+   "python_version": "3.9",
+   "library": "sympy",
+   "version": "1.9",
+   "additional_dependencies": "scipy==1.8.0",
+   "ok": true,
+   "seconds": 3.8,
+   "bytes": 238806382,
+   "reused": false,
+   "problems": [
+    "175"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pytest": "7.1.2",
+    "scipy": "1.8.0",
+    "sympy": "1.9"
+   }
+  },
+  {
+   "key": "399a33c1ed13",
+   "python_version": "3.10",
+   "library": "matplotlib",
+   "version": "3.4.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.7,
+   "bytes": 244725577,
+   "reused": false,
+   "problems": [
+    "55"
+   ],
+   "error": "",
+   "key_packages": {
+    "matplotlib": "3.4.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "3b3fe15eed58",
+   "python_version": "3.10",
+   "library": "scikit-learn",
+   "version": "1.2",
+   "additional_dependencies": "numpy==1.23.5",
+   "ok": true,
+   "seconds": 4.5,
+   "bytes": 220977536,
+   "reused": false,
+   "problems": [
+    "45",
+    "52",
+    "54"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.5",
+    "pytest": "7.2.0",
+    "scikit-learn": "1.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "3d75513fa3d6",
+   "python_version": "3.10",
+   "library": "seaborn",
+   "version": "0.12.0",
+   "additional_dependencies": "pandas==1.4.0 numpy==1.26.4",
+   "ok": true,
+   "seconds": 4.3,
+   "bytes": 307812151,
+   "reused": false,
+   "problems": [
+    "214"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.26.4",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1",
+    "seaborn": "0.12.0"
+   }
+  },
+  {
+   "key": "42d3fe715e8c",
+   "python_version": "3.9",
+   "library": "sympy",
+   "version": "1.13",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.6,
+   "bytes": 238639781,
+   "reused": false,
+   "problems": [
+    "183",
+    "184",
+    "185",
+    "186",
+    "187",
+    "188",
+    "189",
+    "190",
+    "201",
+    "202",
+    "203",
+    "204",
+    "205",
+    "206",
+    "207"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pytest": "7.1.2",
+    "scipy": "1.9.1",
+    "sympy": "1.13.0"
+   }
+  },
+  {
+   "key": "4334112e704e",
+   "python_version": "3.10",
+   "library": "geopandas",
+   "version": "0.9.0",
+   "additional_dependencies": "rtree==0.9.3 shapely==1.8.5",
+   "ok": true,
+   "seconds": 4.8,
+   "bytes": 327816270,
+   "reused": false,
+   "problems": [
+    "19"
+   ],
+   "error": "",
+   "key_packages": {
+    "geopandas": "0.9.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "44741a53d84f",
+   "python_version": "3.7",
+   "library": "librosa",
+   "version": "0.7.0",
+   "additional_dependencies": "scikit-learn==0.21.0 numpy==1.16.0 scipy==1.1.0",
+   "ok": true,
+   "seconds": 4.1,
+   "bytes": 299173386,
+   "reused": false,
+   "problems": [
+    "284"
+   ],
+   "error": "",
+   "key_packages": {
+    "librosa": "0.7.0",
+    "numpy": "1.16.0",
+    "pytest": "6.2.5",
+    "scipy": "1.1.0"
+   }
+  },
+  {
+   "key": "44b2f440663a",
+   "python_version": "3.9",
+   "library": "plotly",
+   "version": "3.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.5,
+   "bytes": 307337119,
+   "reused": false,
+   "problems": [
+    "274"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "plotly": "3.0.0",
+    "pytest": "7.1.2",
+    "scipy": "1.9.1"
+   }
+  },
+  {
+   "key": "45007f1caac7",
+   "python_version": "3.10",
+   "library": "pytest",
+   "version": "7.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.6,
+   "bytes": 187710182,
+   "reused": false,
+   "problems": [
+    "226",
+    "227",
+    "228",
+    "229",
+    "230",
+    "231",
+    "232",
+    "233"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.0.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "472f0f599732",
+   "python_version": "3.10",
+   "library": "tornado",
+   "version": "5.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.8,
+   "bytes": 190235376,
+   "reused": false,
+   "problems": [
+    "265"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1",
+    "tornado": "5.0"
+   }
+  },
+  {
+   "key": "49606737b3b0",
+   "python_version": "3.10",
+   "library": "geopandas",
+   "version": "0.10.0",
+   "additional_dependencies": "rtree==0.9.3",
+   "ok": true,
+   "seconds": 5.2,
+   "bytes": 331625501,
+   "reused": false,
+   "problems": [
+    "18",
+    "25"
+   ],
+   "error": "",
+   "key_packages": {
+    "geopandas": "0.10.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "4fc8322f05f3",
+   "python_version": "3.10",
+   "library": "gradio",
+   "version": "3.17.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.9,
+   "bytes": 417997014,
+   "reused": false,
+   "problems": [
+    "42"
+   ],
+   "error": "",
+   "key_packages": {
+    "gradio": "3.17.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "501447663ceb",
+   "python_version": "3.10",
+   "library": "scipy",
+   "version": "1.8.1",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.8,
+   "bytes": 213963195,
+   "reused": false,
+   "problems": [
+    "111",
+    "113",
+    "115",
+    "117"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.8.1"
+   }
+  },
+  {
+   "key": "547be005e777",
+   "python_version": "3.7",
+   "library": "librosa",
+   "version": "0.7.0",
+   "additional_dependencies": "numpy==1.16.0 scipy==1.1.0",
+   "ok": true,
+   "seconds": 3.5,
+   "bytes": 366255639,
+   "reused": false,
+   "problems": [
+    "276",
+    "278",
+    "280",
+    "282"
+   ],
+   "error": "",
+   "key_packages": {
+    "librosa": "0.7.0",
+    "numpy": "1.16.0",
+    "pytest": "6.2.5",
+    "scipy": "1.1.0"
+   }
+  },
+  {
+   "key": "547d275af74f",
+   "python_version": "3.10",
+   "library": "flask",
+   "version": "3.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.3,
+   "bytes": 190778841,
+   "reused": false,
+   "problems": [
+    "144",
+    "146",
+    "148",
+    "150",
+    "152"
+   ],
+   "error": "",
+   "key_packages": {
+    "flask": "3.0.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "559895f5435c",
+   "python_version": "3.9",
+   "library": "sympy",
+   "version": "1.11",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.4,
+   "bytes": 244317608,
+   "reused": false,
+   "problems": [
+    "178",
+    "179",
+    "180",
+    "197",
+    "198",
+    "199"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pytest": "7.1.2",
+    "scipy": "1.9.1",
+    "sympy": "1.11"
+   }
+  },
+  {
+   "key": "5867d51e918e",
+   "python_version": "3.10",
+   "library": "gradio",
+   "version": "3.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 5.0,
+   "bytes": 384547793,
+   "reused": false,
+   "problems": [
+    "39"
+   ],
+   "error": "",
+   "key_packages": {
+    "gradio": "3.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "58e204e1ea4a",
+   "python_version": "3.10",
+   "library": "gradio",
+   "version": "2.9.2",
+   "additional_dependencies": "black==22.1.0",
+   "ok": true,
+   "seconds": 5.0,
+   "bytes": 379468974,
+   "reused": false,
+   "problems": [
+    "40"
+   ],
+   "error": "",
+   "key_packages": {
+    "gradio": "2.9.2",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "5e4a81c75a2d",
+   "python_version": "3.10",
+   "library": "networkx",
+   "version": "2.5",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.6,
+   "bytes": 193715557,
+   "reused": false,
+   "problems": [
+    "31",
+    "33",
+    "34",
+    "35"
+   ],
+   "error": "",
+   "key_packages": {
+    "networkx": "2.5",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "64cc55ce5b1b",
+   "python_version": "3.10",
+   "library": "networkx",
+   "version": "2.4",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.6,
+   "bytes": 193599136,
+   "reused": false,
+   "problems": [
+    "32"
+   ],
+   "error": "",
+   "key_packages": {
+    "networkx": "2.4",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "64d636161dbb",
+   "python_version": "3.10",
+   "library": "scipy",
+   "version": "1.10.1",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.1,
+   "bytes": 188602977,
+   "reused": false,
+   "problems": [
+    "127"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "68e74ae12a63",
+   "python_version": "3.10",
+   "library": "matplotlib",
+   "version": "3.8.0",
+   "additional_dependencies": "pyparsing==2.3.1",
+   "ok": true,
+   "seconds": 4.0,
+   "bytes": 272440048,
+   "reused": false,
+   "problems": [
+    "330"
+   ],
+   "error": "",
+   "key_packages": {
+    "matplotlib": "3.8.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "6a1d6eba5d2d",
+   "python_version": "3.10",
+   "library": "torch",
+   "version": "2",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 7.2,
+   "bytes": 929220317,
+   "reused": false,
+   "problems": [
+    "15",
+    "17"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1",
+    "torch": "2.0.0+cpu"
+   }
+  },
+  {
+   "key": "6b22d8d3dc73",
+   "python_version": "3.10",
+   "library": "spacy",
+   "version": "3.5.0",
+   "additional_dependencies": "numpy==1.26.4",
+   "ok": true,
+   "seconds": 5.3,
+   "bytes": 267006410,
+   "reused": false,
+   "problems": [
+    "91",
+    "92",
+    "93"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.26.4",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1",
+    "spacy": "3.5.0"
+   }
+  },
+  {
+   "key": "71d8ae69b8b2",
+   "python_version": "3.10",
+   "library": "seaborn",
+   "version": "0.13.0",
+   "additional_dependencies": "pandas==2.0.0 numpy==1.26.4",
+   "ok": true,
+   "seconds": 4.7,
+   "bytes": 310272820,
+   "reused": false,
+   "problems": [
+    "208",
+    "209",
+    "210",
+    "211",
+    "212",
+    "213"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.26.4",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1",
+    "seaborn": "0.13.0"
+   }
+  },
+  {
+   "key": "724358548a3b",
+   "python_version": "3.10",
+   "library": "scipy",
+   "version": "1.8.1",
+   "additional_dependencies": "numpy==1.21.6",
+   "ok": true,
+   "seconds": 4.6,
+   "bytes": 209572372,
+   "reused": false,
+   "problems": [
+    "160",
+    "162"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pytest": "7.2.0",
+    "scipy": "1.8.1"
+   }
+  },
+  {
+   "key": "72ff720122be",
+   "python_version": "3.10",
+   "library": "networkx",
+   "version": "2.6",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.5,
+   "bytes": 313312812,
+   "reused": false,
+   "problems": [
+    "30"
+   ],
+   "error": "",
+   "key_packages": {
+    "networkx": "2.6",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "7332ff8ded61",
+   "python_version": "3.10",
+   "library": "scipy",
+   "version": "1.9.2",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.6,
+   "bytes": 186537901,
+   "reused": false,
+   "problems": [
+    "110",
+    "112",
+    "114",
+    "116",
+    "118",
+    "120",
+    "121",
+    "123",
+    "126",
+    "128",
+    "130",
+    "132",
+    "134",
+    "136",
+    "138",
+    "140",
+    "142"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.9.2"
+   }
+  },
+  {
+   "key": "7566da9ce537",
+   "python_version": "3.9",
+   "library": "plotly",
+   "version": "4.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.3,
+   "bytes": 244007416,
+   "reused": false,
+   "problems": [
+    "270",
+    "271"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "plotly": "4.0.0",
+    "pytest": "7.1.2",
+    "scipy": "1.9.1"
+   }
+  },
+  {
+   "key": "8096101041d5",
+   "python_version": "3.10",
+   "library": "networkx",
+   "version": "2.7",
+   "additional_dependencies": "numpy==1.21.2",
+   "ok": true,
+   "seconds": 4.4,
+   "bytes": 191390483,
+   "reused": false,
+   "problems": [
+    "28"
+   ],
+   "error": "",
+   "key_packages": {
+    "networkx": "2.7",
+    "numpy": "1.21.2",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "809f491b71e1",
+   "python_version": "3.10",
+   "library": "lightgbm",
+   "version": "4.3.0",
+   "additional_dependencies": "numpy==1.26.4",
+   "ok": true,
+   "seconds": 5.0,
+   "bytes": 201913696,
+   "reused": false,
+   "problems": [
+    "90"
+   ],
+   "error": "",
+   "key_packages": {
+    "lightgbm": "4.3.0",
+    "numpy": "1.26.4",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "812ed869be9b",
+   "python_version": "3.7",
+   "library": "torch",
+   "version": "1.10.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 6.6,
+   "bytes": 891501540,
+   "reused": false,
+   "problems": [
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pytest": "6.2.5",
+    "scipy": "1.7.1",
+    "torch": "1.10.0+cpu"
+   }
+  },
+  {
+   "key": "82cf9443cd5b",
+   "python_version": "3.10",
+   "library": "tornado",
+   "version": "6.3.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 5.1,
+   "bytes": 190180459,
+   "reused": false,
+   "problems": [
+    "258",
+    "259",
+    "260",
+    "261",
+    "262"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1",
+    "tornado": "6.3"
+   }
+  },
+  {
+   "key": "87e115974692",
+   "python_version": "3.10",
+   "library": "geopandas",
+   "version": "0.9.0",
+   "additional_dependencies": "shapely==1.8.5",
+   "ok": true,
+   "seconds": 5.3,
+   "bytes": 327701106,
+   "reused": false,
+   "problems": [
+    "21",
+    "23"
+   ],
+   "error": "",
+   "key_packages": {
+    "geopandas": "0.9.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "8d2950d1de2c",
+   "python_version": "3.7",
+   "library": "librosa",
+   "version": "0.8.0",
+   "additional_dependencies": "numpy==1.16.0 scipy==1.1.0 soundfile==0.10.2",
+   "ok": true,
+   "seconds": 4.0,
+   "bytes": 377146731,
+   "reused": false,
+   "problems": [
+    "304",
+    "306",
+    "308",
+    "310",
+    "312"
+   ],
+   "error": "",
+   "key_packages": {
+    "librosa": "0.8.0",
+    "numpy": "1.16.0",
+    "pytest": "6.2.5",
+    "scipy": "1.1.0"
+   }
+  },
+  {
+   "key": "9036ee992330",
+   "python_version": "3.10",
+   "library": "scikit-learn",
+   "version": "1.1",
+   "additional_dependencies": "numpy==1.23.5",
+   "ok": true,
+   "seconds": 4.7,
+   "bytes": 300240574,
+   "reused": false,
+   "problems": [
+    "43",
+    "44",
+    "47",
+    "48",
+    "50",
+    "53"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.5",
+    "pytest": "7.2.0",
+    "scikit-learn": "1.1.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "9053b2eecc28",
+   "python_version": "3.10",
+   "library": "nltk",
+   "version": "3.6.3",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 5.0,
+   "bytes": 198767852,
+   "reused": false,
+   "problems": [
+    "26"
+   ],
+   "error": "",
+   "key_packages": {
+    "nltk": "3.6.3",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "927f7310e738",
+   "python_version": "3.7",
+   "library": "torch",
+   "version": "1.9.0",
+   "additional_dependencies": "scipy==1.7.3 numpy==1.21.6",
+   "ok": true,
+   "seconds": 6.3,
+   "bytes": 833425098,
+   "reused": false,
+   "problems": [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pytest": "6.2.5",
+    "scipy": "1.7.3",
+    "torch": "1.9.0+cpu"
+   }
+  },
+  {
+   "key": "9334199e3200",
+   "python_version": "3.7",
+   "library": "pillow",
+   "version": "7.0.0",
+   "additional_dependencies": "numpy==1.16",
+   "ok": true,
+   "seconds": 4.0,
+   "bytes": 163801538,
+   "reused": false,
+   "problems": [
+    "317",
+    "318",
+    "319"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pillow": "7.0.0",
+    "pytest": "6.2.5",
+    "scipy": "1.7.1"
+   }
+  },
+  {
+   "key": "95550041a1ea",
+   "python_version": "3.10",
+   "library": "gradio",
+   "version": "3.36.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.4,
+   "bytes": 439050509,
+   "reused": false,
+   "problems": [
+    "37",
+    "38"
+   ],
+   "error": "",
+   "key_packages": {
+    "gradio": "3.36.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "95b890b9b5d5",
+   "python_version": "3.10",
+   "library": "pandas",
+   "version": "2",
+   "additional_dependencies": "numpy==1.21.6",
+   "ok": true,
+   "seconds": 4.4,
+   "bytes": 227632229,
+   "reused": false,
+   "problems": [
+    "59",
+    "61",
+    "64",
+    "65"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pandas": "2.0.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "a002d95b94e5",
+   "python_version": "3.10",
+   "library": "falcon",
+   "version": "3.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 5.2,
+   "bytes": 189672460,
+   "reused": false,
+   "problems": [
+    "237",
+    "238",
+    "239",
+    "240",
+    "241",
+    "242",
+    "243",
+    "244",
+    "245",
+    "246",
+    "247",
+    "248",
+    "249",
+    "250"
+   ],
+   "error": "",
+   "key_packages": {
+    "falcon": "3.0.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "a22a1a952250",
+   "python_version": "3.9",
+   "library": "sympy",
+   "version": "1.9",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.2,
+   "bytes": 243379404,
+   "reused": false,
+   "problems": [
+    "176",
+    "177",
+    "191",
+    "192",
+    "193",
+    "194"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pytest": "7.1.2",
+    "scipy": "1.9.1",
+    "sympy": "1.9"
+   }
+  },
+  {
+   "key": "a49d85e9b35b",
+   "python_version": "3.10",
+   "library": "flask",
+   "version": "2.0.0",
+   "additional_dependencies": "scipy==1.8.1 Werkzeug==2.0.0",
+   "ok": true,
+   "seconds": 4.7,
+   "bytes": 216243903,
+   "reused": false,
+   "problems": [
+    "170",
+    "172",
+    "174"
+   ],
+   "error": "",
+   "key_packages": {
+    "flask": "2.0.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.8.1"
+   }
+  },
+  {
+   "key": "a605a96c135e",
+   "python_version": "3.10",
+   "library": "seaborn",
+   "version": "0.12.0",
+   "additional_dependencies": "scipy==1.8.0",
+   "ok": true,
+   "seconds": 4.8,
+   "bytes": 332988304,
+   "reused": false,
+   "problems": [
+    "215"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.8.0",
+    "seaborn": "0.12.0"
+   }
+  },
+  {
+   "key": "a8c070a631dc",
+   "python_version": "3.10",
+   "library": "django",
+   "version": "4.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.8,
+   "bytes": 210455628,
+   "reused": false,
+   "problems": [
+    "100",
+    "101",
+    "104",
+    "105",
+    "108"
+   ],
+   "error": "",
+   "key_packages": {
+    "django": "4.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "aa83b524b37a",
+   "python_version": "3.10",
+   "library": "torch",
+   "version": "1.13",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 7.0,
+   "bytes": 907909341,
+   "reused": false,
+   "problems": [
+    "13",
+    "14",
+    "16"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1",
+    "torch": "1.13.0+cpu"
+   }
+  },
+  {
+   "key": "ae3220e5c290",
+   "python_version": "3.10",
+   "library": "lightgbm",
+   "version": "4.3.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 5.1,
+   "bytes": 197151903,
+   "reused": false,
+   "problems": [
+    "88",
+    "89"
+   ],
+   "error": "",
+   "key_packages": {
+    "lightgbm": "4.3.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "afd4820ccac7",
+   "python_version": "3.10",
+   "library": "scipy",
+   "version": "1.11.1",
+   "additional_dependencies": "numpy==1.25.1",
+   "ok": true,
+   "seconds": 4.3,
+   "bytes": 194081307,
+   "reused": false,
+   "problems": [
+    "157",
+    "159",
+    "161"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.25.1",
+    "pytest": "7.2.0",
+    "scipy": "1.11.1"
+   }
+  },
+  {
+   "key": "b18049f739a8",
+   "python_version": "3.7",
+   "library": "matplotlib",
+   "version": "3.5.0",
+   "additional_dependencies": "numpy==1.18.1 pyparsing==2.3.1",
+   "ok": true,
+   "seconds": 3.4,
+   "bytes": 228489029,
+   "reused": false,
+   "problems": [
+    "328",
+    "329"
+   ],
+   "error": "",
+   "key_packages": {
+    "matplotlib": "3.5.0",
+    "numpy": "1.18.1",
+    "pytest": "6.2.5",
+    "scipy": "1.7.1"
+   }
+  },
+  {
+   "key": "b1c738a6c5a0",
+   "python_version": "3.9",
+   "library": "plotly",
+   "version": "5.8.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 5.3,
+   "bytes": 260198679,
+   "reused": false,
+   "problems": [
+    "267"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "plotly": "5.8.0",
+    "pytest": "7.1.2",
+    "scipy": "1.9.1"
+   }
+  },
+  {
+   "key": "b6031df97e77",
+   "python_version": "3.10",
+   "library": "nltk",
+   "version": "3.7",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.3,
+   "bytes": 199030439,
+   "reused": false,
+   "problems": [
+    "94",
+    "95",
+    "96"
+   ],
+   "error": "",
+   "key_packages": {
+    "nltk": "3.7",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "b60dd08f2c2c",
+   "python_version": "3.10",
+   "library": "jinja2",
+   "version": "3.1",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.8,
+   "bytes": 189150462,
+   "reused": false,
+   "problems": [
+    "154",
+    "156"
+   ],
+   "error": "",
+   "key_packages": {
+    "jinja2": "3.1.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "baa919328507",
+   "python_version": "3.7",
+   "library": "librosa",
+   "version": "0.6.0",
+   "additional_dependencies": "numpy==1.16.0 scipy==1.1.0",
+   "ok": true,
+   "seconds": 3.9,
+   "bytes": 359951633,
+   "reused": false,
+   "problems": [
+    "275",
+    "277",
+    "279",
+    "281"
+   ],
+   "error": "",
+   "key_packages": {
+    "librosa": "0.6.0",
+    "numpy": "1.16.0",
+    "pytest": "6.2.5",
+    "scipy": "1.1.0"
+   }
+  },
+  {
+   "key": "bfd53cd28d9e",
+   "python_version": "3.7",
+   "library": "tqdm",
+   "version": "4.28",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 3.4,
+   "bytes": 157858510,
+   "reused": false,
+   "problems": [
+    "323"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pytest": "6.2.5",
+    "scipy": "1.7.1",
+    "tqdm": "4.28.0"
+   }
+  },
+  {
+   "key": "bffc920693a5",
+   "python_version": "3.10",
+   "library": "scipy",
+   "version": "1.9.1",
+   "additional_dependencies": "numpy==1.21.6",
+   "ok": true,
+   "seconds": 4.2,
+   "bytes": 214050915,
+   "reused": false,
+   "problems": [
+    "158"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pytest": "7.2.0",
+    "scipy": "1.9.1"
+   }
+  },
+  {
+   "key": "c2dc5cda60e2",
+   "python_version": "3.10",
+   "library": "pytest",
+   "version": "7.2.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.4,
+   "bytes": 187710016,
+   "reused": false,
+   "problems": [
+    "234"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "c5f4ce816a17",
+   "python_version": "3.10",
+   "library": "lightgbm",
+   "version": "3.0.0",
+   "additional_dependencies": "numpy==1.26.4",
+   "ok": true,
+   "seconds": 4.9,
+   "bytes": 233325553,
+   "reused": false,
+   "problems": [
+    "85",
+    "86",
+    "87"
+   ],
+   "error": "",
+   "key_packages": {
+    "lightgbm": "3.0.0",
+    "numpy": "1.26.4",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "c61031cd001b",
+   "python_version": "3.10",
+   "library": "lightgbm",
+   "version": "3.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.8,
+   "bytes": 228563760,
+   "reused": false,
+   "problems": [
+    "83"
+   ],
+   "error": "",
+   "key_packages": {
+    "lightgbm": "3.0.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "c66a0ffe26d3",
+   "python_version": "3.7",
+   "library": "matplotlib",
+   "version": "3.2.0",
+   "additional_dependencies": "numpy==1.18.1 pyparsing==2.3.1 packaging==19.0",
+   "ok": true,
+   "seconds": 3.7,
+   "bytes": 206350772,
+   "reused": false,
+   "problems": [
+    "327"
+   ],
+   "error": "",
+   "key_packages": {
+    "matplotlib": "3.2.0",
+    "numpy": "1.18.1",
+    "pytest": "6.2.5",
+    "scipy": "1.7.1"
+   }
+  },
+  {
+   "key": "c682af3a0c92",
+   "python_version": "3.7",
+   "library": "matplotlib",
+   "version": "3.4.0",
+   "additional_dependencies": "numpy==1.18.1 pyparsing==2.3.1 packaging==19.0",
+   "ok": true,
+   "seconds": 3.5,
+   "bytes": 222135592,
+   "reused": false,
+   "problems": [
+    "326"
+   ],
+   "error": "",
+   "key_packages": {
+    "matplotlib": "3.4.0",
+    "numpy": "1.18.1",
+    "pytest": "6.2.5",
+    "scipy": "1.7.1"
+   }
+  },
+  {
+   "key": "c8bbe5f5be3c",
+   "python_version": "3.10",
+   "library": "falcon",
+   "version": "2.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 5.0,
+   "bytes": 189137330,
+   "reused": false,
+   "problems": [
+    "251",
+    "252",
+    "253",
+    "254",
+    "255",
+    "256",
+    "257"
+   ],
+   "error": "",
+   "key_packages": {
+    "falcon": "2.0.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "cac27c6d5522",
+   "python_version": "3.9",
+   "library": "sympy",
+   "version": "1.10",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.4,
+   "bytes": 244014295,
+   "reused": false,
+   "problems": [
+    "195",
+    "196"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pytest": "7.1.2",
+    "scipy": "1.9.1",
+    "sympy": "1.10"
+   }
+  },
+  {
+   "key": "cb22931c6e1c",
+   "python_version": "3.10",
+   "library": "pandas",
+   "version": "1.5.1",
+   "additional_dependencies": "numpy==1.21.6",
+   "ok": true,
+   "seconds": 4.6,
+   "bytes": 226891049,
+   "reused": false,
+   "problems": [
+    "57"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pandas": "1.5.1",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "cc2a5846c2f5",
+   "python_version": "3.10",
+   "library": "scipy",
+   "version": "1.7.3",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.2,
+   "bytes": 207310215,
+   "reused": false,
+   "problems": [
+    "109"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.7.3"
+   }
+  },
+  {
+   "key": "d0cac3e8cc49",
+   "python_version": "3.7",
+   "library": "pillow",
+   "version": "7.1.0",
+   "additional_dependencies": "numpy==1.16",
+   "ok": true,
+   "seconds": 3.5,
+   "bytes": 163827709,
+   "reused": false,
+   "problems": [
+    "320",
+    "321",
+    "322"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pillow": "7.1.0",
+    "pytest": "6.2.5",
+    "scipy": "1.7.1"
+   }
+  },
+  {
+   "key": "d9943030949a",
+   "python_version": "3.9",
+   "library": "sympy",
+   "version": "1.12",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.2,
+   "bytes": 236711143,
+   "reused": false,
+   "problems": [
+    "181",
+    "182",
+    "200"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "pytest": "7.1.2",
+    "scipy": "1.9.1",
+    "sympy": "1.12"
+   }
+  },
+  {
+   "key": "dc5b54e001a0",
+   "python_version": "3.10",
+   "library": "scipy",
+   "version": "1.11.2",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.5,
+   "bytes": 191957992,
+   "reused": false,
+   "problems": [
+    "119",
+    "122",
+    "124",
+    "125",
+    "129",
+    "131",
+    "133",
+    "135",
+    "137",
+    "139",
+    "141"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.11.2"
+   }
+  },
+  {
+   "key": "dde3ae652c3b",
+   "python_version": "3.9",
+   "library": "plotly",
+   "version": "5.10.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.8,
+   "bytes": 260425355,
+   "reused": false,
+   "problems": [
+    "268",
+    "269"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "plotly": "5.10.0",
+    "pytest": "7.1.2",
+    "scipy": "1.9.1"
+   }
+  },
+  {
+   "key": "e23fd8dfad53",
+   "python_version": "3.10",
+   "library": "tornado",
+   "version": "6.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.8,
+   "bytes": 190133767,
+   "reused": false,
+   "problems": [
+    "263",
+    "264"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1",
+    "tornado": "6.0"
+   }
+  },
+  {
+   "key": "ed70e9455035",
+   "python_version": "3.9",
+   "library": "plotly",
+   "version": "4.0.0",
+   "additional_dependencies": "chart-studio==1.0.0",
+   "ok": true,
+   "seconds": 4.4,
+   "bytes": 246287718,
+   "reused": false,
+   "problems": [
+    "272",
+    "273"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.21.6",
+    "plotly": "4.0.0",
+    "pytest": "7.1.2",
+    "scipy": "1.9.1"
+   }
+  },
+  {
+   "key": "ee8b75caf7d0",
+   "python_version": "3.10",
+   "library": "torch",
+   "version": "1.12.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 8.2,
+   "bytes": 866908096,
+   "reused": false,
+   "problems": [
+    "12"
+   ],
+   "error": "",
+   "key_packages": {
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1",
+    "torch": "1.12.0+cpu"
+   }
+  },
+  {
+   "key": "ee9bafb2c41d",
+   "python_version": "3.10",
+   "library": "geopandas",
+   "version": "0.10.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.8,
+   "bytes": 331510337,
+   "reused": false,
+   "problems": [
+    "20",
+    "22"
+   ],
+   "error": "",
+   "key_packages": {
+    "geopandas": "0.10.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "f4ba5cf80bd4",
+   "python_version": "3.7",
+   "library": "librosa",
+   "version": "0.7.0",
+   "additional_dependencies": "numpy==1.16.0 scipy==1.1.0 soundfile==0.10.2",
+   "ok": true,
+   "seconds": 4.0,
+   "bytes": 362583557,
+   "reused": false,
+   "problems": [
+    "286",
+    "288",
+    "290",
+    "292",
+    "294",
+    "296",
+    "298",
+    "300",
+    "301",
+    "303",
+    "305",
+    "307",
+    "309",
+    "311",
+    "314",
+    "316"
+   ],
+   "error": "",
+   "key_packages": {
+    "librosa": "0.7.0",
+    "numpy": "1.16.0",
+    "pytest": "6.2.5",
+    "scipy": "1.1.0"
+   }
+  },
+  {
+   "key": "f8e205f31a34",
+   "python_version": "3.10",
+   "library": "nltk",
+   "version": "3.5",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.3,
+   "bytes": 198703993,
+   "reused": false,
+   "problems": [
+    "97",
+    "98"
+   ],
+   "error": "",
+   "key_packages": {
+    "nltk": "3.5",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "fc0e8272140b",
+   "python_version": "3.10",
+   "library": "flask",
+   "version": "3.0.0",
+   "additional_dependencies": "numpy==1.25.1",
+   "ok": true,
+   "seconds": 3.9,
+   "bytes": 192908293,
+   "reused": false,
+   "problems": [
+    "164",
+    "166",
+    "168"
+   ],
+   "error": "",
+   "key_packages": {
+    "flask": "3.0.0",
+    "numpy": "1.25.1",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  },
+  {
+   "key": "feedf104d19b",
+   "python_version": "3.10",
+   "library": "mitmproxy",
+   "version": "7.0.0",
+   "additional_dependencies": "",
+   "ok": true,
+   "seconds": 4.8,
+   "bytes": 228491085,
+   "reused": false,
+   "problems": [
+    "218",
+    "219",
+    "220",
+    "221",
+    "222",
+    "223",
+    "224",
+    "225"
+   ],
+   "error": "",
+   "key_packages": {
+    "mitmproxy": "7.0.0",
+    "numpy": "1.23.0",
+    "pytest": "7.2.0",
+    "scipy": "1.10.1"
+   }
+  }
+ ]
+}

@@ -9,7 +9,7 @@
 Your coding agent learned from whatever docs were newest. Pinned checks its code against the exact library versions
 you run, hands it the right call when an API changed — with the proof — and learns from every run.
 
-[Live demo](#live-demo) · [Add to your agent](#add-it-to-your-agent) · [Results](#results) · [How it works](#how-it-works) · [HACKATHON.md](HACKATHON.md)
+[Live demo](https://3000-agqwsud3k4vlguzsgfducr6rfq.instabox.tech) · [Add to your agent](#add-it-to-your-agent) · [Results](#results) · [How it works](#how-it-works) · [HACKATHON.md](HACKATHON.md)
 
 </div>
 
@@ -43,10 +43,10 @@ Pinned is an MCP server. No model inside, no API key: your agent does the thinki
 **Hosted** (the live instance):
 
 ```bash
-claude mcp add --transport http pinned https://<live-url>/mcp        # Claude Code
-codex mcp add pinned --url https://<live-url>/mcp                    # Codex
+claude mcp add --transport http pinned https://3000-agqwsud3k4vlguzsgfducr6rfq.instabox.tech/mcp        # Claude Code
+codex mcp add pinned --url https://3000-agqwsud3k4vlguzsgfducr6rfq.instabox.tech/mcp                    # Codex
 ```
-Cursor: `{ "mcpServers": { "pinned": { "url": "https://<live-url>/mcp" } } }` in `.cursor/mcp.json`.
+Cursor: `{ "mcpServers": { "pinned": { "url": "https://3000-agqwsud3k4vlguzsgfducr6rfq.instabox.tech/mcp" } } }` in `.cursor/mcp.json`.
 
 **Fully local** (your laptop, your graph):
 

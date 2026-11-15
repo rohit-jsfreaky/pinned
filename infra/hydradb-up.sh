@@ -9,7 +9,7 @@ mkdir -p "$S/store" "$S/cache"
 printf '%s\n' 'local-development-token-32-bytes' > "$S/auth-token"
 chmod -R 777 "$S"   # the container user must write the cache dir
 docker rm -f "$NAME" >/dev/null 2>&1 || true
-docker run -d --name "$NAME" -p "$HTTP:8443" -p "$BOLT:7687" -p "$ADMIN:9090" -v "$S:/data" \
+docker run -d --restart "${HYDRA_RESTART:-no}" --name "$NAME" -p "$HTTP:8443" -p "$BOLT:7687" -p "$ADMIN:9090" -v "$S:/data" \
   -e CLOUD_PROVIDER=local -e LOCAL_PATH=/data/store \
   -e GRAPH_NAMESPACE=default -e GRAPH_ID=default -e GRAPH_CELL_ID=cell-0 -e GRAPH_CELLS=cell-0 \
   -e GRAPH_NODE_ID=node-0 -e GRAPH_BOLT_NODE_ADDRESSES=node-0=127.0.0.1:7687 \

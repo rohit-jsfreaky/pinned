@@ -1,0 +1,106 @@
+{
+ "created": "2026-11-15T11:24:32+00:00",
+ "split": "test",
+ "problems": 169,
+ "urls": 143,
+ "ok": 124,
+ "budget_chars": 8000,
+ "problems_with_docs_context": 168,
+ "failed": [
+  {
+   "url": "https://github.com/microsoft/lightgbm/releases?page=2",
+   "status": 403,
+   "error": "HTTP 403"
+  },
+  {
+   "url": "https://librosa.org/doc/latest/generated/librosa.pyin.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.beat.plp.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.chirp.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.feature.fourier_tempogram.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.feature.inverse.mel_to_audio.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.feature.inverse.mfcc_to_mel.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.feature.melspectrogram.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.feature.rms.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.lpc.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.samples_like.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.sequence.dtw.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.stream.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.times_like.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.util.localmin.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.vqt.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://librosa.org/doc/main/generated/librosa.yin.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.DataFrame.html",
+   "status": 404,
+   "error": "HTTP 404"
+  },
+  {
+   "url": "https://pandas.pydata.org/pandas-docs/version/1.5.1/reference/api/pandas.Series.html#pandas.Series",
+   "status": 404,
+   "error": "HTTP 404"
+  }
+ ]
+}

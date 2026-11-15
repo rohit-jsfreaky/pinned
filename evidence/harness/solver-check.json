@@ -1,0 +1,31 @@
+{
+ "created": "2026-11-15T11:21:15+00:00",
+ "host": "vm",
+ "solver": {
+  "backend": "claude-cli",
+  "cli_version": "2.1.325 (Claude Code)",
+  "model_alias": "haiku",
+  "flags": [
+   "-p",
+   "--model",
+   "haiku",
+   "--output-format",
+   "json",
+   "--tools",
+   "",
+   "--system-prompt",
+   "<SYSTEM_PROMPT>",
+   "--no-session-persistence",
+   "--setting-sources",
+   "",
+   "--strict-mcp-config",
+   "--disable-slash-commands"
+  ],
+  "temperature": "CLI default (claude -p has no temperature flag)"
+ },
+ "works": true,
+ "model": "claude-haiku-5-5",
+ "seconds": 3.23,
+ "cost_usd": 0.0002952,
+ "reply": "```python\ndef add(a, b):\n    return a + b\n```"
+}

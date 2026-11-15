@@ -95,8 +95,8 @@ None new. The only graph use in E is through `pinned.graph` helpers (`upsert_nod
 - pass@1 is ONE sample per problem. `claude -p` has no temperature flag, so the CLI default sampling is used (recorded
   in config). A ~2-3 point gap (none vs docs = 8 problems) is within single-sample noise; Phase 2 should add repeats
   (e.g. 3 samples per problem via a sample index in the cache key) before claiming small gains.
-- Haiku 5.5 was trained after GitChameleon 2.0 was published (Jul 2025), so contamination is possible; it affects all
-  arms equally but inflates absolute numbers.
+- GitChameleon 2.0 is public since Jul 2025; the solver model may have seen it in training (not verified). That would
+  affect all arms alike but inflate absolute numbers.
 - Environment differs from upstream in: `uv pip` resolver, CPython 3.7.17 built from source (OpenSSL 3), symlinked
   venvs, 6 era constraints, offline test runs. Proof it is still right: 328/328 ground truth pass.
 - Docs arm: 143 test URLs -> 124 fetched; 18 are dead links in the dataset (404), 1 GitHub releases page is blocked by

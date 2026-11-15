@@ -58,3 +58,11 @@ def test_committed_split_matches_the_dataset():
     regenerated = make_split(load_problems(), dataset_sha(), 13)
     assert s == regenerated
     assert len(s.train) + len(s.test) == 328
+
+
+def test_data_guard_keeps_pytest_out_of_data(tmp_path: Path):
+    from pinned.eval.dataset import ensure_data_guard
+
+    g = ensure_data_guard(tmp_path / "data")
+    assert 'collect_ignore_glob = ["*"]' in g.read_text()
+    assert ensure_data_guard(tmp_path / "data") == g

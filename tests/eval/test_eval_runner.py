@@ -87,3 +87,11 @@ def test_scrub_removes_every_test_line():
 def test_missing_interpreter_is_an_error(tmp_path):
     with pytest.raises(FileNotFoundError):
         run_candidate("7", "", tmp_path / "nope" / "python", _test_file(tmp_path))
+
+
+def test_tests_run_offline_and_fail_fast(tmp_path):
+    code = ("import urllib.request\n\ndef f(x):\n"
+            "    return urllib.request.urlopen('http://example.com', timeout=30).read()\n")
+    r = run_candidate("7", code, PY, _test_file(tmp_path), timeout=60)
+    assert not r.passed and r.error_type == "URLError" and r.seconds < 20
+    assert "Connection refused" in r.error_text

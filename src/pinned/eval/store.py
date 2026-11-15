@@ -114,6 +114,14 @@ class RunStore:
         self.config_path.write_text(json.dumps(cfg, indent=1) + "\n")
         return cfg
 
+    def update_config(self, **fields) -> dict:
+        """Set facts learned while running (resolved model ids, runner policy). Not for measurement-defining keys."""
+        cfg = self.config()
+        cfg.update(fields)
+        cfg["updated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        self.config_path.write_text(json.dumps(cfg, indent=1) + "\n")
+        return cfg
+
     # ---- jsonl
     @staticmethod
     def _read(path: Path) -> list[dict]:

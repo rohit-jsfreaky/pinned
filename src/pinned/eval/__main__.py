@@ -32,7 +32,7 @@ from .report import build_curve, summarize
 from .runner import TIMEOUT_S
 from .solver import TEMPLATE_HASH, Backoff, ClaudeCLISolver, CompletionCache, SolverError, extract_code
 from .split import SPLIT_PATH, load_split, make_split, write_split_once
-from .store import RunStore
+from .store import RunStore, git_commit
 from .venvs import (DEFAULT_VENV_DIR, ERA_CONSTRAINTS, PYTHON_VERSIONS, VenvSpec, build_all, specs_for,
                     total_disk_bytes)
 
@@ -203,11 +203,26 @@ def cmd_solve(a) -> None:
     rows = solve_stage(store, _problems_for(a), arm, a.split, a.iteration, solver, CompletionCache(Path(a.cache)),
                        a.concurrency, Backoff(), _log)
     failed = [r.problem for r in rows.values() if r.error]
+    _record_models(store)
     _log(f"solve done: {len(rows) - len(failed)} completions, {len(failed)} solver failures -> {store.dir}")
+
+
+def _record_models(store: RunStore) -> None:
+    models = sorted({m for c in store.completions().values() for m in c.model.split(",") if m})
+    store.update_config(solver_model_ids=models)
+
+
+def _record_runner(store: RunStore) -> None:
+    store.update_config(runner={"timeout_s": TIMEOUT_S, "venv_dir": str(DEFAULT_VENV_DIR),
+                                "network": "offline (proxy env -> closed local port)",
+                                "venvs_evidence": "evidence/harness/venvs.json",
+                                "selfcheck_evidence": "evidence/harness/selfcheck.json",
+                                "tested_at_commit": git_commit()})
 
 
 def cmd_test(a) -> None:
     store = RunStore(a.run_id)
+    _record_runner(store)
     probs = ds.by_id(ds.load_problems(Path(a.data_dir)))
     test_stage(store, probs, VenvTester(a.workers), a.arm, a.split, a.iteration, _log)
     s = summarize(store, load_split(Path(a.split_path)))
@@ -218,6 +233,7 @@ def cmd_test(a) -> None:
 def cmd_baseline(a) -> None:
     cmd_solve(a)
     store = RunStore(a.run_id)
+    _record_runner(store)
     probs = ds.by_id(ds.load_problems(Path(a.data_dir)))
     test_stage(store, probs, VenvTester(a.workers), a.arm, a.split, a.iteration, _log)
     s = summarize(store, load_split(Path(a.split_path)))
@@ -261,7 +277,9 @@ def cmd_curve(a) -> None:
     drv = CurveDriver(store, ds.load_problems(Path(a.data_dir)), split, search, learner, solver,
                       CompletionCache(Path(a.cache)), VenvTester(a.workers), a.arm_name, a.k, a.concurrency,
                       Backoff(), _log)
+    _record_runner(store)
     drv.run(a.iterations)
+    _record_models(store)
     summarize(store, split)
     build_curve()
 
@@ -364,6 +382,7 @@ def main(argv: list[str] | None = None) -> None:
     p.set_defaults(fn=cmd_curve)
 
     a = ap.parse_args(argv)
+    ds.ensure_data_guard()
     a.fn(a)
 
 

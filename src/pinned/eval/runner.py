@@ -26,6 +26,15 @@ PLUGIN_DIR = Path(__file__).resolve().parent / "_plugin"
 SOLUTION_NAME = "solution.py"   # how the solution file is named in error_text
 TEST_FAILURE_TYPES = {"AssertionError", "Failed"}   # failures the hidden test raises itself (pytest.fail / assert)
 WITHHELD = "[withheld: hidden test content]"
+# Tests run OFFLINE: every proxy variable points at a closed local port, so HTTP(S) calls from candidate code or
+# libraries fail fast instead of hanging (e.g. gradio `launch(share=True)` opening a public tunnel). Deterministic, and
+# model-written code never reaches the internet. Local servers (localhost) still work.
+_OFFLINE = "http://127.0.0.1:9"
+OFFLINE_ENV = {
+    **{k: _OFFLINE for k in ("HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "http_proxy", "https_proxy", "all_proxy")},
+    "NO_PROXY": "localhost,127.0.0.1,0.0.0.0,::1", "no_proxy": "localhost,127.0.0.1,0.0.0.0,::1",
+    "HF_HUB_OFFLINE": "1", "GRADIO_ANALYTICS_ENABLED": "False",
+}
 
 
 @dataclass(frozen=True)
@@ -129,6 +138,7 @@ def run_candidate(problem_id: str, code: str, python: Path, test_path: Path, tim
             "MPLBACKEND": "Agg",
             "HOME": tmp,                      # caches (matplotlib, numba, ...) go to the throwaway dir
             "NUMBA_CACHE_DIR": str(Path(tmp) / "numba"),
+            **OFFLINE_ENV,
         })
         env.pop("PYTHONHOME", None)
         env.pop("VIRTUAL_ENV", None)

@@ -47,7 +47,9 @@ ERA_CONSTRAINTS: dict[tuple[str, str], tuple[str, ...]] = {
     # gradio_client >= 0.3 removed gradio_client.serializing, which gradio 3.24 / 3.36 import; gradio 3.24.0 (2023-03)
     # also needs the 0.0.x serializer API (0.1+ has no "serialized_input" key)
     ("gradio", "3.24.0"): ("gradio_client<0.1",),
-    ("gradio", "3.36.0"): ("gradio_client<0.3",),
+    # starlette 1.x changed TemplateResponse(name, context) -> gradio 3.36.0 (2023-07) serves 500 on "/" and launch()
+    # decides localhost is unreachable; fastapi 0.100.x (its era) pins starlette 0.27 and predates pydantic 2.1+
+    ("gradio", "3.36.0"): ("gradio_client<0.3", "fastapi<0.101", "pydantic<2.1"),
     # joblib 0.12 renamed Memory.cachedir -> location; librosa 0.6.0 (2018-02) reads .cachedir
     # numba 0.49 removed numba.decorators, which librosa 0.6.x / 0.7.x import
     ("librosa", "0.6.0"): ("joblib<0.12", "numba<0.49"),

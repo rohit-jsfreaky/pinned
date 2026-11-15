@@ -49,6 +49,22 @@ class Problem:
         return {f: getattr(self, f) for f in SOLVER_FIELDS}
 
 
+DATA_ROOT = Path("data")
+DATA_GUARD = (
+    '"""Written by pinned.eval: data/ holds downloaded third-party code (GitChameleon hidden tests, a CPython build,\n'
+    'problem venvs). pytest run from the repo root must never collect it."""\n\ncollect_ignore_glob = ["*"]\n'
+)
+
+
+def ensure_data_guard(root: Path = DATA_ROOT) -> Path:
+    """Keep `pytest` (run from the repo root) out of data/."""
+    root.mkdir(parents=True, exist_ok=True)
+    guard = root / "conftest.py"
+    if not guard.exists() or guard.read_text() != DATA_GUARD:
+        guard.write_text(DATA_GUARD)
+    return guard
+
+
 def download(data_dir: Path = DEFAULT_DATA_DIR, revision: str | None = None) -> str:
     """Download the full HF dataset snapshot into `data_dir`; returns (and records) the dataset commit sha."""
     from huggingface_hub import HfApi, snapshot_download

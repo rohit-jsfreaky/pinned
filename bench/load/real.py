@@ -17,7 +17,7 @@ import platform
 import statistics
 import subprocess
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from pinned.eval import dataset as ds
@@ -37,7 +37,7 @@ def _stats(xs: list[float]) -> dict:
 
 def _image() -> str:
     try:
-        return subprocess.run(["docker", "inspect", "-f", "{{.Image}}", "pinned-g"], capture_output=True, text=True,
+        return subprocess.run(["docker", "inspect", "-f", "{{.Image}}", "pinned-g"], capture_output=True, text=True, check=False,
                               timeout=10).stdout.strip()
     except OSError:
         return ""
@@ -75,7 +75,7 @@ def main() -> None:
 
     out = {
         "kind": "real-graph-search",
-        "utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "utc": datetime.now(UTC).isoformat(timespec="seconds"),
         "hydradb_image": _image(),
         "machine": {"cpu_count": os.cpu_count(), "platform": platform.platform(),
                     "note": "client and HydraDB node on the same machine (4 vCPU cloud VM); eval jobs ran in parallel"},

@@ -13,16 +13,15 @@ from __future__ import annotations
 import json
 import math
 import threading
-from concurrent.futures import ThreadPoolExecutor
 from collections import defaultdict
 from collections.abc import Iterable
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 from pinned.contract import (
     ADDED_IN,
-    API,
     CHANGED_IN,
     CUES,
     EPISODE,

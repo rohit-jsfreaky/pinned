@@ -1,0 +1,258 @@
+{
+ "run_id": "shuffled-curve-1",
+ "generated": "2026-11-15T19:25:02+00:00",
+ "metric": "pass@1 (one completion per problem; hidden tests)",
+ "groups": [
+  {
+   "arm": "shuffled",
+   "iteration": 0,
+   "split": "test",
+   "n": 169,
+   "passed": 116,
+   "pass_at_1": 0.6864,
+   "expected": 169,
+   "missing": 0,
+   "solver_failed": [],
+   "pass_at_1_over_expected": 0.6864,
+   "error_types": {
+    "AssertionError": 34,
+    "AttributeError": 7,
+    "ValueError": 5,
+    "TypeError": 2,
+    "ZeroDivisionError": 1,
+    "NetworkXError": 1,
+    "PolynomialError": 1,
+    "ParameterError": 1,
+    "NameError": 1
+   },
+   "per_library": {
+    "django": {
+     "passed": 4,
+     "n": 5,
+     "pass_at_1": 0.8
+    },
+    "falcon": {
+     "passed": 7,
+     "n": 11,
+     "pass_at_1": 0.6364
+    },
+    "flask": {
+     "passed": 10,
+     "n": 11,
+     "pass_at_1": 0.9091
+    },
+    "geopandas": {
+     "passed": 1,
+     "n": 4,
+     "pass_at_1": 0.25
+    },
+    "gradio": {
+     "passed": 3,
+     "n": 4,
+     "pass_at_1": 0.75
+    },
+    "jinja2": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "kymatio": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    },
+    "librosa": {
+     "passed": 9,
+     "n": 21,
+     "pass_at_1": 0.4286
+    },
+    "lightgbm": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "matplotlib": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "mitmproxy": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "networkx": {
+     "passed": 3,
+     "n": 5,
+     "pass_at_1": 0.6
+    },
+    "nltk": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "numpy": {
+     "passed": 8,
+     "n": 8,
+     "pass_at_1": 1.0
+    },
+    "pandas": {
+     "passed": 2,
+     "n": 5,
+     "pass_at_1": 0.4
+    },
+    "pillow": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    },
+    "plotly": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "pytest": {
+     "passed": 4,
+     "n": 5,
+     "pass_at_1": 0.8
+    },
+    "scikit-learn": {
+     "passed": 4,
+     "n": 6,
+     "pass_at_1": 0.6667
+    },
+    "scipy": {
+     "passed": 16,
+     "n": 20,
+     "pass_at_1": 0.8
+    },
+    "seaborn": {
+     "passed": 4,
+     "n": 4,
+     "pass_at_1": 1.0
+    },
+    "spacy": {
+     "passed": 1,
+     "n": 2,
+     "pass_at_1": 0.5
+    },
+    "sympy": {
+     "passed": 12,
+     "n": 17,
+     "pass_at_1": 0.7059
+    },
+    "torch": {
+     "passed": 4,
+     "n": 9,
+     "pass_at_1": 0.4444
+    },
+    "tornado": {
+     "passed": 3,
+     "n": 4,
+     "pass_at_1": 0.75
+    },
+    "tqdm": {
+     "passed": 0,
+     "n": 1,
+     "pass_at_1": 0.0
+    }
+   },
+   "per_type_of_change": {
+    "Argument or Attribute change": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "Function Name change": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    },
+    "New feature or additional dependency based change": {
+     "passed": 4,
+     "n": 5,
+     "pass_at_1": 0.8
+    },
+    "Semantics or Function Behaviour change": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "argument change": {
+     "passed": 25,
+     "n": 38,
+     "pass_at_1": 0.6579
+    },
+    "argument or attribute change": {
+     "passed": 17,
+     "n": 21,
+     "pass_at_1": 0.8095
+    },
+    "behaviour": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "breaking change": {
+     "passed": 9,
+     "n": 10,
+     "pass_at_1": 0.9
+    },
+    "deprecation": {
+     "passed": 5,
+     "n": 5,
+     "pass_at_1": 1.0
+    },
+    "name change": {
+     "passed": 16,
+     "n": 23,
+     "pass_at_1": 0.6957
+    },
+    "name change (attribute)": {
+     "passed": 1,
+     "n": 1,
+     "pass_at_1": 1.0
+    },
+    "new feature": {
+     "passed": 8,
+     "n": 20,
+     "pass_at_1": 0.4
+    },
+    "new func/method/class": {
+     "passed": 14,
+     "n": 22,
+     "pass_at_1": 0.6364
+    },
+    "other library": {
+     "passed": 2,
+     "n": 3,
+     "pass_at_1": 0.6667
+    },
+    "other library or new feature": {
+     "passed": 1,
+     "n": 3,
+     "pass_at_1": 0.3333
+    },
+    "output behavior": {
+     "passed": 2,
+     "n": 2,
+     "pass_at_1": 1.0
+    },
+    "output behaviour": {
+     "passed": 3,
+     "n": 7,
+     "pass_at_1": 0.4286
+    },
+    "output change": {
+     "passed": 3,
+     "n": 3,
+     "pass_at_1": 1.0
+    }
+   },
+   "solver_cost_usd": 0.1513,
+   "models": [
+    "claude-haiku-5-5"
+   ]
+  }
+ ]
+}

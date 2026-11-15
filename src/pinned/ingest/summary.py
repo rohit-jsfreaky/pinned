@@ -32,28 +32,25 @@ def _count_in(g: HydraGraph, q: str, ids: list[int], workers: int = 8) -> int:
         return sum(pool.map(lambda c: g.query(q, {"ids": c})[0]["n"], chunks))
 
 
-def library_counts(g: HydraGraph, library: str, api_ids: list[int]) -> dict:
-    """Node and edge counts of one library, read from the graph.
+def library_counts(g: HydraGraph, library: str, api_ids: list[int], version_ids: list[int]) -> dict:
+    """Node and edge counts of one library, read from the graph by id.
 
-    HydraDB rejects a read that walks more than 250,000 edges (admission control `cypher_edge_rows`) and only the
-    indexed equality on `library` narrows a scan (an id range does not), so a whole-library edge count fails for
-    sympy / plotly. Edges are therefore counted per chunk of 1,000 Api ids (`WHERE a.id IN $ids`, an index lookup).
-    `api_ids` = ids of every path the ladder's snapshots contain; `api_nodes` is the graph's own count, so a
-    difference shows up as `api_nodes_not_enumerated`."""
-    p = {"l": library}
-    out = {"versions": g.query(f"MATCH (v:{VERSION}) WHERE v.library = $l RETURN count(*) AS n", p)[0]["n"],
-           "api_nodes": g.query(f"MATCH (a:{API}) WHERE a.library = $l RETURN count(*) AS n", p)[0]["n"],
+    At full size (~1M nodes) HydraDB rejects label scans: `MATCH (a:Api) RETURN count(*)` exceeds the 250,000
+    label-index-candidate admission limit, a read that walks more than 250,000 edges is rejected
+    (`cypher_edge_rows`), and a label + property scan can run into the 30 s query timeout. So everything is counted
+    per chunk of 1,000 known ids (`MATCH (a) WHERE a.id IN $ids`, an index lookup). `api_ids` = ids of every path
+    in the ladder's snapshots plus paths named by gap reports; `version_ids` = the ladder's versions."""
+    out = {"versions": _count_in(g, "MATCH (v) WHERE v.id IN $ids RETURN count(*) AS n", version_ids),
+           # no label in id-anchored reads: `MATCH (a:Api) WHERE a.id IN $ids` scans the label (~11 s per 1,000
+           # ids on a 136k-node graph) while `MATCH (a) WHERE a.id IN $ids` uses the id lookup (~0.1 s)
+           "api_nodes": _count_in(g, "MATCH (a) WHERE a.id IN $ids RETURN count(*) AS n", api_ids),
            "edges": {}}
-    # no label in id-anchored reads: `MATCH (a:Api) WHERE a.id IN $ids` scans the label (~11 s per 1,000 ids on a
-    # 136k-node graph) while `MATCH (a) WHERE a.id IN $ids` uses the id lookup (~0.1 s); ids already encode the label
-    present = _count_in(g, "MATCH (a) WHERE a.id IN $ids RETURN count(*) AS n", api_ids)
-    out["api_nodes_not_enumerated"] = out["api_nodes"] - present
     for rel in API_EDGES:
         out["edges"][rel] = _count_in(g, f"MATCH (a)-[:{rel}]->(b) WHERE a.id IN $ids RETURN count(*) AS n", api_ids)
     out["edges"][CUES] = _count_in(g, f"MATCH (t)-[:{CUES}]->(a) WHERE a.id IN $ids RETURN count(*) AS n", api_ids)
-    out["edges"][NEXT] = g.query(f"MATCH (v:{VERSION})-[:{NEXT}]->(w) WHERE v.library = $l RETURN count(*) AS n",
-                                 p)[0]["n"]
-    out["edges"][HAS_VERSION] = out["versions"]
+    out["edges"][NEXT] = _count_in(g, f"MATCH (v)-[:{NEXT}]->(w) WHERE v.id IN $ids RETURN count(*) AS n", version_ids)
+    out["edges"][HAS_VERSION] = _count_in(g, f"MATCH (l)-[:{HAS_VERSION}]->(v) WHERE v.id IN $ids RETURN count(*) AS n",
+                                          version_ids)
     return out
 
 

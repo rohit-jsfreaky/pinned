@@ -20,12 +20,14 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import asdict
 from pathlib import Path
 
-from pinned.graph import HydraGraph
+from pinned.contract import LIBRARY
+from pinned.graph import HydraError, HydraGraph, node_id
 
 from .dataset import download, load_pairs, save_pairs
 from .ingestor import DEFAULT_CACHE, PyPIIngestor, ROOT
 from .ladder import save_ladders
 from .summary import coverage, library_counts, write_json
+from .writer import version_id
 
 EVIDENCE = ROOT / "evidence" / "ingest"
 DATA = ROOT / "data"
@@ -106,7 +108,8 @@ def summarize(g: HydraGraph, args: argparse.Namespace) -> None:
     import_names: dict[str, list[str]] = {}
     for lad in ladders:
         lib = lad["library"]
-        counts = library_counts(g, lib, ing.known_api_ids(lib))
+        counts = library_counts(g, lib, ing.known_api_ids(lib),
+                                [version_id(lib, r["version"]) for r in lad["rungs"]])
         reports = sorted((EVIDENCE / "reports" / lib).glob("*.json")) if (EVIDENCE / "reports" / lib).exists() else []
         rows_written, write_s, load_s = 0, 0.0, 0.0
         for f in reports:
@@ -132,13 +135,17 @@ def summarize(g: HydraGraph, args: argparse.Namespace) -> None:
         t["write_seconds"] = t.get("write_seconds", 0.0) + write_s
         for k, v in counts["edges"].items():
             t["edges"][k] = t["edges"].get(k, 0) + v
-        lib_node = g.query("MATCH (l:Library) WHERE l.name = $n RETURN l.import_names AS i", {"n": lib})
+        lib_node = g.query("MATCH (l) WHERE l.id IN $ids RETURN l.import_names AS i", {"ids": [node_id(LIBRARY, lib)]})
         import_names[lib] = [x for x in (lib_node[0]["i"] if lib_node else "").split(",") if x]
     t = out["total"]
     t["seconds"] = round(t["seconds"], 2)
     t["write_seconds"] = round(t.get("write_seconds", 0.0), 2)
     t["rows_per_s_write"] = round(t["rows_written"] / t["write_seconds"], 1) if t.get("write_seconds") else None
-    t["term_nodes"] = g.query("MATCH (t:Term) RETURN count(*) AS n")[0]["n"]
+    try:  # a full label count; ~17 s at 76k Terms, under the 30 s query timeout
+        t["term_nodes"] = g.query("MATCH (t:Term) RETURN count(*) AS n")[0]["n"]
+    except HydraError as e:
+        t["term_nodes"] = None
+        t["term_nodes_error"] = str(e)[:200]
     dataset = DATA / "gitchameleon" / "dataset.jsonl"
     if dataset.exists():
         cov = coverage(g, dataset, import_names)

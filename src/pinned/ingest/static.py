@@ -178,6 +178,9 @@ class StaticLoader:
         doc = mod.docstring.value if mod.docstring else ""
         rec = ApiRecord(path=path, kind="module", doc=first_line(doc))
         typing_only: set[str] = set()
+        # `from X import *` is an explicit re-export even in a plain module (plotly.graph_objects re-exports
+        # plotly.graph_objs that way): names griffe expanded from such a star count as re-exports
+        star_from: list[str] = []
         if mod.filepath and not isinstance(mod.filepath, list):
             self.result.modules[path] = Path(mod.filepath)
             rec.deprecations = scan_docstring(doc)
@@ -188,12 +191,15 @@ class StaticLoader:
                 typing_only = type_checking_names(src)
             if "__all__" in src and not self._literal_exports(mod):
                 self.result.computed_all.add(path)  # e.g. `__all__ = [s for s in dir() ...]`: only runtime knows
+            if "import *" in src:
+                star_from = wildcard_sources(src, mod.path, mod.is_init_module)
         self.result.apis[path] = rec
         # import targets incl. wildcard sources and names griffe already expanded from a wildcard (via .pyi stubs)
         self.result.imports[path] = set(mod.imports.values()) | {
             m.target_path for m in mod.members.values() if m.is_alias}
         exports = None if path in self.relaxed else self._exports(mod)
         hub = mod.is_init_module or mod.name == "api" or mod.filepath is None or path in self.relaxed
+
         for name, member in list(mod.members.items()):
             if name.endswith("*"):  # a wildcard griffe could not expand (target not found statically)
                 continue
@@ -202,7 +208,8 @@ class StaticLoader:
             if name.startswith("_") or name in typing_only:
                 continue  # private, or imported only for type checkers
             if member.is_alias:
-                if (exports is not None and name not in exports) or (exports is None and not hub):
+                starred = any(member.target_path.startswith(f"{m}.") for m in star_from)
+                if (exports is not None and name not in exports) or (exports is None and not hub and not starred):
                     continue
                 self._alias(member, f"{path}.{name}", exported=exports is not None)
             elif member.is_module:

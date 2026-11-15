@@ -11,7 +11,7 @@ from pathlib import Path
 
 from packaging.version import Version
 
-from pinned.contract import API, IngestReport, VERSION
+from pinned.contract import API, IngestReport
 from pinned.graph import HydraGraph, node_id
 
 from .dataset import Pair, load_pairs, read_pairs
@@ -23,7 +23,7 @@ from .model import Snapshot
 from .pypi import PyPIClient, Release
 from .snapshot import SnapshotBuilder
 from .validity import validity
-from .writer import write_facts, write_ladder
+from .writer import version_id, write_facts, write_ladder
 
 log = logging.getLogger(__name__)
 
@@ -131,9 +131,11 @@ class PyPIIngestor:
         return sorted(api_node_id(library, p) for p in paths if p)
 
     def _ingested(self, library: str) -> set[str]:
-        rows = self.g.query(f"MATCH (v:{VERSION}) WHERE v.library = $lib AND v.ingested = true RETURN v.version AS v",
-                            {"lib": library})
-        return {r["v"] for r in rows}
+        """Versions of the ladder already written. Looked up by id: a label + property scan (`MATCH (v:Version)
+        WHERE v.library = ...`) can exceed HydraDB's 30 s query timeout on a graph of ~1M nodes."""
+        ids = [version_id(library, r.version) for r in self.ladder(library).rungs]
+        rows = self.g.query("MATCH (v) WHERE v.id IN $ids RETURN v.version AS v, v.ingested AS i", {"ids": ids})
+        return {r["v"] for r in rows if r["i"] is True}
 
     # ------------------------------------------------------------------ ingestion
     def ingest_version(self, library: str, version: str) -> IngestReport:

@@ -251,3 +251,15 @@ def test_star_import_from_module_with_runtime_all(tmp_path):
     a = load_static(tmp_path, ["rt"], ["rt"]).apis
     assert a["rt.load"].target == "rt.core.audio.load" and a["rt.load"].sig == "(path, sr=22050)"
     assert a["rt.core.load"].kind == "function"
+
+
+def test_star_import_in_plain_module_is_a_reexport(tmp_path):
+    pkg = tmp_path / "pl"
+    (pkg / "objs").mkdir(parents=True)
+    (pkg / "__init__.py").write_text("")
+    (pkg / "objs" / "__init__.py").write_text("class Figure:\n    '''A figure.'''\n")
+    (pkg / "objects.py").write_text("from pl.objs import *\nfrom pl.objs import Figure as _F\nimport copy\n")
+    (pkg / "other.py").write_text("from pl.objs import Figure\n")
+    a = load_static(tmp_path, ["pl"], ["pl"]).apis
+    assert a["pl.objects.Figure"].target == "pl.objs.Figure"
+    assert "pl.other.Figure" not in a  # a plain `from x import y` in a plain module is still not a re-export

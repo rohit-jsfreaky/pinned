@@ -289,3 +289,45 @@ def test_context_skips_imports_the_code_uses(lib, search):
     assert [i.path for i in ctx.items] == [f"{m}.special.i1"]
     alone = search.context_for("bessel", f"from {m} import special\n", b.name, "1.0.0")
     assert [i.path for i in alone.items] == [f"{m}.special"]
+
+
+def test_hub_words_reweight_but_do_not_discover(lib, graph, monkeypatch, run_key):
+    from pinned.search import GraphSearch
+    from pinned.search import facts as F
+
+    monkeypatch.setattr(F, "OPEN_BUDGET", 5)
+    hw, nw = f"hubword{run_key}", f"niche{run_key}"   # words are global nodes: keep this test's counts its own
+    b = lib()
+    m = b.imp
+    for i in range(8):
+        b.api(f"noise{i}", added=[("1.0.0", "()")]).cue(hw, f"noise{i}", w=1.0)
+    b.api("target", added=[("1.0.0", "()")]).cue(hw, "target", w=1.0).cue(nw, "target", w=1.0)
+    b.api("rival", added=[("1.0.0", "()")]).cue(nw, "rival", w=1.0)
+    b.commit()
+    s = GraphSearch(graph)
+    try:
+        cold = s.context_for(f"{nw} {hw}", "", b.name, "1.0.0", k=20)   # first sight: expanded, learned as a hub
+        hub, niche = node_id(TERM, hw), node_id(TERM, nw)
+        assert s.stats.total(hub) == 9 and s.stats.total(niche) == 2
+        assert s.stats.plan([hub, niche], 5) == ([niche], [hub])
+        assert len(cold.items) == 10
+        warm = s.context_for(f"{nw} {hw}", "", b.name, "1.0.0", k=20)
+        paths = [i.path for i in warm.items]
+        assert paths[:2] == [f"{m}.target", f"{m}.rival"]       # the hub's weight still counts on target
+        assert not any("noise" in p for p in paths)               # but the hub discovers nothing on its own
+        assert any(h.src == hw for h in warm.items[0].chain)
+        set_edges_many(graph, CUES, [(node_id(TERM, hw), b.aid("target"), {"w": 0.1})])  # learning decays it
+        again = s.context_for(f"{nw} {hw}", "", b.name, "1.0.0", k=20)
+        assert [i.path for i in again.items][:2] == [f"{m}.rival", f"{m}.target"]
+    finally:
+        s.close()
+
+
+def test_walk_only_when_chain_edges_exist(lib, search, graph):
+    b = lib()
+    m = b.imp
+    b.api("gone", added=[("1.0.0", "()")], removed=["2.0.0"]).api("later", added=[("3.0.0", "()")]).commit()
+    before = graph.requests
+    fs = search.check_calls(f"import {m}\n{m}.gone()\n{m}.later()\n", b.name, "2.0.0")
+    assert [f.status for f in fs] == ["removed", "added_later"]
+    assert graph.requests - before == 2    # meta + events; no SSpaths for APIs without REPLACED_BY / ALIAS_OF edges

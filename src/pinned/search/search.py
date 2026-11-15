@@ -25,9 +25,10 @@ from pinned.contract import (
     Graph,
     Hop,
     Status,
+    TERM,
     VersionFact,
 )
-from pinned.graph import node, version_ord
+from pinned.graph import node, node_id, version_ord
 
 from . import facts as F
 from .chains import Replacement, best_replacement, chain_hops, is_rename, version_hop
@@ -48,6 +49,8 @@ from .text import dotted_names, words
 from .validity import Event, Verdict, verdict_at
 
 MAX_CODE_CANDIDATES = 48
+HUB_POOL = 24         # candidates hub words re-weight
+SHORTLIST = 16        # candidates whose version facts are read (plus every code reference)
 MAX_WORDS = 64
 CUE_HOPS = 2          # strongest Term edges kept in an item's chain (the evidence for why it was picked)
 WALK_STATUSES = ("removed", "missing", "added_later", "deprecated")
@@ -74,6 +77,7 @@ class GraphSearch:
 
     def __init__(self, graph: Graph, workers: int = 8):
         self.graph = graph
+        self.stats = F.TermStats()
         self._pool = ThreadPoolExecutor(max_workers=workers, thread_name_prefix="pinned-search")
 
     def close(self) -> None:
@@ -101,12 +105,15 @@ class GraphSearch:
     # ------------------------------------------------------------------------------------------------ shared steps
     def _walk(self, s: _Scope, verdicts: dict[int, Verdict], seeds: list[int],
               known: dict[int, F.ApiFacts]) -> dict[int, Replacement]:
-        """Replacement for every seed: SSpaths out of each seed (in parallel), plus SSpaths into the seeds that are newer
-        than v or unknown, then one batched events read for the nodes the incoming walks found."""
-        if not seeds:
+        """Replacement for every seed: SSpaths out of each seed that has REPLACED_BY / ALIAS_OF edges out (in parallel),
+        SSpaths into each seed newer than v (or unknown) that has such edges in, then one batched events read for the
+        nodes the incoming walks found. `known` must come from `facts.events` (it carries the chain-edge flags)."""
+        out_seeds = [a for a in seeds if a in known and known[a].chains_out]
+        back_seeds = [a for a in seeds if a in known and known[a].chains_in
+                      and verdicts[a].status in ("added_later", "missing")]
+        if not out_seeds and not back_seeds:
             return {}
-        outs = list(self._pool.map(lambda a: F.walk_out(s.g, a), seeds))
-        back_seeds = [a for a in seeds if verdicts[a].status in ("added_later", "missing")]
+        outs = list(self._pool.map(lambda a: F.walk_out(s.g, a), out_seeds))
         ins = list(self._pool.map(lambda a: F.walk_in(s.g, a), back_seeds))
         pool: dict[int, F.ApiFacts] = dict(known)
         for w in outs:
@@ -192,20 +199,23 @@ class GraphSearch:
         for w in words(problem):
             q[w] = max(q.get(w, 0.0), TASK_Q)
         terms = sorted(q, key=lambda t: (-q[t], t))[:MAX_WORDS]
-        cue_rows = F.cues(g, s.meta.name, terms, s.ord) if terms else []
-        score_cues(cands, cue_rows, q)
+        cue_rows, hubs = F.cues(g, s.meta.name, terms, s.ord, self.stats) if terms else ([], [])
+        degree = {t: self.stats.degree(node_id(TERM, t), s.meta.name) for t in terms}
+        score_cues(cands, cue_rows, q, degree)
+        if hubs:  # hub words only re-weight the strongest candidates found so far (read from the Api side: cheap)
+            pool = self._shortlist(cands, max(3 * k, HUB_POOL))
+            score_cues(cands, F.hub_cues(g, hubs, [c.api for c in pool]), q, degree)
         apply_member_boost(cands, {r.path for r in code.refs})
 
-        shortlist = ranked(cands)[: max(3 * k, 24)]
-        shortlist_ids = {c.api for c in shortlist}
-        shortlist += [c for c in cands.values() if c.from_code and c.api not in shortlist_ids]
+        shortlist = self._shortlist(cands, max(2 * k, SHORTLIST))
         known = F.events(g, [c.api for c in shortlist])
 
         picked: list[tuple[Candidate, Verdict]] = []
         for c in shortlist:
             f = known.get(c.api)
-            v = verdict_at(f.events, s.ord) if f else verdict_at([], s.ord)
-            if f is None and (c.guessed or not c.from_code):
+            evs = f.events if f else []
+            v = verdict_at(evs, s.ord)
+            if not evs and (c.guessed or not c.from_code):
                 continue  # a guess or a cue target the graph has no version facts for: nothing to tell the agent
             picked.append((c, v))
         picked.sort(key=lambda cv: (-cv[0].score, cv[0].path))
@@ -236,6 +246,13 @@ class GraphSearch:
                 deduped[it.path] = it
         final = sorted(deduped.values(), key=lambda it: (-it.score, it.path))[:k]
         return Context(s.meta.name, s.version, final, round((time.perf_counter() - t0) * 1000, 2), g.requests)
+
+    @staticmethod
+    def _shortlist(cands: dict[int, Candidate], size: int) -> list[Candidate]:
+        """The `size` best candidates plus every candidate the code references."""
+        top = ranked(cands)[:size]
+        ids = {c.api for c in top}
+        return top + [c for c in cands.values() if c.from_code and c.api not in ids]
 
     @staticmethod
     def _cue_hops(c: Candidate) -> list[Hop]:

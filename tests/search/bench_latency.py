@@ -6,7 +6,8 @@ Builds a synthetic graph under a fresh prefix in exactly the contract.py schema:
 (22,000 Api) with ADDED_IN / REMOVED_IN (some re-added) / CHANGED_IN (signature + deprecated) facts, REPLACED_BY and
 ALIAS_OF chains (1-3 hops), a Zipf-like word vocabulary with CUES edges and SHORTCUT edges. Then measures
 `context_for` and `check_calls` at concurrency 1 / 8 / 32 with bench.load.run.measure and writes
-evidence/search/latency.json (p50/p95/p99, qps, errors, graph round trips per call).
+evidence/search/latency.json (p50/p95/p99, qps, errors, graph round trips per call). The `latency` block is warm
+(the process has already seen the vocabulary once, see facts.TermStats); the cold first pass is reported apart.
 """
 
 from __future__ import annotations
@@ -132,11 +133,14 @@ def main() -> None:
     search = GraphSearch(g, workers=8)
     ctx_calls, chk_calls = make_calls(libs, a.calls, rnd)
 
-    # graph round trips per call, sequential so the shared client counter is exact (and equals ctx.graph_queries)
-    ctx_q, chk_q, items, mismatch = [], [], [], 0
+    # Pass 1 (cold: a fresh GraphSearch has never seen these words, so it expands every word once and learns which are
+    # hubs). Sequential, so the shared client counter is exact (and must equal ctx.graph_queries).
+    ctx_q, chk_q, items, mismatch, cold_ms = [], [], [], 0, []
     for args in ctx_calls[:100]:
         before = g.requests
+        t = time.perf_counter()
         ctx = search.context_for(*args, k=8)
+        cold_ms.append((time.perf_counter() - t) * 1000)
         ctx_q.append(g.requests - before)
         mismatch += ctx.graph_queries != ctx_q[-1]
         items.append(len(ctx.items))
@@ -155,8 +159,14 @@ def main() -> None:
     def chk_fn(args):
         return search.check_calls(*args)
 
-    for args in ctx_calls[:20]:   # warm the connection pool
+    # Pass 2 (warm): every call below runs on the same instance after pass 1.
+    for args in ctx_calls:
         ctx_fn(args)
+    warm_q = []
+    for args in ctx_calls[:100]:
+        before = g.requests
+        ctx_fn(args)
+        warm_q.append(g.requests - before)
     results = {
         "context_for": [measure(ctx_fn, ctx_calls, c) for c in (1, 8, 32)],
         "check_calls": [measure(chk_fn, chk_calls, c) for c in (1, 8, 32)],
@@ -180,7 +190,11 @@ def main() -> None:
                            "ALIAS_OF": count_edges(g, "Api", "ALIAS_OF"),
                            "SHORTCUT": count_edges(g, "Term", "SHORTCUT")},
         },
-        "graph_queries_per_call": {"context_for": q_stats(ctx_q), "check_calls": q_stats(chk_q),
+        "context_for_cold_first_100_sequential_ms": {
+            "p50": round(sorted(cold_ms)[50], 2), "p95": round(sorted(cold_ms)[95], 2), "max": round(max(cold_ms), 2),
+            "note": "first time this process sees the words: every word is expanded once (hub cost paid here)"},
+        "graph_queries_per_call": {"context_for_cold": q_stats(ctx_q), "context_for_warm": q_stats(warm_q),
+                                   "check_calls": q_stats(chk_q),
                                    "context_for_counter_mismatches": mismatch,
                                    "context_for_items_mean": round(statistics.fmean(items), 2)},
         "latency": results,
@@ -188,7 +202,8 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     path = OUT / "latency.json"
     path.write_text(json.dumps(out, indent=2) + "\n")
-    print(json.dumps({k: out[k] for k in ("graph", "graph_queries_per_call", "latency")}, indent=1))
+    print(json.dumps({k: out[k] for k in ("graph", "context_for_cold_first_100_sequential_ms", "graph_queries_per_call",
+                                          "latency")}, indent=1))
     print("saved", path)
     search.close()
     g.close()

@@ -5,17 +5,17 @@ score(api) = CODE_SCORE                 if the starting code references it
            + sum over words t:  q(t) * w(t, api) * idf(t)          for CUES edges (w >= W_FLOOR)
            + sum over words t:  q(t) * SHORTCUT_BOOST * w(t, api)  for SHORTCUT edges valid at the asked version
            x MEMBER_BOOST              if it is a member of something the code references (pandas.DataFrame.*)
-idf(t) = 1 / (1 + ln(number of APIs of this library that t cues))  - a word that cues many APIs counts less.
+idf(t) = 1 / (1 + ln(number of APIs of this library that t cues, w >= W_FLOOR))  - a word that cues many APIs counts
+         less. The count comes from facts.TermStats (learned when the word is expanded).
 q(t)   = 1.0 for task words, LOOSE_Q for method names called on unknown objects, CODE_WORD_Q for code words.
 """
 
 from __future__ import annotations
 
 import math
-from collections import Counter
 from dataclasses import dataclass, field
 
-from pinned.contract import CUES, SHORTCUT
+from pinned.contract import SHORTCUT
 
 from .facts import Cue
 
@@ -38,18 +38,17 @@ class Candidate:
     cues: list[tuple[float, Cue]] = field(default_factory=list)   # (contribution, edge) behind the score
 
 
-def idf(cue_rows: list[Cue]) -> dict[str, float]:
-    deg = Counter(c.term for c in cue_rows if c.rel == CUES)
-    return {t: 1.0 / (1.0 + math.log(n)) for t, n in deg.items()}
+def idf(degree: int) -> float:
+    return 1.0 / (1.0 + math.log(max(degree, 1)))
 
 
-def score_cues(cands: dict[int, Candidate], cue_rows: list[Cue], q: dict[str, float]) -> None:
-    weights = idf(cue_rows)
+def score_cues(cands: dict[int, Candidate], cue_rows: list[Cue], q: dict[str, float], degree: dict[str, int]) -> None:
+    """Add every edge's contribution. `degree[word]` = CUES edges of that word into this library (w >= W_FLOOR)."""
     for c in cue_rows:
         if c.rel == SHORTCUT:
             contrib = q.get(c.term, TASK_Q) * SHORTCUT_BOOST * c.w
         else:
-            contrib = q.get(c.term, TASK_Q) * c.w * weights.get(c.term, 1.0)
+            contrib = q.get(c.term, TASK_Q) * c.w * idf(degree.get(c.term, 1))
         cand = cands.setdefault(c.api, Candidate(c.api, c.path))
         cand.score += contrib
         cand.cues.append((contrib, c))

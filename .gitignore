@@ -10,3 +10,12 @@ node_modules/
 
 # design research: other sites' code, kept local only
 design/
+
+# build docs (kept local, not part of the product repo)
+CLAUDE.md
+PLAN.md
+PROGRESS.md
+prompts/
+docs/facts/
+docs/progress/
+docs/hydradb-findings.md
